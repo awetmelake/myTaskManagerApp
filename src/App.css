@@ -1,0 +1,41 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0 ;
+  font-size: 15px;
+}
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.4;
+}
+
+a{
+  color: #333;
+  text-decoration: none;
+}
+
+.task-panel{
+  margin: 10px;
+  margin-right: 0;
+  padding: 10px;
+  width: 400px;
+  height: 500px;
+  background-color: #f3f3f3;
+  border: 2px solid black;
+  border-radius: 5px;
+  float: left;
+}
+.task-header{
+  font-size: 20px;
+  text-align: center;
+}
+.task-item{
+  padding: 10px;
+  margin: 10px auto;
+  width: 90%;
+  background-color: #fffb7f;
+  color: black;
+  border: 2px solid #ffd800;
+  border-radius: 5px;
+}
