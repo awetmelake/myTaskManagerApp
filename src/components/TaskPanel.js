@@ -8,14 +8,11 @@ class TaskPanel extends Component {
     //create as many TaskPanels as there are in App state
     return this.props.panels.map(panel => (
       <div className="task-panel">
-        <TaskHeader
-        title={panel}
-        createTask ={this.props.createTask}
-        />
+        <TaskHeader title={panel} createTask={this.props.createTask} />
         <Tasks
-        panel={panel}
-        setFocus={this.props.setFocus}
-        tasks={this.props.tasks}
+          panel={panel}
+          setFocus={this.props.setFocus}
+          tasks={this.props.tasks}
         />
       </div>
     ));

@@ -34,13 +34,12 @@ class CreateTask extends Component {
               rows="3"
               style={{ fontSize: "18px" }}
             />
-            <button type='submit' />
+            <button type="submit" />
           </form>
         )}
-        <button
-        style={btnStyle}
-        onClick={this.toggle}
-        >+</button>
+        <button style={btnStyle} onClick={this.toggle}>
+          +
+        </button>
       </div>
     );
   }

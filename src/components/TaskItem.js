@@ -3,23 +3,28 @@ import PropTypes from "prop-types";
 
 class TaskItem extends Component {
   //dotted border on focus == true
-  getStyle = () => {
+  getStyle = focused => {
     return {
-      borderStyle: this.props.task.focused ? "solid" : "dotted"
+      borderStyle: focused ? "solid" : "dotted"
     };
   };
 
   render() {
-    const { id, title } = this.props.task;
+    const { setFocus } = this.props;
+    const { id, title, time, focused } = this.props.task;
     return (
-      <p
+      <div
         className="task-item"
-        style={this.getStyle()}
-        onClick={this.props.setFocus.bind(this, id)}
-      >{title}</p>
-    );
+        style={this.getStyle(focused)}
+        onClick={setFocus.bind(this, id)}
+      >
+        {title}
+        <p style={{float: 'right',}}>{time}</p>
+        </div>
+      );
+    }
   }
-}
+
 
 //PropTypes
 TaskItem.propTypes = {
