@@ -1,7 +1,12 @@
 import React from 'react';
+import CreateTask from './CreateTask.js'
 
 const TaskHeader = (props) => (
-  <h2 className="task-header">{props.title}</h2>
+  <div className="task-header">
+    <h2>{props.title}</h2>
+    <CreateTask/>
+  </div>
 );
+
 
 export default TaskHeader;

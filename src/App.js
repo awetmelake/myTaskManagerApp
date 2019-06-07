@@ -1,47 +1,86 @@
-import React, { Component } from 'react';
-import './App.css';
-import TaskPanel from './components/TaskPanel.js'
+import React, { Component } from "react";
+import "./App.css";
+import TaskPanel from "./components/TaskPanel.js";
+import Header from "./components/Header.js";
+
+/*
+task:
+Pomodoro Timer
+Possibly a way to draw and drop tasks from panel to panel??
+Make button for adding tasks in TaskHeader
+*/
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos:[
+      tasks: [
         {
           id: 1,
-          title: 'wake up',
-          status: 'done',
-          focused: true,
+          title: "wake up",
+          status: "DONE",
+          focused: true
         },
         {
           id: 2,
-          title: 'take a walk',
-          status: 'todo',
-          focused: 'false',
-
+          title: "take a walk",
+          status: "DONE",
+          focused: "false"
         },
         {
           id: 3,
-          title: 'sleep',
-          status: 'done',
-          focused: 'false',
-        },
+          title: "sleep",
+          status: "TODO",
+          focused: "false"
+        }
       ],
-      panels:[
-        'Todo',
-        'In Progress',
-        'Done'
+      panels: [
+        "TODO",
+        "DONE"
       ],
     };
   }
+  //Create new panels
+  createPanel = title => {
+    this.setState({
+      panels: [...this.state.panels, title],
+    });
+  };
+
+  //Create new
+  createTask = task => {
+    this.setState({
+      tasks: [...this.state.tasks, task],
+    });
+  };
+
+  //Toggle focus
+  setFocus = id => {
+    this.setState({
+      tasks: this.state.tasks.map(task => {
+        //map through task items=> return a new tasks array=> setState
+        if (task.id === id) {
+          task.focused = !task.focused;
+        }
+        return task;
+      })
+    });
+  };
+
   render() {
     return (
       <div className="App">
-        <TaskPanel todos={this.state.todos} panels={this.state.panels}/>
+        <Header name="TASKFLOW" />
+        <TaskPanel
+          createPanel={this.createPanel}
+          tasks={this.state.tasks}
+          panels={this.state.panels}
+          setFocus={this.setFocus}
+          createTask={this.createTask}
+        />
       </div>
     );
   }
-
 }
 
 export default App;

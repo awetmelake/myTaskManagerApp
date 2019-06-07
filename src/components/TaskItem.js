@@ -2,26 +2,28 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 class TaskItem extends Component {
+  //dotted border on focus == true
   getStyle = () => {
-    return (
-      this.props.focused ? {borderStyle: 'dotted'} : {borderStyle: 'solid'}
-    )
-
+    return {
+      borderStyle: this.props.task.focused ? "solid" : "dotted"
+    };
   };
 
   render() {
+    const { id, title } = this.props.task;
     return (
-      <div className="task-item"
-      style={this.getStyle()}>
-        <p> {this.props.todo.title} </p>
-      </div>
+      <p
+        className="task-item"
+        style={this.getStyle()}
+        onClick={this.props.setFocus.bind(this, id)}
+      >{title}</p>
     );
   }
 }
 
 //PropTypes
 TaskItem.propTypes = {
-  todo: PropTypes.object.isRequired
+  task: PropTypes.object.isRequired
 };
 
 export default TaskItem;
