@@ -2,12 +2,12 @@ import React, { Component } from "react";
 
 class CreateTask extends Component {
   state = {
-    visible: false,
+    on: false,
     title: ""
   };
   toggle = () => {
     this.setState({
-      visible: !this.state.visible
+      on: !this.state.on
     });
   };
   onChange = e => {
@@ -18,40 +18,42 @@ class CreateTask extends Component {
   render() {
     return (
       <div>
-        {this.state.visible && (
+        {this.state.on && (
           <form style={promptStyle}>
-            <textarea
+            <label>Title</label>
+            <br/>
+            <input
               name="title"
               onChange={this.onChange}
-              placeholder="Enter new task"
-              rows="1"
-              style={{ fontSize: "20px" }}
+              style={{padding: '5px',}}
             />
+            <label>Description</label>
             <textarea
               name="description"
               onChange={this.onChange}
-              placeholder="description (optional)"
-              rows="3"
-              style={{ fontSize: "18px" }}
+              style={{padding: '10px',}}
+
             />
-            <button type="submit" />
+            <br/>
+            <button style={{}} type="submit">ok</button>
           </form>
         )}
-        <button style={btnStyle} onClick={this.toggle}>
+        <p style={btnStyle} onClick={this.toggle}>
           +
-        </button>
+        </p>
       </div>
     );
   }
 }
 const btnStyle = {
-  color: "white",
   float: "right",
-  backgroundColor: "green",
-  padding: "0 5px ",
-  borderRadius: "40px",
+  color: "green",
+  padding: "0 10px",
+  borderRadius: "100px",
   position: "relative",
-  bottom: "20px"
+  bottom: "33px",
+  fontSize: "30px",
+  fontWeight: "1000",
 };
 const promptStyle = {
   textAlign: "center",
@@ -62,7 +64,7 @@ const promptStyle = {
   position: "fixed",
   top: "50vh",
   left: "calc(50vw - 150px)",
-  border: "2px solid black"
+  border: "2px solid black",
 };
 
 export default CreateTask;

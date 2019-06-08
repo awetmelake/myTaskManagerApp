@@ -4,7 +4,7 @@ import TaskPanel from "./components/TaskPanel.js";
 import Header from "./components/Header.js";
 
 /*
-task:
+TODO:
 Pomodoro Timer
 Possibly a way to draw and drop tasks from panel to panel??
 Make button for adding tasks in TaskHeader
@@ -19,19 +19,23 @@ class App extends Component {
           id: 1,
           title: "wake up",
           status: "DONE",
-          focused: true
+          focused: true,
+          time: 0,
+
         },
         {
           id: 2,
           title: "take a walk",
           status: "DONE",
-          focused: "false"
+          focused: "false",
+          time: 0,
         },
         {
           id: 3,
           title: "sleep",
           status: "TODO",
-          focused: "false"
+          focused: "false",
+          time: 0,
         }
       ],
       panels: [

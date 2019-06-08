@@ -5,7 +5,7 @@ class TaskItem extends Component {
   //dotted border on focus == true
   getStyle = focused => {
     return {
-      borderStyle: focused ? "solid" : "dotted"
+      borderStyle: focused ? "solid" : "dotted",
     };
   };
 
@@ -19,12 +19,11 @@ class TaskItem extends Component {
         onClick={setFocus.bind(this, id)}
       >
         {title}
-        <p style={{float: 'right',}}>{time}</p>
-        </div>
-      );
-    }
+        <p style={{ float: "right" }}>{time}</p>
+      </div>
+    );
   }
-
+}
 
 //PropTypes
 TaskItem.propTypes = {

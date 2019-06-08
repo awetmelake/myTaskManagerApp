@@ -5,14 +5,15 @@ import PropTypes from "prop-types";
 
 class TaskPanel extends Component {
   render() {
+    const { setFocus, tasks, createTask, panels} = this.props;
     //create as many TaskPanels as there are in App state
-    return this.props.panels.map(panel => (
+    return panels.map(panel => (
       <div className="task-panel">
-        <TaskHeader title={panel} createTask={this.props.createTask} />
+        <TaskHeader title={panel} createTask={createTask} />
         <Tasks
           panel={panel}
-          setFocus={this.props.setFocus}
-          tasks={this.props.tasks}
+          setFocus={setFocus}
+          tasks={tasks}
         />
       </div>
     ));
