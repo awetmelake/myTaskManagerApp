@@ -6,7 +6,7 @@ class Tasks extends Component {
   render() {
     const { tasks, panel, setFocus } = this.props;
     return tasks
-      .filter(task => task.status === panel)
+      .filter(task => task.panel === panel)
       .map(task => (<TaskItem panel={panel} key={task.id} task={task} setFocus={setFocus} />));
   }
 }
@@ -14,7 +14,6 @@ class Tasks extends Component {
 //PropTypes
 Tasks.propTypes = {
   tasks: PropTypes.array.isRequired,
-  setFocus: PropTypes.object.isRequired
 };
 
 export default Tasks;

@@ -5,7 +5,8 @@ class TaskItem extends Component {
   //dotted border on focus == true
   getStyle = focused => {
     return {
-      borderStyle: focused ? "solid" : "dotted",
+      border: focused ? "1px dotted black" : "1px solid black",
+      backgroundColor: this.props.task.color
     };
   };
 
@@ -19,7 +20,7 @@ class TaskItem extends Component {
         onClick={setFocus.bind(this, id)}
       >
         {title}
-        <p style={{ float: "right" }}>{time}</p>
+        <p style={{ textAlign: "right" }} >{time}</p>
       </div>
     );
   }

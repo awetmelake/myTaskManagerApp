@@ -7,58 +7,72 @@ import Header from "./components/Header.js";
 TODO:
 Pomodoro Timer
 Possibly a way to draw and drop tasks from panel to panel??
-Make button for adding tasks in TaskHeader
-*/
 
+*/
+const uuidv4 = require("uuid/v4");
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       tasks: [
         {
-          id: 1,
+          id: uuidv4(),
           title: "wake up",
-          status: "DONE",
-          focused: true,
+          discription: "sdfsdf",
+          panel: "DONE",
+          focused: false,
           time: 0,
-
+          color: "yellow"
         },
         {
-          id: 2,
+          id: uuidv4(),
           title: "take a walk",
-          status: "DONE",
-          focused: "false",
+          discription: "sdfsdfsdf",
+          panel: "DONE",
+          focused: false,
           time: 0,
+          color: "lightblue"
         },
         {
-          id: 3,
+          id: uuidv4(),
           title: "sleep",
-          status: "TODO",
-          focused: "false",
+          discription: "dasdas",
+          panel: "TODO",
+          focused: false,
           time: 0,
+          color: "yellow"
         }
       ],
-      panels: [
-        "TODO",
-        "DONE"
-      ],
+      panels: ["TODO", "DONE"]
     };
   }
-  //Create new panels
-  createPanel = title => {
+
+  addPanel = panel => {
     this.setState({
-      panels: [...this.state.panels, title],
+      panels: [...this.state.panels, panel]
     });
   };
 
-  //Create new
-  createTask = task => {
+  delPanel = panel => {
     this.setState({
-      tasks: [...this.state.tasks, task],
+      panels: [...this.state.panel.filter(title => panel !== title)]
     });
   };
 
-  //Toggle focus
+  addTask = task => {
+    task.id = uuidv4();
+    this.setState({
+      tasks: [...this.state.tasks, task]
+    });
+  };
+
+  delTask = id => {
+    this.setState({
+      panels: [...this.state.tasks.filter(task => task.id !== id)]
+    });
+  };
+
+  //Toggle task item focus
   setFocus = id => {
     this.setState({
       tasks: this.state.tasks.map(task => {
@@ -74,13 +88,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header name="TASKFLOW" />
+        <Header
+          name="TASKFLOW"
+          addPanel={this.addPanel}
+          delPanel={this.delPanel}
+        />
         <TaskPanel
-          createPanel={this.createPanel}
           tasks={this.state.tasks}
           panels={this.state.panels}
           setFocus={this.setFocus}
-          createTask={this.createTask}
+          addTask={this.addTask}
         />
       </div>
     );

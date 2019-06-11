@@ -43,8 +43,11 @@ a{
   padding: 10px;
   margin: 10px auto;
   width: 100%;
-  background-color: #fffb7f;
   color: black;
-  border: 2px solid #ffd800;
+  border: 1px solid black;
   border-radius: 5px;
+}
+.settings{
+  width: 10%;
+  height: 300px;
 }

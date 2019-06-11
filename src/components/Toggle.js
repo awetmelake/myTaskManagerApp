@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Toggle extends Component {
+//reusable toggle container component, renders children 
+class Toggle extends React.Component {
   state = {
     on: false,
   }
@@ -17,8 +18,8 @@ class Toggle extends Component {
       on: this.state.on,
       toggle: this.toggle,
     })
-  }
 
+  }
 }
 
 export default Toggle;

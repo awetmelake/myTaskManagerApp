@@ -1,24 +1,26 @@
 import React, { Component } from "react";
 
-class CreateTask extends Component {
+class AddTask extends Component {
   state = {
     title: '',
     focused: false,
     time: 0,
     panel: this.props.panel,
   };
+
   handleChange = e => {
     this.setState({[e.target.name]: e.target.value});
   };
-  handleClick = (e) => {
+
+  handleClick = e => {
     e.preventDefault();
     if (this.state.title.length > 0) {
-      this.props.createTask(this.state);
+      this.props.addTask(this.state);
       this.setState({title: '', discription: ''}); //clear field
     }
     this.props.toggle();
-
   }
+
   render() {
     return (
       <div>
@@ -33,7 +35,7 @@ class CreateTask extends Component {
             <br />
             <textarea name="description" onChange={this.handleChange} />
           </div>
-          <button style={{marginTop: '10px'}} type='submit' onClick={this.handleClick}>OK</button>
+          <button style={{marginTop: '10px',}} type='submit' onClick={this.handleClick}>OK</button>
         </form>
       </div>
     );
@@ -41,14 +43,13 @@ class CreateTask extends Component {
 }
 
 const promptStyle = {
-  textAlign: "center",
   width: "300px",
   height: "200px",
   backgroundColor: "#f3f3f3",
   position: "fixed",
-  top: "50vh",
+  top: "30vh",
   left: "calc(50vw - 150px)",
   border: "2px solid black"
 };
 
-export default CreateTask;
+export default AddTask;
