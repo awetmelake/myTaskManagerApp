@@ -40,14 +40,32 @@ a{
   text-align: center;
 }
 .task-item{
+  margin-top: 5px;
   padding: 10px;
-  margin: 10px auto;
   width: 100%;
   color: black;
   border: 1px solid black;
   border-radius: 5px;
 }
-.settings{
-  width: 10%;
-  height: 300px;
+.task-header-setting{
+  position: relative;
+  bottom: 5px;
+  padding: 0 5px 10px;
+  background-color: lightgreen;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+.task-header-setting-btn{
+  font-size: 20px;
+  font-weight: 600;
+  line-height: .5;
+}
+.task-header-title{
+  margin: 10px 0px 10px;
+}
+ul{
+  text-align: left;
+}
+.add-task{
+  clear: both;
 }
