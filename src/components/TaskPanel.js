@@ -1,24 +1,27 @@
-import React, { Component } from "react";
-import Tasks from "./Tasks.js";
-import TaskHeader from "./TaskHeader.js";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import Tasks from './Tasks.js';
+import TaskHeader from './TaskHeader.js';
+import PropTypes from 'prop-types';
 
 class TaskPanel extends Component {
+
+
   render() {
-    const { setFocus, tasks, createTask, panels, delTask, addTask} = this.props;
-    //create as many TaskPanels as there are in App state
+    const { setFocus, tasks, addTask, panels, delTask, toggleDel } = this.props;
     return panels.map(panel => (
-      <div className="task-panel">
+      <div className='task-panel'>
         <TaskHeader
-        panel={panel}
-        createTask={createTask}
-        delTask={delTask}
-        addTask={addTask}
+          panel={panel}
+          addTask={addTask}
+          delTask={delTask}
+          toggleDel={toggleDel}
+          key={panel.id}
         />
         <Tasks
-          panel={panel}
+          panel={panel.title}
           setFocus={setFocus}
           tasks={tasks}
+          toggleDel={toggleDel}
         />
       </div>
     ));

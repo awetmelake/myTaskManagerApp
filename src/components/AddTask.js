@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class AddTask extends Component {
   state = {
@@ -6,50 +6,51 @@ class AddTask extends Component {
     focused: false,
     time: 0,
     panel: this.props.panel,
+    color: 'yellow'
   };
 
   handleChange = e => {
-    this.setState({[e.target.name]: e.target.value});
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   handleClick = e => {
     e.preventDefault();
     if (this.state.title.length > 0) {
       this.props.addTask(this.state);
-      this.setState({title: '', discription: ''}); //clear field
+      this.setState({ title: ', discription: ' }); //clear field
     }
     this.props.toggle();
-  }
+  };
 
+  handleColor = () => {};
   render() {
     return (
-      <div>
-        <form style={promptStyle}>
-          <div style={{ marginTop: "20px" }}>
-            <label>Title</label>
-            <br />
-            <input name="title" onChange={this.handleChange} />
-          </div>
-          <div style={{ marginTop: "20px" }}>
-            <label>Description</label>
-            <br />
-            <textarea name="description" onChange={this.handleChange} />
-          </div>
-          <button style={{marginTop: '10px',}} type='submit' onClick={this.handleClick}>OK</button>
-        </form>
-      </div>
+      <form className='prompt-window'>
+        <div style={{ marginTop: '5px' }}>
+          <label>Title</label>
+          <br />
+          <input name='title' onChange={this.handleChange} />
+        </div>
+        <div style={{ marginTop: '5px' }}>
+          <label>Description</label>
+          <br />
+          <textarea name='description' onChange={this.handleChange} />
+        </div>
+        <button
+          style={{ marginTop: '5px' }}
+          type='submit'
+          onClick={this.handleClick}
+        >
+          OK
+        </button>
+        <ul>
+          <li>
+            <input type=''></input>
+          </li>
+        </ul>
+      </form>
     );
   }
 }
-
-const promptStyle = {
-  width: "300px",
-  height: "200px",
-  backgroundColor: "#f3f3f3",
-  position: "fixed",
-  top: "30vh",
-  left: "calc(50vw - 150px)",
-  border: "2px solid black"
-};
 
 export default AddTask;

@@ -1,24 +1,28 @@
-import React, { Component } from "react";
-import TaskSetting from "./TaskSetting.js";
-import Toggle from "./Toggle.js";
-import HeaderSet from "./HeaderSet";
+import React, { Component } from 'react';
+import TaskSetting from './TaskSetting.js';
+import Toggle from './Toggle.js';
+import TaskHeaderSet from './TaskHeaderSet';
 
 class TaskHeader extends Component {
   render() {
-    const { addTask, delTask, panel } = this.props;
+    const { addTask, delTask, panel, toggleDel } = this.props;
     return (
-      <div className="task-header">
-      <h2>{panel}</h2>
-        <Toggle status={panel} addTask={addTask}>
-          {({ on, toggle }) => (
-            <div>
-              <p style={{}}onClick={toggle}>settings</p>
+      <div className='task-header'>
+        <h2 className='task-header-title'>{panel.title}</h2>
+        <div className='task-header-setting'>
+          <Toggle >
+            {({ on, toggle }) => (
+              <div>
+                <p className='task-header-setting-btn' onClick={toggle}>
+                  ...
+                </p>
                 {on && (
-                  <HeaderSet toggle={toggle} panel={panel} addTask={addTask} />
+                  <TaskHeaderSet toggle={toggle} panel={panel} addTask={addTask} delTask={delTask} toggleDel={toggleDel}/>
                 )}
-            </div>
-          )}
-        </Toggle>
+              </div>
+            )}
+          </Toggle>
+        </div>
       </div>
     );
   }

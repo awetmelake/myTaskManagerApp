@@ -2,60 +2,53 @@ import React, { Component } from "react";
 import "./App.css";
 import TaskPanel from "./components/TaskPanel.js";
 import Header from "./components/Header.js";
+//random id generator
+const uuidv4 = require("uuid/v4");
 
 /*
 TODO:
 Pomodoro Timer
 Possibly a way to draw and drop tasks from panel to panel??
 
+Problems:
+panel title not showing on new panel creation
 */
-const uuidv4 = require("uuid/v4");
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      delMode: false,
       tasks: [
         {
           id: uuidv4(),
           title: "wake up",
-          discription: "sdfsdf",
-          panel: "DONE",
-          focused: false,
-          time: 0,
-          color: "yellow"
-        },
-        {
-          id: uuidv4(),
-          title: "take a walk",
-          discription: "sdfsdfsdf",
-          panel: "DONE",
-          focused: false,
-          time: 0,
-          color: "lightblue"
-        },
-        {
-          id: uuidv4(),
-          title: "sleep",
-          discription: "dasdas",
+          description: "sdfsdf",
           panel: "TODO",
           focused: false,
-          time: 0,
+          // time: 0,
           color: "yellow"
         }
       ],
-      panels: ["TODO", "DONE"]
+      panels: [
+        {
+          title: "TODO",
+          id: uuidv4()
+        }
+      ]
     };
   }
 
+  //add and delete functions
   addPanel = panel => {
+    panel.id = uuidv4();
     this.setState({
       panels: [...this.state.panels, panel]
     });
   };
 
-  delPanel = panel => {
+  delPanel = id => {
     this.setState({
-      panels: [...this.state.panel.filter(title => panel !== title)]
+      panels: [...this.state.panel.filter(panel => panel.id !== id)]
     });
   };
 
@@ -66,22 +59,30 @@ class App extends Component {
     });
   };
 
-  delTask = id => {
+  delTask = () => {
     this.setState({
-      panels: [...this.state.tasks.filter(task => task.id !== id)]
+      tasks: [...this.state.tasks.filter(task => task.focused === false)]
     });
   };
 
-  //Toggle task item focus
+  //toggle functions
   setFocus = id => {
+    if (this.state.delMode) {
+      this.setState({
+        //map through task items => return a new tasks array with toggled items
+        tasks: this.state.tasks.map(task => {
+          if (task.id === id) {
+            task.focused = !task.focused;
+          }
+          return task;
+        })
+      });
+    }
+  };
+
+  toggleDel = () => {
     this.setState({
-      tasks: this.state.tasks.map(task => {
-        //map through task items=> return a new tasks array=> setState
-        if (task.id === id) {
-          task.focused = !task.focused;
-        }
-        return task;
-      })
+      delMode: !this.state.delMode
     });
   };
 
@@ -96,8 +97,10 @@ class App extends Component {
         <TaskPanel
           tasks={this.state.tasks}
           panels={this.state.panels}
+          toggleDel={this.toggleDel}
           setFocus={this.setFocus}
           addTask={this.addTask}
+          delTask={this.delTask}
         />
       </div>
     );

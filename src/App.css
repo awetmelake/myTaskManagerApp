@@ -1,17 +1,15 @@
-*{
+* {
   box-sizing: border-box;
   margin: 0;
-  padding: 0 ;
+  padding: 0;
   font-size: 15px;
   user-select: none;
-
 }
-
-body{
+body {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.4;
 }
-header{
+header {
   text-align: center;
   font-family: monospace;
   font-size: 40px;
@@ -19,12 +17,22 @@ header{
   background-color: black;
   color: white;
 }
-a{
+.header-add-panel-btn {
+  float: right;
+  color: green;
+  margin-right: 30px;
+  border-radius: 100px;
+  position: absolute;
+  left: 1700px;
+  bottom: 490px;
+  font-size: 48px;
+  font-weight: 1000;
+}
+a {
   color: #333;
   text-decoration: none;
 }
-
-.task-panel{
+.task-panel {
   margin: 10px;
   margin-right: 0;
   padding: 10px;
@@ -35,37 +43,52 @@ a{
   border-radius: 5px;
   float: left;
 }
-.task-header{
+.task-header {
   font-size: 20px;
   text-align: center;
 }
-.task-item{
-  margin-top: 5px;
-  padding: 10px;
-  width: 100%;
-  color: black;
-  border: 1px solid black;
-  border-radius: 5px;
+.task-header-title {
+  margin: 10px 0px 10px;
 }
-.task-header-setting{
-  position: relative;
+.task-header-setting {
   bottom: 5px;
-  padding: 0 5px 10px;
-  background-color: lightgreen;
   border-radius: 10px;
   margin: 0 auto;
 }
-.task-header-setting-btn{
+.task-header-setting-btn {
+  float: right;
+  position: relative;
+  bottom: 40px;
+  right: 10px;
   font-size: 20px;
   font-weight: 600;
-  line-height: .5;
 }
-.task-header-title{
-  margin: 10px 0px 10px;
-}
-ul{
+.task-header-setting ul {
   text-align: left;
 }
-.add-task{
+.task-header-setting li {
+  list-style: none;
+  display: block;
+  width: fit-content;
+  margin-left: 20px;
+  float: left;
+}
+.task-header-setting p {
+  color: green;
+}
+.task-item {
+  margin-top: 5px;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
   clear: both;
+}
+.task-item-setting-btn{
+  font-size: 20px;
+}
+.prompt-window {
+  text-align: center;
+  position: absolute;
+  right: calc(50vw - 100px);
+  bottom: 199px;
 }

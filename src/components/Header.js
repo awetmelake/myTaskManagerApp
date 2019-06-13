@@ -17,7 +17,7 @@ class Header extends Component {
                   addPanel={this.props.addPanel}
                 />
               )}
-              <p style={btnStyle} onClick={toggle}>
+              <p className='header-add-panel-btn' onClick={toggle}>
                 +
               </p>
             </div>
@@ -28,14 +28,4 @@ class Header extends Component {
   }
 }
 
-const btnStyle = {
-  float: "right",
-  color: "green",
-  marginRight: "30px",
-  borderRadius: "100px",
-  position: "relative",
-  bottom: "65px",
-  fontSize: "48px",
-  fontWeight: "1000"
-};
 export default Header;

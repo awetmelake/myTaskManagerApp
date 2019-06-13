@@ -13,6 +13,9 @@ class TaskSetting extends Component {
         panel={panel}
         addTask={addTask}
         />
+        <Toggle>
+
+        </Toggle>
       </div>
     );
   }
