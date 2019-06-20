@@ -1,22 +1,25 @@
 import React, { Component } from "react";
 import TaskItem from "./TaskItem.js";
 import PropTypes from "prop-types";
-import Toggle from "./Toggle.js";
 
 class Tasks extends Component {
   render() {
-    const { tasks, panel, setFocus, delMode } = this.props;
-    return tasks
-      .filter(task => task.panel === panel)
-      .map(task => (
-        <TaskItem key={task.id} task={task} setFocus={setFocus} delMode={delMode} />
-      ));
+    const { panel, setTaskFocus } = this.props;
+    const { tasks } = panel;
+    return tasks.map(task => (
+      <TaskItem
+        key={task.id}
+        task={task}
+        panelId={panel.id}
+        setTaskFocus={setTaskFocus}
+      />
+    ));
   }
 }
 
 //PropTypes
 Tasks.propTypes = {
-  tasks: PropTypes.array.isRequired
+  panel: PropTypes.object.isRequired
 };
 
 export default Tasks;

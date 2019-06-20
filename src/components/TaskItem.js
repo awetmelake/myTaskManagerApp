@@ -12,24 +12,22 @@ class TaskItem extends Component {
   };
 
   render() {
-    const { setFocus } = this.props;
-    const { title,  focused, description, id } = this.props.task;
+    const { setTaskFocus, task, panelId } = this.props;
+    const { title, focused, description, id } = task;
     return (
       <div
         className="task-item"
         style={this.getStyle(focused)}
-        onClick={setFocus.bind(this, id )}
+        onClick={setTaskFocus.bind(this, id, panelId)}
       >
-        {title  }
+        {title}
         <Toggle description={description}>
           {({ on, toggle }) => (
             <div>
-              <a className="task-item-setting-btn" onClick={toggle}>
+              <p className="task-item-show-desc btn" onClick={toggle}>
                 ...
-              </a>
-              {on && (
-                <p>{description}</p>
-              )}
+              </p>
+              {on && <p>{description}</p>}
             </div>
           )}
         </Toggle>

@@ -1,57 +1,41 @@
 import React, { Component } from "react";
-import AddTask from "./AddTask.js";
-import DelTask from "./DelTask.js";
-import Toggle from "./Toggle.js";
-
+// TODO: add trash can image and make it delete panel
 class TaskHeaderSet extends Component {
   render() {
-    const { panel, toggle, addTask, delTask, toggleDel } = this.props;
+    const { panel, toggleDel, changeWindow } = this.props;
     return (
       <ul>
         <li>
-          <Toggle>
-            {({ on, toggle }) => (
-              <div>
-                <p style={btnStyle} onClick={toggle}>
-                  +
-                </p>
-                {on && (
-                  <AddTask
-                    toggle={toggle}
-                    panel={panel.title}
-                    addTask={addTask}
-                  />
-                )}
-              </div>
-            )}
-          </Toggle>
+          <p
+            className="btn task-setting-btn"
+            id="add-task-btn"
+            onClick={changeWindow.bind(this, "addtask", panel.id)}
+          >
+            +
+          </p>
         </li>
         <li>
-          <Toggle>
-            {({ on, toggle }) => (
-              <div>
-                <p style={btnStyle} onClick={(e) => {toggle(); toggleDel()}}>
-                  -
-                </p>
-                {on && <DelTask delTask={delTask} toggle={toggle} toggleDel={toggleDel}/>}
-              </div>
-            )}
-          </Toggle>
+          <p
+            className="btn task-setting-btn"
+            id="del-task-btn"
+            onClick={e => {
+              toggleDel(panel.id);
+              changeWindow("deltask", panel.id);
+            }}
+          >
+            -
+          </p>
+        </li>
+        <li>
+          <img
+            href="#"
+            alt="."
+            onClick={changeWindow.bind(this, "delpanel", null)}
+          />
         </li>
       </ul>
     );
   }
 }
-//styles
-const btnStyle = {
-  padding: "0 10px",
-  position: "relative",
-  bottom: '10px',
-  fontSize: "30px",
-  fontWeight: "1000"
-};
-const liStyle = {
-  display: "inline",
-  width: "fit-content"
-};
+
 export default TaskHeaderSet;

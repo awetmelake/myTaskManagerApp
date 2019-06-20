@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class AddTask extends Component {
   state = {
-    title: '',
+    title: "",
     focused: false,
     time: 0,
     panel: this.props.panel,
-    color: 'yellow'
+    color: "yellow"
   };
 
   handleChange = e => {
@@ -16,38 +16,45 @@ class AddTask extends Component {
   handleClick = e => {
     e.preventDefault();
     if (this.state.title.length > 0) {
-      this.props.addTask(this.state);
-      this.setState({ title: ', discription: ' }); //clear field
+      this.props.addTask(this.state, this.props.userPrompt.target);
+      this.setState({ title: "", discription: "" }); //clear field
     }
-    this.props.toggle();
+    this.props.changeWindow("none", null);
   };
 
-  handleColor = () => {};
+  getStyle = () => {
+    return {
+      display: this.props.userPrompt.type === "addtask" ? "initial" : "none"
+    };
+  };
+
   render() {
     return (
-      <form className='prompt-window'>
-        <div style={{ marginTop: '5px' }}>
-          <label>Title</label>
-          <br />
-          <input name='title' onChange={this.handleChange} />
-        </div>
-        <div style={{ marginTop: '5px' }}>
-          <label>Description</label>
-          <br />
-          <textarea name='description' onChange={this.handleChange} />
-        </div>
-        <button
-          style={{ marginTop: '5px' }}
-          type='submit'
+      <form style={this.getStyle()}>
+        <h2>Add new task</h2>
+        <br />
+        <input name="title" placeholder="Title" onChange={this.handleChange} />
+        <br />
+        <br />
+        <textarea
+          name="description"
+          onChange={this.handleChange}
+          placeholder="Description (optional)"
+        />
+        <br />
+        <label>Color </label>
+        <input
+          type="color"
+          name="color"
+          value="#ffff00"
+          onChange={this.handleChange}
+        />
+        <br />
+        <input
+          type="submit"
+          style={{ marginTop: "5px" }}
           onClick={this.handleClick}
-        >
-          OK
-        </button>
-        <ul>
-          <li>
-            <input type=''></input>
-          </li>
-        </ul>
+        />
       </form>
     );
   }

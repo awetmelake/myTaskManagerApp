@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class AddPanel extends Component {
   state = {
-    title: '',
-    id: null,
+    title: "",
+    id: null
   };
 
   handleChange = e => {
@@ -14,21 +14,27 @@ class AddPanel extends Component {
     e.preventDefault();
     if (this.state.title.length > 0) {
       this.props.addPanel(this.state);
-      this.setState({ title: '' }); //clear field
+      this.setState({ title: "" }); //clear field
     }
     this.props.toggle();
   };
+
+  getStyle = () => {
+    return {
+      display: this.props.userPrompt.type === "addpanel" ? "initial" : "none"
+    };
+  };
   render() {
     return (
-      <form className='prompt-window'>
-        <div style={{ marginTop: '20px' }}>
+      <form style={this.getStyle()}>
+        <div style={{ marginTop: "20px" }}>
           <label>New Panel Title</label>
           <br />
-          <input name='title' onChange={this.handleChange} />
+          <input name="title" onChange={this.handleChange} />
         </div>
         <button
-          style={{ marginTop: '10px' }}
-          type='submit'
+          style={{ marginTop: "10px" }}
+          type="submit"
           onClick={this.handleClick}
         >
           OK

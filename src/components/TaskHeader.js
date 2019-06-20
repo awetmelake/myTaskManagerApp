@@ -1,23 +1,28 @@
-import React, { Component } from 'react';
-import TaskSetting from './TaskSetting.js';
-import Toggle from './Toggle.js';
-import TaskHeaderSet from './TaskHeaderSet';
+import React, { Component } from "react";
+import Toggle from "./Toggle.js";
+import TaskHeaderSet from "./TaskHeaderSet";
 
 class TaskHeader extends Component {
   render() {
-    const { addTask, delTask, panel, toggleDel } = this.props;
+    const { panel, toggleDel, changeWindow } = this.props;
+    const { title } = panel;
     return (
-      <div className='task-header'>
-        <h2 className='task-header-title'>{panel.title}</h2>
-        <div className='task-header-setting'>
-          <Toggle >
+      <div className="task-header">
+        <h2 className="task-header-title">{title}</h2>
+        <div className="task-header-setting">
+          <Toggle>
             {({ on, toggle }) => (
               <div>
-                <p className='task-header-setting-btn' onClick={toggle}>
+                <p className="btn task-header-setting-btn" onClick={toggle}>
                   ...
                 </p>
                 {on && (
-                  <TaskHeaderSet toggle={toggle} panel={panel} addTask={addTask} delTask={delTask} toggleDel={toggleDel}/>
+                  <TaskHeaderSet
+                    changeWindow={changeWindow}
+                    toggleParent={toggle}
+                    panel={panel}
+                    toggleDel={toggleDel}
+                  />
                 )}
               </div>
             )}
@@ -27,6 +32,5 @@ class TaskHeader extends Component {
     );
   }
 }
-const btnStyle = {};
 
 export default TaskHeader;
