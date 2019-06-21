@@ -28,8 +28,8 @@ class TaskHeaderSet extends Component {
         </li>
         <li>
           <img
-            href="#"
-            alt="."
+            href="https://www.iconbunny.com/icons/media/catalog/product/1/7/177.5-recycle-bin-icon-iconbunny.jpg"
+            alt="del"
             onClick={changeWindow.bind(this, "delpanel", null)}
           />
         </li>

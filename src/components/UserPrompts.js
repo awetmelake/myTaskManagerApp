@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import AddTask from "./AddTask.js";
 import DelTask from "./DelTask.js";
-import AddPanel from "./AddPanel.js";
+import DelPanel from "./DelPanel.js";
 
 class UserPrompt extends Component {
   getStyle = () => {
@@ -13,7 +13,7 @@ class UserPrompt extends Component {
     const {
       addTask,
       delTask,
-      addPanel,
+      delPanel,
       userPrompt,
       changeWindow,
       toggleDel
@@ -31,10 +31,10 @@ class UserPrompt extends Component {
           delTask={delTask}
           toggleDel={toggleDel}
         />
-        <AddPanel
+        <DelPanel
           userPrompt={userPrompt}
           changeWindow={changeWindow}
-          addPanel={addPanel}
+          delPanel={delPanel}
         />
       </div>
     );

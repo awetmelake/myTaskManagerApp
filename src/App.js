@@ -57,6 +57,7 @@ class App extends Component {
   }
 
   //add and delete functions//
+  //pass in new panel object
   addPanel = panel => {
     panel.id = uuidv4();
     panel.delMode = false;
@@ -65,9 +66,9 @@ class App extends Component {
     });
   };
 
-  delPanel = id => {
+  delPanel = panelId => {
     this.setState({
-      panels: [...this.state.panels.filter(panel => panel.id !== id)]
+      panels: [...this.state.panels.filter(panel => panel.id !== panelId)]
     });
   };
 
@@ -126,7 +127,7 @@ class App extends Component {
 
   //change prompt window
   changeWindow = (type, target) => {
-    if (type !== this.state.userPrompt.type) {
+    if (target !== this.state.userPrompt.target) {
       this.setState({ userPrompt: { type: type, target: target } });
     } else {
       this.setState({ userPrompt: {type: 'none'}});
@@ -150,7 +151,7 @@ class App extends Component {
           changeWindow={this.changeWindow}
           addTask={this.addTask}
           delTask={this.delTask}
-          addPanel={this.addPanel}
+          delPanel={this.delPanel}
         />
       </div>
     );
