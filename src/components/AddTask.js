@@ -3,6 +3,7 @@ import React, { Component } from "react";
 class AddTask extends Component {
   state = {
     title: "",
+    description: "",
     focused: false,
     time: 0,
     panel: this.props.panel,
@@ -17,7 +18,7 @@ class AddTask extends Component {
     e.preventDefault();
     if (this.state.title.length > 0) {
       this.props.addTask(this.state, this.props.userPrompt.target);
-      this.setState({ title: "", discription: "" }); //clear field
+      this.setState({ title: "", description: "" }); //clear field
     }
     this.props.changeWindow("none", null);
   };
