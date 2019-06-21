@@ -24,7 +24,14 @@ class TaskItem extends Component {
         <Toggle description={description}>
           {({ on, toggle }) => (
             <div>
-              <p className="task-item-show-desc btn" onClick={toggle}>
+              <p
+                style={(() => {
+                  return {display: description !== undefined ? 'initial': 'none'}
+                })()}
+                className="task-item-show-desc btn"
+                onClick={toggle}
+                title='Show Description'
+              >
                 ...
               </p>
               {on && <p>{description}</p>}
