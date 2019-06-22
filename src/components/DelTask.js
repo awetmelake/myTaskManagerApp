@@ -16,7 +16,7 @@ class DelTask extends Component {
 
   render() {
     return (
-      <form style={this.getStyle()}>
+      <form style={this.getStyle()} className="prompt-window">
         <label>Select Tasks to Delete</label>
         <br />
         <br />

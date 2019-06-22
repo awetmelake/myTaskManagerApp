@@ -19,7 +19,7 @@ class UserPrompt extends Component {
       toggleDel
     } = this.props;
     return (
-      <div style={this.getStyle()} className="prompt-window">
+      <div style={this.getStyle()}>
         <AddTask
           userPrompt={userPrompt}
           changeWindow={changeWindow}

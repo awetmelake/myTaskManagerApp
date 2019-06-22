@@ -11,7 +11,7 @@ TODO:
 Pomodoro Timer
 Header menu nav
 Edit title on click functionality
-
+toggle navs disappear when clicked off 
 */
 class App extends Component {
   constructor(props) {
@@ -68,7 +68,7 @@ class App extends Component {
 
   delPanel = panelId => {
     this.setState({
-      panels: [...this.state.panels.filter(panel => panel.id !== panelId)]
+      panels: this.state.panels.filter(panel => panel.id !== panelId)
     });
   };
 
@@ -89,7 +89,7 @@ class App extends Component {
     this.setState({
       panels: this.state.panels.map(panel => {
         if (panel.id === panelId) {
-          panel.tasks = panel.tasks.filter(task =>  task.focused === false);
+          panel.tasks = panel.tasks.filter(task => task.focused === false);
         }
         return panel;
       })
@@ -130,7 +130,7 @@ class App extends Component {
     if (target !== this.state.userPrompt.target) {
       this.setState({ userPrompt: { type: type, target: target } });
     } else {
-      this.setState({ userPrompt: {type: 'none'}});
+      this.setState({ userPrompt: { type: "none" } });
     }
   };
 

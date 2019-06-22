@@ -31,7 +31,7 @@ class AddTask extends Component {
 
   render() {
     return (
-      <form style={this.getStyle()}>
+      <form style={this.getStyle()} className="prompt-window">
         <h2>Add new task</h2>
         <br />
         <input name="title" placeholder="Title" onChange={this.handleChange} />

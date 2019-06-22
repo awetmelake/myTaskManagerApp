@@ -10,6 +10,7 @@ class TaskHeaderSet extends Component {
             className="btn task-setting-btn"
             id="add-task-btn"
             onClick={changeWindow.bind(this, "addtask", panel.id)}
+            title="Add task"
           >
             +
           </p>
@@ -22,15 +23,19 @@ class TaskHeaderSet extends Component {
               toggleDel(panel.id);
               changeWindow("deltask", panel.id);
             }}
+            title="Delete Task"
           >
             -
           </p>
         </li>
         <li>
           <img
-            href="https://www.iconbunny.com/icons/media/catalog/product/1/7/177.5-recycle-bin-icon-iconbunny.jpg"
+            className="btn"
+            id="del-panel-btn"
+            src="https://www.iconbunny.com/icons/media/catalog/product/1/7/177.5-recycle-bin-icon-iconbunny.jpg"
             alt="del"
-            onClick={changeWindow.bind(this, "delpanel", null)}
+            onClick={changeWindow.bind(this, "delpanel", panel.id)}
+            title="Delete panel"
           />
         </li>
       </ul>

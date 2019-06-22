@@ -13,6 +13,10 @@ body {
   display: block;
   cursor: pointer;
 }
+#del-panel-btn{
+  width: 40px;
+  padding: 5px;
+}
 header {
   text-align: center;
   font-family: monospace;
