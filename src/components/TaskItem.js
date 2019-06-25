@@ -21,7 +21,7 @@ class TaskItem extends Component {
         onClick={setTaskFocus.bind(this, id, panelId)}
       >
         {title}
-        <Toggle description={description} className='disappear-onclick-background'>
+        <Toggle description={description} >
           {({ on, toggle }) => (
             <div>
               <p
