@@ -19,7 +19,16 @@ class UserPrompt extends Component {
       toggleDel
     } = this.props;
     return (
-      <div style={this.getStyle()}>
+      <div
+        onClick={e => {
+          if (e.target.className === "disappear-onclick-background") {
+            changeWindow("none", null);
+            //clicking anywhere outside of current prompt changes window to none
+          }
+        }}
+        className="disappear-onclick-background"
+        style={this.getStyle()}
+      >
         <AddTask
           userPrompt={userPrompt}
           changeWindow={changeWindow}

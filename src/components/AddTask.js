@@ -5,7 +5,6 @@ class AddTask extends Component {
     title: "",
     description: "",
     focused: false,
-    time: 0,
     panel: this.props.panel,
     color: "yellow"
   };
@@ -18,7 +17,7 @@ class AddTask extends Component {
     e.preventDefault();
     if (this.state.title.length > 0) {
       this.props.addTask(this.state, this.props.userPrompt.target);
-      this.setState({ title: "", description: "" }); //clear field
+      this.setState({ title: "", description: "", color: "yellow" }); //clear field
     }
     this.props.changeWindow("none", null);
   };

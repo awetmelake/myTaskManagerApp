@@ -11,7 +11,7 @@ TODO:
 Pomodoro Timer
 Header menu nav
 Edit title on click functionality
-toggle navs disappear when clicked off 
+toggle navs disappear when clicked off
 */
 class App extends Component {
   constructor(props) {

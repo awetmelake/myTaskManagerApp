@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Toggle from "./Toggle.js";
 
 class TaskItem extends Component {
-  //dotted border on focus == true
+  //dotted border on (focus == true)
   getStyle = focused => {
     return {
       border: focused ? "2px dotted black" : "2px solid black",
@@ -21,7 +21,7 @@ class TaskItem extends Component {
         onClick={setTaskFocus.bind(this, id, panelId)}
       >
         {title}
-        <Toggle description={description}>
+        <Toggle description={description} className='disappear-onclick-background'>
           {({ on, toggle }) => (
             <div>
               <p

@@ -112,3 +112,10 @@ header {
   border-radius: 10px;
   width: 300px;
 }
+.disappear-onclick-background{
+  position: absolute;
+  top: 0;
+  left:0;
+  width: calc( 100vw - 20px);
+  height: 100vh;
+}

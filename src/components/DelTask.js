@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 
 class DelTask extends Component {
+  state = {
+    on: false
+  };
   handleClick = e => {
     e.preventDefault();
     this.props.delTask(this.props.userPrompt.target);
