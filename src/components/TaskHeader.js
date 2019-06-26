@@ -19,7 +19,7 @@ class TaskHeader extends Component {
                 {on && (
                   <TaskHeaderSet
                     changeWindow={changeWindow}
-                    toggleParent={toggle}
+                    toggle={toggle}
                     panel={panel}
                     toggleDel={toggleDel}
                   />

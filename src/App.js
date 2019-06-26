@@ -129,8 +129,6 @@ class App extends Component {
   changeWindow = (type, target) => {
     if (target !== this.state.userPrompt.target) {
       this.setState({ userPrompt: { type: type, target: target } });
-    } else {
-      this.setState({ userPrompt: { type: "none" } });
     }
   };
 

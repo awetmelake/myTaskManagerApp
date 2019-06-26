@@ -20,7 +20,10 @@ class DelTask extends Component {
         <label>Select Tasks to Delete</label>
         <br />
         <br />
-        <input type="submit" onClick={this.handleClick} />
+        <button onClick={this.handleClick} style={{ marginRight: "10px" }}>
+          Delete
+        </button>
+        <button onClick={this.handleClick}>Cancel</button>
       </form>
     );
   }

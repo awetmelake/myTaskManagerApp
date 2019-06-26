@@ -19,31 +19,32 @@ class UserPrompt extends Component {
       toggleDel
     } = this.props;
     return (
-      <div
-        onClick={e => {
-          if (e.target.className === "disappear-onclick-background") {
-            changeWindow("none", null);
-            //clicking anywhere outside of current prompt changes window to none
-          }
-        }}
-        className="disappear-onclick-background"
-        style={this.getStyle()}
-      >
-        <AddTask
-          userPrompt={userPrompt}
-          changeWindow={changeWindow}
-          addTask={addTask}
-        />
+      <div>
+        <div
+          onClick={e => {
+            if (e.target.className === "disappear-onclick-background") {
+              changeWindow("none", null);
+              //add class to child components to make them disappear on click
+            }
+          }}
+          style={this.getStyle()}
+        >
+          <AddTask
+            userPrompt={userPrompt}
+            changeWindow={changeWindow}
+            addTask={addTask}
+          />
+          <DelPanel
+            userPrompt={userPrompt}
+            changeWindow={changeWindow}
+            delPanel={delPanel}
+          />
+        </div>
         <DelTask
           userPrompt={userPrompt}
           changeWindow={changeWindow}
           delTask={delTask}
           toggleDel={toggleDel}
-        />
-        <DelPanel
-          userPrompt={userPrompt}
-          changeWindow={changeWindow}
-          delPanel={delPanel}
         />
       </div>
     );

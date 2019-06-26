@@ -13,22 +13,24 @@ class DelPanel extends Component {
   };
   render() {
     return (
-      <form style={this.getStyle()} className="prompt-window">
-        <label>Delete Panel?</label>
-        <br />
-        <br />
-        <button onClick={this.handleClick} style={{ marginRight: "10px" }}>
-          yes
-        </button>
-        <button
-          onClick={e => {
-            e.preventDefault();
-            this.props.changeWindow( "none", null);
-          }}
-        >
-          no
-        </button>
-      </form>
+      <div style={this.getStyle()} className="disappear-onclick-background">
+        <form style={this.getStyle()} className="prompt-window">
+          <label>Delete Panel?</label>
+          <br />
+          <br />
+          <button onClick={this.handleClick} style={{ marginRight: "10px" }}>
+            yes
+          </button>
+          <button
+            onClick={e => {
+              e.preventDefault();
+              this.props.changeWindow("none", null);
+            }}
+          >
+            no
+          </button>
+        </form>
+      </div>
     );
   }
 }
