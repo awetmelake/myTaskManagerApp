@@ -3,9 +3,11 @@ import React, { Component } from "react";
 class DelTask extends Component {
   handleClick = e => {
     e.preventDefault();
-    this.props.delTask(this.props.userPrompt.target);
+    if (e.target.title === 'delete') {
+      this.props.delTask(this.props.userPrompt.target);
+    }
     this.props.toggleDel(this.props.userPrompt.target);
-    this.props.changeWindow("none", null);
+    this.props.changeWindow("none", {});
   };
 
   getStyle = () => {
@@ -15,16 +17,19 @@ class DelTask extends Component {
   };
 
   render() {
+    const { type } = this.props.userPrompt;
     return (
-      <form style={this.getStyle()} className="prompt-window">
+      <div>
+      {(type == 'deltask') && (<form style={this.getStyle()} className="prompt-window">
         <label>Select Tasks to Delete</label>
         <br />
         <br />
-        <button onClick={this.handleClick} style={{ marginRight: "10px" }}>
+        <button title='delete' onClick={this.handleClick} style={{ marginRight: "10px" }}>
           Delete
         </button>
-        <button onClick={this.handleClick}>Cancel</button>
-      </form>
+        <button title='cancel' onClick={this.handleClick}>Cancel</button>
+      </form>)}
+      </div>
     );
   }
 }
