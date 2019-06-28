@@ -12,7 +12,8 @@ class TaskPanel extends Component {
       delTask,
       toggleDel,
       delPanel,
-      changeWindow
+      changeWindow,
+      userPrompt
     } = this.props;
     return panels.map(panel => (
       <div className="task-panel">
@@ -26,9 +27,12 @@ class TaskPanel extends Component {
           key={panel.id}
         />
         <Tasks
+          changeWindow={changeWindow}
+          userPrompt={userPrompt}
           panel={panel}
           setTaskFocus={setTaskFocus}
           toggleDel={toggleDel}
+          delTask={delTask}
         />
       </div>
     ));
