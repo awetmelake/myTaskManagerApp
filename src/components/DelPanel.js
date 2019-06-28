@@ -4,7 +4,7 @@ class DelPanel extends Component {
   handleClick = e => {
     e.preventDefault();
     this.props.delPanel(this.props.userPrompt.target);
-    this.props.changeWindow("none", null);
+    this.props.changeWindow("none", {});
   };
   getStyle = () => {
     return {
@@ -24,7 +24,7 @@ class DelPanel extends Component {
           <button
             onClick={e => {
               e.preventDefault();
-              this.props.changeWindow("none", null);
+              this.props.changeWindow("none", {});
             }}
           >
             no
