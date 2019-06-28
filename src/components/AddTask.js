@@ -19,7 +19,7 @@ class AddTask extends Component {
       this.props.addTask(this.state, this.props.userPrompt.target);
       this.setState({ title: "", description: "", color: "yellow" }); //clear field
     }
-    this.props.changeWindow("none", null);
+    this.props.changeWindow("none", {});
   };
 
   getStyle = () => {
@@ -29,9 +29,10 @@ class AddTask extends Component {
   };
 
   render() {
+    const { type } = this.props.userPrompt;
     return (
       <div style={this.getStyle()} className="disappear-onclick-background">
-      <form  className="prompt-window">
+      {(type == 'addtask') && (<form  className="prompt-window">
         <h2>Add new task</h2>
         <br />
         <input name="title" placeholder="Title" onChange={this.handleChange} />
@@ -56,7 +57,7 @@ class AddTask extends Component {
           style={{ marginTop: "5px" }}
           onClick={this.handleClick}
         />
-      </form>
+      </form>)}
       </div>
     );
   }
