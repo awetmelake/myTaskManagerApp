@@ -17,10 +17,8 @@ class DelTask extends Component {
   };
 
   render() {
-    const { type } = this.props.userPrompt;
     return (
-      <div>
-      {(type == 'deltask') && (<form style={this.getStyle()} className="prompt-window">
+      <form style={this.getStyle()} className="prompt-window">
         <label>Select Tasks to Delete</label>
         <br />
         <br />
@@ -28,8 +26,7 @@ class DelTask extends Component {
           Delete
         </button>
         <button title='cancel' onClick={this.handleClick}>Cancel</button>
-      </form>)}
-      </div>
+      </form>
     );
   }
 }
