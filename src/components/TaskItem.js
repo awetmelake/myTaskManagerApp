@@ -32,7 +32,12 @@ class TaskItem extends Component {
               style={this.getStyle(focused, panel.delMode)}
               onClick={e => {
                 setTaskFocus(id, panel.id);
-                if(!panel.delMode && userPrompt.type !== 'deltask'){
+                if (
+                  !panel.delMode &&
+                  userPrompt.type !== "deltask" &&
+                  e.target.className !== "task-item-show-desc btn"
+                ) {
+                  console.log(e.target.className);
                   changeWindow("taskinfo", task);
                   toggle();
                 }
@@ -45,8 +50,7 @@ class TaskItem extends Component {
                     <p
                       style={(() => {
                         return {
-                          display:
-                            description !== undefined ? "initial" : "none"
+                          display: description.length > 0 ? "initial" : "none"
                         };
                       })()}
                       className="task-item-show-desc btn"
@@ -60,7 +64,7 @@ class TaskItem extends Component {
                 )}
               </Toggle>
             </div>
-            {on  && (
+            {on && (
               <TaskInfo
                 setTaskFocus={setTaskFocus}
                 toggleDel={toggleDel}
