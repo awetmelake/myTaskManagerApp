@@ -10,9 +10,12 @@ class Tasks extends Component {
       changeWindow,
       delTask,
       toggleDel,
-      userPrompt
+      userPrompt,
+      editTask
     } = this.props;
+
     const { tasks } = panel;
+
     return tasks.map(task => (
       <TaskItem
         changeWindow={changeWindow}
@@ -22,6 +25,7 @@ class Tasks extends Component {
         key={task.id}
         task={task}
         panel={panel}
+        editTask={editTask}
         setTaskFocus={setTaskFocus}
       />
     ));

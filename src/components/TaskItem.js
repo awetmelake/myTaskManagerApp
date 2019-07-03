@@ -5,9 +5,12 @@ import TaskInfo from "./TaskInfo.js";
 
 class TaskItem extends Component {
   //dotted border on (focus == true)
-  getStyle = (focused, delMode) => {
+  getStyle = () => {
     return {
-      border: focused && delMode ? "2px dotted black" : "2px solid black",
+      border:
+        this.props.task.focused && this.props.panel.delMode
+          ? "2px dotted black"
+          : "2px solid black",
       backgroundColor: this.props.task.color
     };
   };
@@ -20,16 +23,19 @@ class TaskItem extends Component {
       changeWindow,
       delTask,
       toggleDel,
-      userPrompt
+      userPrompt,
+      editTask
     } = this.props;
-    const { title, focused, description, id } = task;
+
+    const { title,  description, id } = task;
+
     return (
       <Toggle delTask={delTask}>
         {({ on, toggle }) => (
           <div>
             <div
               className="task-item"
-              style={this.getStyle(focused, panel.delMode)}
+              style={this.getStyle()}
               onClick={e => {
                 setTaskFocus(id, panel.id);
                 if (
@@ -67,6 +73,7 @@ class TaskItem extends Component {
             {on && (
               <TaskInfo
                 setTaskFocus={setTaskFocus}
+                editTask={editTask}
                 toggleDel={toggleDel}
                 toggle={toggle}
                 task={task}

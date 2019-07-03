@@ -3,23 +3,29 @@ import React, { Component } from "react";
 class TaskItemSet extends Component {
   state = {
     editMode: false
-  };s
+  };
   toggleEdit = () => {
     this.setState({
       editMode: !this.state.editMode
     });
-    if(this.state.editMode){
+    if (this.state.editMode) {
       //turn text to inputs
     }
   };
   render() {
-    const { delTask, id, panel, setTaskFocus, toggleDel } = this.props;
+    const {
+      toggleEdit,
+      delTask,
+      id,
+      panel,
+      setTaskFocus,
+      toggleDel
+    } = this.props;
     return (
       <ul className="task-item-set btn">
-        <li onClick={this.toggleEdit}>edit</li>
+        <li onClick={e => toggleEdit()}>edit</li>
+        <li>move</li>
         <li>timer</li>
-        <br />
-        <br />
         <br />
         <br />
         <br />

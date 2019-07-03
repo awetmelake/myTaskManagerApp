@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-// TODO: add trash can image and make it delete panel
+
 class TaskHeaderSet extends Component {
   render() {
     const { panel, toggleDel, changeWindow, toggle } = this.props;
     return (
-      <ul onClick={e => {toggle()}}>
+      <ul onClick={toggle}>
         <li>
           <p
             className="btn task-setting-btn"
@@ -34,7 +34,7 @@ class TaskHeaderSet extends Component {
             id="del-panel-btn"
             src="https://www.iconbunny.com/icons/media/catalog/product/1/7/177.5-recycle-bin-icon-iconbunny.jpg"
             alt="del"
-            onClick={changeWindow.bind(this, "delpanel", panel.id)}
+            onClick={e => changeWindow("delpanel", panel.id)}
             title="Delete panel"
           />
         </li>

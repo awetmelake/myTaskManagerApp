@@ -11,12 +11,15 @@ TODO:
 Pomodoro Timer
 Header menu nav
 Edit title on click functionality
-toggle navs disappear when clicked off
+
 */
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      board: {
+        name: "TASKFLOW"
+      },
       panels: [
         {
           title: "TODO",
@@ -51,7 +54,7 @@ class App extends Component {
       ],
       userPrompt: {
         type: "none",
-        target: null
+        target: {}
       }
     };
   }
@@ -85,6 +88,7 @@ class App extends Component {
     });
   };
 
+  //delete focused tasks inside passed panel
   delTask = panelId => {
     this.setState({
       panels: this.state.panels.map(panel => {
@@ -94,6 +98,23 @@ class App extends Component {
         return panel;
       })
     });
+  };
+
+  //
+  editTask = (newTask, taskId, panelId) => {
+      this.setState({
+        panels: this.state.panels.map(panel => {
+          if(panel.id === panelId){
+            panel.tasks = panel.tasks.map(task => {
+              if (task.id === taskId){
+                task = newTask;
+              }
+              return task
+            });
+          }
+          return panel;
+        })
+      })
   };
 
   //toggle functions//
@@ -114,6 +135,7 @@ class App extends Component {
     });
   };
 
+  //toggle deletemode property of panel
   toggleDel = panelId => {
     this.setState({
       panels: this.state.panels.map(panel => {
@@ -135,15 +157,19 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header name="TASKFLOW" addPanel={this.addPanel} />
+        <Header name={this.state.board.name} addPanel={this.addPanel} />
         <TaskPanel
           panels={this.state.panels}
           changeWindow={this.changeWindow}
           toggleDel={this.toggleDel}
           setTaskFocus={this.setTaskFocus}
           delPanel={this.delPanel}
+          delTask={this.delTask}
+          editTask={this.editTask}
+          userPrompt={this.state.userPrompt}
         />
         <UserPrompt
+          panels={this.state.panels}
           toggleDel={this.toggleDel}
           userPrompt={this.state.userPrompt}
           changeWindow={this.changeWindow}

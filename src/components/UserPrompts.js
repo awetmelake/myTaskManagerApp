@@ -3,6 +3,8 @@ import AddTask from "./AddTask.js";
 import DelTask from "./DelTask.js";
 import DelPanel from "./DelPanel.js";
 
+// cleaned syntax
+
 class UserPrompt extends Component {
   render() {
     const {
@@ -16,10 +18,7 @@ class UserPrompt extends Component {
     return (
       <div
         onClick={e => {
-          //add class to child components to make them disappear on background click
-          if (e.target.className === "disappear-onclick-background") {
-            changeWindow("none", null);
-          }
+          e.target.className === "disappear-onclick-background" && changeWindow("none", null);
         }}
       >
         <AddTask
@@ -38,7 +37,6 @@ class UserPrompt extends Component {
           delTask={delTask}
           toggleDel={toggleDel}
         />
-
       </div>
     );
   }
