@@ -100,7 +100,7 @@ class App extends Component {
     });
   };
 
-  //
+  //replace task matching task id with new task object
   editTask = (newTask, taskId, panelId) => {
       this.setState({
         panels: this.state.panels.map(panel => {
