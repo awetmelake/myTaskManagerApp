@@ -8,7 +8,6 @@ const uuidv4 = require("uuid/v4");
 
 /*
 TODO:
-Pomodoro Timer
 Header menu nav
 Edit title on click functionality
 
@@ -60,7 +59,7 @@ class App extends Component {
   }
 
   //add and delete functions//
-  //pass in new panel object
+  //pass in new panel object, added to state panels
   addPanel = panel => {
     panel.id = uuidv4();
     panel.delMode = false;
@@ -69,11 +68,11 @@ class App extends Component {
     });
   };
 
-  delPanel = panelId => {
+  //delete panel by panel id
+  delPanel = panelId =>
     this.setState({
       panels: this.state.panels.filter(panel => panel.id !== panelId)
     });
-  };
 
   //pass in task object and panel id
   addTask = (task, panelId) => {
@@ -100,23 +99,33 @@ class App extends Component {
     });
   };
 
-  //replace task matching task id with new task object
+  //replace task matching task and panel id with new task object
   editTask = (newTask, taskId, panelId) => {
-      this.setState({
-        panels: this.state.panels.map(panel => {
-          if(panel.id === panelId){
-            panel.tasks = panel.tasks.map(task => {
-              if (task.id === taskId){
-                task = newTask;
-              }
-              return task
-            });
-          }
-          return panel;
-        })
+    this.setState({
+      panels: this.state.panels.map(panel => {
+        if (panel.id === panelId) {
+          panel.tasks = panel.tasks.map(task => {
+            if (task.id === taskId) {
+              task = newTask;
+            }
+            return task;
+          });
+        }
+        return panel;
       })
+    });
   };
 
+  editPanelTitle = (newTitle, panelId) => {
+    this.setState({
+      panels: this.state.panels.map(panel => {
+        if (panel.id === panelId) {
+          panel.title = newTitle;
+        }
+        return panel;
+      })
+    });
+  };
   //toggle functions//
   setTaskFocus = (taskId, panelId) => {
     this.setState({
@@ -158,16 +167,19 @@ class App extends Component {
     return (
       <div className="App">
         <Header name={this.state.board.name} addPanel={this.addPanel} />
-        <TaskPanel
-          panels={this.state.panels}
-          changeWindow={this.changeWindow}
-          toggleDel={this.toggleDel}
-          setTaskFocus={this.setTaskFocus}
-          delPanel={this.delPanel}
-          delTask={this.delTask}
-          editTask={this.editTask}
-          userPrompt={this.state.userPrompt}
-        />
+        <div className="panels">
+          <TaskPanel
+            panels={this.state.panels}
+            changeWindow={this.changeWindow}
+            toggleDel={this.toggleDel}
+            setTaskFocus={this.setTaskFocus}
+            delPanel={this.delPanel}
+            delTask={this.delTask}
+            editTask={this.editTask}
+            userPrompt={this.state.userPrompt}
+            editPanelTitle={this.editPanelTitle}
+          />
+        </div>
         <UserPrompt
           panels={this.state.panels}
           toggleDel={this.toggleDel}
