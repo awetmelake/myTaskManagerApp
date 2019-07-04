@@ -20,19 +20,18 @@ class TaskItem extends Component {
       setTaskFocus,
       task,
       panel,
-      changeWindow,
       delTask,
       toggleDel,
       userPrompt,
       editTask
     } = this.props;
 
-    const { title,  description, id } = task;
+    const { title, description, id } = task;
 
     return (
       <Toggle delTask={delTask}>
         {({ on, toggle }) => (
-          <div>
+          <>
             <div
               className="task-item"
               style={this.getStyle()}
@@ -44,7 +43,6 @@ class TaskItem extends Component {
                   e.target.className !== "task-item-show-desc btn"
                 ) {
                   console.log(e.target.className);
-                  changeWindow("taskinfo", task);
                   toggle();
                 }
               }}
@@ -52,21 +50,18 @@ class TaskItem extends Component {
               {title}
               <Toggle description={description}>
                 {({ on, toggle }) => (
-                  <div>
-                    <p
-                      style={(() => {
-                        return {
-                          display: description.length > 0 ? "initial" : "none"
-                        };
-                      })()}
-                      className="task-item-show-desc btn"
-                      onClick={toggle}
-                      title="Show Description"
-                    >
-                      ...
-                    </p>
+                  <>
+                    {description.length > 0 && (
+                      <p
+                        className="task-item-show-desc btn"
+                        onClick={toggle}
+                        title="Show Description"
+                      >
+                        ...
+                      </p>
+                    )}
                     {on && <p>{description}</p>}
-                  </div>
+                  </>
                 )}
               </Toggle>
             </div>
@@ -81,7 +76,7 @@ class TaskItem extends Component {
                 panel={panel}
               />
             )}
-          </div>
+          </>
         )}
       </Toggle>
     );

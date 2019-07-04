@@ -2,9 +2,18 @@ import React, { Component } from "react";
 
 class TaskHeaderSet extends Component {
   render() {
-    const { panel, toggleDel, changeWindow, toggle } = this.props;
+    const { panel, toggleDel, changeWindow, toggle, toggleEdit } = this.props;
     return (
       <ul onClick={toggle}>
+        <li>
+          <img
+            onClick={e => toggleEdit()}
+            className="btn"
+            id='edit-panel-title-btn'
+            src="../images/edit-icon.png"
+            title="Edit Title"
+          />
+        </li>
         <li>
           <p
             className="btn task-setting-btn"
@@ -32,8 +41,7 @@ class TaskHeaderSet extends Component {
           <img
             className="btn"
             id="del-panel-btn"
-            src="https://www.iconbunny.com/icons/media/catalog/product/1/7/177.5-recycle-bin-icon-iconbunny.jpg"
-            alt="del"
+            src="../images/recycle-bin-image.jpg"
             onClick={e => changeWindow("delpanel", panel.id)}
             title="Delete panel"
           />
