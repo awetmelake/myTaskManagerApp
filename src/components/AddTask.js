@@ -22,47 +22,45 @@ class AddTask extends Component {
     this.props.changeWindow("none", {});
   };
 
-  getStyle = () => ({
-    display: this.props.userPrompt.type === "addtask" ? "initial" : "none"
-  });
-
   render() {
     const { type } = this.props.userPrompt;
     return (
-      <div style={this.getStyle()} className="disappear-onclick-background">
+      <>
         {type === "addtask" && (
-          <form className="prompt-window">
-            <h2>Add new task</h2>
-            <br />
-            <input
-              name="title"
-              placeholder="Title"
-              onChange={this.handleChange}
-            />
-            <br />
-            <br />
-            <textarea
-              name="description"
-              onChange={this.handleChange}
-              placeholder="Description (optional)"
-            />
-            <br />
-            <label>Color </label>
-            <input
-              type="color"
-              name="color"
-              value="#ffff00"
-              onChange={this.handleChange}
-            />
-            <br />
-            <input
-              type="submit"
-              style={{ marginTop: "5px" }}
-              onClick={this.handleClick}
-            />
-          </form>
+          <div className="disappear-onclick-background">
+            <form className="prompt-window">
+              <h2>Add new task</h2>
+              <br />
+              <input
+                name="title"
+                placeholder="Title"
+                onChange={this.handleChange}
+              />
+              <br />
+              <br />
+              <textarea
+                name="description"
+                onChange={this.handleChange}
+                placeholder="Description (optional)"
+              />
+              <br />
+              <label>Color </label>
+              <input
+                type="color"
+                name="color"
+                value="#ffff00"
+                onChange={this.handleChange}
+              />
+              <br />
+              <input
+                type="submit"
+                style={{ marginTop: "5px" }}
+                onClick={this.handleClick}
+              />
+            </form>
+          </div>
         )}
-      </div>
+      </>
     );
   }
 }
