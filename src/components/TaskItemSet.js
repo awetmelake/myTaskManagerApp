@@ -1,17 +1,14 @@
 import React, { Component } from "react";
+import TimerSet from "./TimerSet.js";
+import Toggle from "./Toggle.js";
 
 class TaskItemSet extends Component {
   state = {
     editMode: false
   };
-  toggleEdit = () => {
-    this.setState({
-      editMode: !this.state.editMode
-    });
-    if (this.state.editMode) {
-      //turn text to inputs
-    }
-  };
+
+  toggleEdit = () => this.setState({ editMode: !this.state.editMode });
+
   render() {
     const {
       toggleEdit,
@@ -19,26 +16,48 @@ class TaskItemSet extends Component {
       id,
       panel,
       setTaskFocus,
-      toggleDel
+      toggleDel,
+      task,
+      changeWindow
     } = this.props;
+    
     return (
       <ul className="task-item-set btn">
         <li onClick={e => toggleEdit()}>edit</li>
-        <li>move</li>
-        <li>timer</li>
+        <li onClick={e => changeWindow("moveTask", task.id)}>move</li>
+        <Toggle>
+          {({ on, toggle }) => (
+            <>
+              <li onClick={toggle}>timer</li>
+              {on && <TimerSet />}
+            </>
+          )}
+        </Toggle>
         <br />
         <br />
         <br />
-        <li
-          onClick={e => {
-            toggleDel(panel.id);
-            setTaskFocus(id, panel.id);
-            delTask(panel.id);
-            toggleDel(panel.id);
-          }}
-        >
-          delete
-        </li>
+        <Toggle>
+          {({ on, toggle }) => (
+            <>
+              <li onClick={toggle}>delete</li>
+              {on && (
+                <div className="prompt-window delete-confirm">
+                  <p style={{ fontSize: "15px" }}>Delete?</p>
+                  <button
+                    onClick={e => delTask(task.id)}
+                    style={{ marginRight: "10px" }}
+                    className="btn"
+                  >
+                    yes
+                  </button>
+                  <button onClick={toggle} className="btn">
+                    no
+                  </button>
+                </div>
+              )}
+            </>
+          )}
+        </Toggle>
       </ul>
     );
   }

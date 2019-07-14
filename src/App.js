@@ -9,8 +9,9 @@ const uuidv4 = require("uuid/v4");
 /*
 TODO:
 Header menu nav
-Edit title on click functionality
 
+replace class components with functional ones where possible ,
+proptype is required
 */
 class App extends Component {
   constructor(props) {
@@ -27,11 +28,28 @@ class App extends Component {
           tasks: [
             {
               id: uuidv4(),
-              title: "wake up",
-              description: "sdfsdf",
-              panel: "TODO",
+              title: "Pick up kids from school",
+              description: "",
+              completeBy: "4:00pm",
               focused: false,
-              color: "yellow"
+              color: "lightgreen",
+              time: 0
+            }
+          ]
+        },
+        {
+          title: "In Progress",
+          id: uuidv4(),
+          delMode: false,
+          tasks: [
+            {
+              id: uuidv4(),
+              title: "Work on project",
+              description: "add finishing touches",
+              completeBy: "Thursday",
+              focused: false,
+              color: "yellow",
+              time: 0
             }
           ]
         },
@@ -42,11 +60,12 @@ class App extends Component {
           tasks: [
             {
               id: uuidv4(),
-              title: "sleep",
-              description: "go to bed at 10",
-              panel: "Done",
+              title: "Wake up",
+              description: "",
+              completeBy: "5:00 am",
               focused: false,
-              color: "yellow"
+              color: "red",
+              time: 0
             }
           ]
         }
@@ -69,10 +88,7 @@ class App extends Component {
   };
 
   //delete panel by panel id
-  delPanel = panelId =>
-    this.setState({
-      panels: this.state.panels.filter(panel => panel.id !== panelId)
-    });
+  delPanel = panelId => this.setState({panels: this.state.panels.filter(panel => panel.id !== panelId)});
 
   //pass in task object and panel id
   addTask = (task, panelId) => {
@@ -87,8 +103,18 @@ class App extends Component {
     });
   };
 
+  //delete task by id
+  delTask = taskId => {
+    this.setState({
+      panels: this.state.panels.map(panel => {
+        panel.tasks = panel.tasks.filter(task => task.id !== taskId);
+        return panel;
+      })
+    });
+  };
+
   //delete focused tasks inside passed panel
-  delTask = panelId => {
+  delFocused = panelId => {
     this.setState({
       panels: this.state.panels.map(panel => {
         if (panel.id === panelId) {
@@ -99,7 +125,20 @@ class App extends Component {
     });
   };
 
-  //replace task matching task and panel id with new task object
+  moveTask = (taskId, targetPanelId) => {
+    let curTask;
+    this.state.panels.forEach(panel => {
+      panel.tasks.forEach(task => {
+        if (task.id === taskId) {
+          curTask = task;
+        }
+      });
+    });
+    this.delTask(taskId);
+    this.addTask(curTask, targetPanelId);
+  };
+
+  //replace task with matching id and panel id with new task object
   editTask = (newTask, taskId, panelId) => {
     this.setState({
       panels: this.state.panels.map(panel => {
@@ -126,6 +165,7 @@ class App extends Component {
       })
     });
   };
+
   //toggle functions//
   setTaskFocus = (taskId, panelId) => {
     this.setState({
@@ -159,7 +199,7 @@ class App extends Component {
   //change prompt window
   changeWindow = (type, target) => {
     if (target !== this.state.userPrompt.target) {
-      this.setState({ userPrompt: { type: type, target: target } });
+      this.setState({ userPrompt: { type, target } });
     }
   };
 
@@ -173,11 +213,10 @@ class App extends Component {
             changeWindow={this.changeWindow}
             toggleDel={this.toggleDel}
             setTaskFocus={this.setTaskFocus}
-            delPanel={this.delPanel}
-            delTask={this.delTask}
             editTask={this.editTask}
             userPrompt={this.state.userPrompt}
             editPanelTitle={this.editPanelTitle}
+            delTask={this.delTask}
           />
         </div>
         <UserPrompt
@@ -186,8 +225,9 @@ class App extends Component {
           userPrompt={this.state.userPrompt}
           changeWindow={this.changeWindow}
           addTask={this.addTask}
-          delTask={this.delTask}
+          delFocused={this.delFocused}
           delPanel={this.delPanel}
+          moveTask={this.moveTask}
         />
       </div>
     );

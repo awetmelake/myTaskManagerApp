@@ -8,25 +8,27 @@ class Tasks extends Component {
       panel,
       setTaskFocus,
       changeWindow,
-      delTask,
+      delFocused,
       toggleDel,
       userPrompt,
-      editTask
+      editTask,
+      moveTask,
+      delTask
     } = this.props;
-
     const { tasks } = panel;
-
     return tasks.map(task => (
       <TaskItem
         changeWindow={changeWindow}
         userPrompt={userPrompt}
         toggleDel={toggleDel}
-        delTask={delTask}
+        delFocused={delFocused}
         key={task.id}
         task={task}
         panel={panel}
         editTask={editTask}
         setTaskFocus={setTaskFocus}
+        moveTask={moveTask}
+        delTask={delTask}
       />
     ));
   }

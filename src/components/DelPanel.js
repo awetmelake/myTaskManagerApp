@@ -10,31 +10,29 @@ class DelPanel extends Component {
   render() {
     const { type } = this.props.userPrompt;
     return (
-      <>
-        {type === "delpanel" && (
-            <div className="disappear-onclick-background">
-              <form className="prompt-window">
-                <label>Delete Panel?</label>
-                <br />
-                <br />
-                <button
-                  onClick={this.handleClick}
-                  style={{ marginRight: "10px" }}
-                >
-                  yes
-                </button>
-                <button
-                  onClick={e => {
-                    e.preventDefault();
-                    this.props.changeWindow("none", {});
-                  }}
-                >
-                  no
-                </button>
-              </form>
-            </div>
-          )}
-      </>
+      <div className="disappear-onclick-background">
+        <form className="prompt-window">
+          <label>Delete Panel?</label>
+          <br />
+          <br />
+          <button
+            className="btn"
+            onClick={this.handleClick}
+            style={{ marginRight: "10px" }}
+          >
+            yes
+          </button>
+          <button
+            className="btn"
+            onClick={e => {
+              e.preventDefault();
+              this.props.changeWindow("none", {});
+            }}
+          >
+            no
+          </button>
+        </form>
+      </div>
     );
   }
 }

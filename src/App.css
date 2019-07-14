@@ -5,13 +5,15 @@
   font-size: 15px;
   user-select: none;
 }
+*:focus {
+  outline: none;
+}
 body {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.4;
   background-color: #f3f3f3;
 }
 .btn {
-  display: block;
   cursor: pointer;
 }
 li {
@@ -20,7 +22,7 @@ li {
 header {
   text-align: center;
   font-family: monospace;
-  font-size: 35px;
+  font-size: 30px;
   font-weight: 800;
   background-color: black;
   color: white;
@@ -36,7 +38,11 @@ header {
   font-size: 48px;
   font-weight: 1000;
 }
-
+.panels {
+  margin: 30px auto 0px;
+  width: 90%;
+  height: 90vh;
+}
 .task-panel {
   margin: 10px;
   margin-right: 0;
@@ -54,6 +60,7 @@ header {
 }
 .task-header-title {
   margin: 10px 0 10px;
+  font-weight: 600;
 }
 .task-header-setting {
   bottom: 5px;
@@ -69,6 +76,7 @@ header {
   padding: 0 12px;
 }
 .task-header-setting ul {
+  overflow: hidden;
   background-color: white;
   border-radius: 10px;
   border: 2px solid black;
@@ -83,6 +91,10 @@ header {
   padding: 0 10px;
   font-size: 30px;
   font-weight: 1000;
+}
+#edit-panel-title-btn {
+  width: 40px;
+  padding: 10px;
 }
 #add-task-btn {
   color: green;
@@ -102,17 +114,18 @@ header {
 }
 .task-item-show-desc {
   font-size: 20px;
-  padding-bottom: 5px;
+  width: fit-content;
 }
 .prompt-window {
   text-align: center;
   position: absolute;
-  left: calc(50vw - 160px);
+  left: calc(50vw - 130px);
+  margin: 0 auto;
   top: 199px;
   background-color: white;
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
-  width: 300px;
+  width: 260px;
   box-shadow: 0px 0px 5px black;
 }
 .disappear-onclick-background {
@@ -136,13 +149,30 @@ header {
 .task-info p {
   font-size: 25px;
 }
-.task-info input{
+.task-info input {
   font-size: 25px;
+  border: none;
+  border-bottom: 1px solid black;
+}
+ul#color-select {
+  width: fit-content;
+  margin: 0 auto;
+}
+#color-select li {
+  float: left;
+}
+#color-select li button {
+  border-color: black;
+  border-radius: 40px;
+  font-size: 15px;
+  padding: 10px;
+  margin-right: 20px;
+  display: block;
 }
 .task-item-set {
-  width: 45px;
+  width: 50px;
   position: absolute;
-  left: 410px;
+  left: 401px;
   bottom: 0px;
   float: right;
 }
@@ -154,11 +184,43 @@ header {
   padding: 12px 2px;
   margin-bottom: 10px;
   box-shadow: 1px 0px 10px black;
+  clear: both;
 }
 .task-item-set li:hover {
   box-shadow: 1px 0px 5px black;
 }
-
-*:focus{
-  outline: none;
+.timer-set {
+  left:  -160px;
+  width: 150px;
+  top: 95px;
+}
+.timer-set p {
+  margin-top: 5px;
+  text-align: center;
+  font-size: 15px;
+}
+.timer-set p:hover {
+  text-decoration: underline;
+}
+.move-task {
+  width: 120px;
+  left: calc(50vw + 60px);
+  top: 230px;
+}
+.move-task p {
+  margin-top: 5px;
+  text-align: center;
+  font-size: 15px;
+  padding: 5px;
+}
+.move-task-item:hover {
+  text-decoration: underline;
+}
+.delete-confirm {
+  cursor: auto;
+  width: 100px;
+  height: 60px;
+  position: absolute;
+  left: 60px;
+  top: 220px;
 }

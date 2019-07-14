@@ -9,8 +9,9 @@ class TaskHeaderSet extends Component {
           <img
             onClick={e => toggleEdit()}
             className="btn"
-            id='edit-panel-title-btn'
+            id="edit-panel-title-btn"
             src="../images/edit-icon.png"
+            alt="edit"
             title="Edit Title"
           />
         </li>
@@ -18,7 +19,7 @@ class TaskHeaderSet extends Component {
           <p
             className="btn task-setting-btn"
             id="add-task-btn"
-            onClick={changeWindow.bind(this, "addtask", panel.id)}
+            onClick={e => changeWindow("addtask", panel.id)}
             title="Add task"
           >
             +
@@ -42,6 +43,7 @@ class TaskHeaderSet extends Component {
             className="btn"
             id="del-panel-btn"
             src="../images/recycle-bin-image.jpg"
+            alt="del"
             onClick={e => changeWindow("delpanel", panel.id)}
             title="Delete panel"
           />

@@ -31,6 +31,8 @@ class TaskHeader extends Component {
         {this.state.editMode ? (
           <>
             <input
+              autoComplete="off"
+              autoFocus={true}
               className="task-header-title"
               name="title"
               value={this.state.title}
@@ -42,16 +44,18 @@ class TaskHeader extends Component {
               }}
             />
             <br />
-            <button
-              style={{ marginRight: "10px" }}
-              name="save"
-              onClick={this.handleSubmit}
-            >
-              save
-            </button>
-            <button name="cancel" onClick={this.handleSubmit}>
-              cancel
-            </button>
+            <div style={{ margin: "0 auto" }}>
+              <button
+                style={{ marginRight: "10px" }}
+                name="save"
+                onClick={this.handleSubmit}
+              >
+                save
+              </button>
+              <button name="cancel" onClick={this.handleSubmit}>
+                cancel
+              </button>
+            </div>
           </>
         ) : (
           <p className="task-header-title">{this.state.title}</p>
@@ -63,7 +67,7 @@ class TaskHeader extends Component {
                 <p className="btn task-header-setting-btn" onClick={toggle}>
                   ...
                 </p>
-                {on && (
+                {on && !this.state.editMode && (
                   <TaskHeaderSet
                     toggleEdit={this.toggleEdit}
                     changeWindow={changeWindow}

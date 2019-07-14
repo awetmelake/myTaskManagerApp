@@ -23,13 +23,15 @@ class TaskItem extends Component {
       delTask,
       toggleDel,
       userPrompt,
-      editTask
+      editTask,
+      moveTask,
+      changeWindow
     } = this.props;
 
     const { title, description, id } = task;
 
     return (
-      <Toggle delTask={delTask}>
+      <Toggle>
         {({ on, toggle }) => (
           <>
             <div
@@ -42,13 +44,12 @@ class TaskItem extends Component {
                   userPrompt.type !== "deltask" &&
                   e.target.className !== "task-item-show-desc btn"
                 ) {
-                  console.log(e.target.className);
                   toggle();
                 }
               }}
             >
               {title}
-              <Toggle description={description}>
+              <Toggle>
                 {({ on, toggle }) => (
                   <>
                     {description.length > 0 && (
@@ -74,6 +75,8 @@ class TaskItem extends Component {
                 task={task}
                 delTask={delTask}
                 panel={panel}
+                moveTask={moveTask}
+                changeWindow={changeWindow}
               />
             )}
           </>
