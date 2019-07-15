@@ -1,6 +1,6 @@
 import React from 'react';
 
-//reusable toggle container component, renders children 
+//reusable toggle container component, renders children
 class Toggle extends React.Component {
   state = {
     on: false,

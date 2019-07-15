@@ -4,7 +4,7 @@ class TaskHeaderSet extends Component {
   render() {
     const { panel, toggleDel, changeWindow, toggle, toggleEdit } = this.props;
     return (
-      <ul onClick={toggle}>
+      <ul className="task-header-set" onClick={toggle}>
         <li>
           <img
             onClick={e => toggleEdit()}
@@ -16,17 +16,17 @@ class TaskHeaderSet extends Component {
           />
         </li>
         <li>
-          <p
+          <button
             className="btn task-setting-btn"
             id="add-task-btn"
             onClick={e => changeWindow("addtask", panel.id)}
             title="Add task"
           >
             +
-          </p>
+          </button>
         </li>
         <li>
-          <p
+          <button
             className="btn task-setting-btn"
             id="del-task-btn"
             onClick={e => {
@@ -36,7 +36,7 @@ class TaskHeaderSet extends Component {
             title="Delete Task"
           >
             -
-          </p>
+          </button>
         </li>
         <li>
           <img

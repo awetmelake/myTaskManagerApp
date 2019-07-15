@@ -14,7 +14,7 @@ class TaskInfo extends Component {
     timer: {
       time: 0,
       isRunning: 0,
-      type: "stopwatch"
+      type: "none"
     }
   };
 
@@ -71,7 +71,6 @@ class TaskInfo extends Component {
           e.target.className === "disappear-onclick-background" && toggle()
         }
       >
-        {timer.type !== "none" && <Timer type={timer.type} />}
         <div
           style={this.getBg()}
           className="task-info"
@@ -85,8 +84,13 @@ class TaskInfo extends Component {
             }
           }}
         >
-          Title:
-          <br />
+        Title:
+        <img
+        onClick={toggle}
+        className="exit-btn-image btn"
+        src="./images/exit.png"
+        />
+        {timer.type !== "none" && <Timer type={timer.type} />}
           <>
             {this.state.editMode ? (
               <input

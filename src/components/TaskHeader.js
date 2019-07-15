@@ -46,13 +46,14 @@ class TaskHeader extends Component {
             <br />
             <div style={{ margin: "0 auto" }}>
               <button
+                className="btn"
                 style={{ marginRight: "10px" }}
                 name="save"
                 onClick={this.handleSubmit}
               >
                 save
               </button>
-              <button name="cancel" onClick={this.handleSubmit}>
+              <button className="btn" name="cancel" onClick={this.handleSubmit}>
                 cancel
               </button>
             </div>

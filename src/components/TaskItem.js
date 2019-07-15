@@ -49,17 +49,19 @@ class TaskItem extends Component {
               }}
             >
               {title}
+              <br />
               <Toggle>
                 {({ on, toggle }) => (
                   <>
                     {description.length > 0 && (
-                      <p
+                      <button
                         className="task-item-show-desc btn"
+                        style={{ backgroundColor: this.props.task.color }}
                         onClick={toggle}
                         title="Show Description"
                       >
                         ...
-                      </p>
+                      </button>
                     )}
                     {on && <p>{description}</p>}
                   </>

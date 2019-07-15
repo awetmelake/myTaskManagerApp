@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import TimerSet from "./TimerSet.js";
 import Toggle from "./Toggle.js";
 
 class TaskItemSet extends Component {
@@ -20,7 +19,7 @@ class TaskItemSet extends Component {
       task,
       changeWindow
     } = this.props;
-    
+
     return (
       <ul className="task-item-set btn">
         <li onClick={e => toggleEdit()}>edit</li>
@@ -29,7 +28,25 @@ class TaskItemSet extends Component {
           {({ on, toggle }) => (
             <>
               <li onClick={toggle}>timer</li>
-              {on && <TimerSet />}
+              {on && (
+                <div
+                  onClick={e => {
+                    e.target.className ===
+                      "disappear-onclick-background timer" && toggle();
+                    console.log(e.target.className);
+                  }}
+                  className="disappear-onclick-background timer"
+                >
+                  <div className="prompt-window timer-set">
+                    <p className="btn" onClick={toggle}>
+                      Start Stopwatch
+                    </p>
+                    <p className="btn" onClick={toggle}>
+                      Start Pomodoro
+                    </p>
+                  </div>
+                </div>
+              )}
             </>
           )}
         </Toggle>
@@ -41,18 +58,26 @@ class TaskItemSet extends Component {
             <>
               <li onClick={toggle}>delete</li>
               {on && (
-                <div className="prompt-window delete-confirm">
-                  <p style={{ fontSize: "15px" }}>Delete?</p>
-                  <button
-                    onClick={e => delTask(task.id)}
-                    style={{ marginRight: "10px" }}
-                    className="btn"
-                  >
-                    yes
-                  </button>
-                  <button onClick={toggle} className="btn">
-                    no
-                  </button>
+                <div
+                  onClick={e =>
+                    e.target.className ===
+                      "disappear-onclick-background delete" && toggle()
+                  }
+                  className="disappear-onclick-background delete"
+                >
+                  <div className="prompt-window delete-confirm">
+                    <p style={{ fontSize: "15px" }}>Delete?</p>
+                    <button
+                      onClick={e => delTask(task.id)}
+                      style={{ marginRight: "10px" }}
+                      className="btn"
+                    >
+                      yes
+                    </button>
+                    <button onClick={toggle} className="btn">
+                      no
+                    </button>
+                  </div>
                 </div>
               )}
             </>

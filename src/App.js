@@ -17,12 +17,14 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      board: {
-        name: "TASKFLOW"
-      },
+      boards: [
+        {
+          name: "TASKFLOW"
+        },
+      ],
       panels: [
         {
-          title: "TODO",
+          title: "To Do",
           id: uuidv4(),
           delMode: false,
           tasks: [
@@ -206,7 +208,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header name={this.state.board.name} addPanel={this.addPanel} />
+        <Header boards={this.state.boards} addPanel={this.addPanel} />
         <div className="panels">
           <TaskPanel
             panels={this.state.panels}

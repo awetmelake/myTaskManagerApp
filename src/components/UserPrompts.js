@@ -3,7 +3,6 @@ import AddTask from "./AddTask.js";
 import DelTask from "./DelTask.js";
 import DelPanel from "./DelPanel.js";
 import MoveTask from "./MoveTask.js";
-import TimerSet from "./TimerSet.js";
 
 /*class created to hold components that need a disappear on click background, also moves these components closer to app level state for easier editing */
 class UserPrompt extends Component {
