@@ -62,19 +62,7 @@ class TaskInfo extends Component {
           e.target.className === "disappear-onclick-background" && toggle()
         }
       >
-        <div
-          style={this.getBg()}
-          className="task-info"
-          onClick={e => {
-            if (
-              this.state.editMode &&
-              e.target.className !== "" &&
-              e.target.className !== "btn"
-            ) {
-              this.toggleEdit();
-            }
-          }}
-        >
+        <div style={this.getBg()} className="task-info">
           Title:
           <img
             alt="exit btn"
@@ -83,41 +71,35 @@ class TaskInfo extends Component {
             src="./images/exit.png"
           />
           {timer.type !== "none" && <Timer type={timer.type} />}
-          <>
-            {this.state.editMode ? (
-              <input
-                autoFocus={true}
-                autoComplete="off"
-                onChange={this.handleChange}
-                name="title"
-                style={this.getBg()}
-                value={this.state.title}
-              />
-            ) : (
-              <p>{this.state.title}</p>
-            )}
-          </>
+          {this.state.editMode ? (
+            <input
+              autoFocus={true}
+              autoComplete="off"
+              onChange={this.handleChange}
+              name="title"
+              style={this.getBg()}
+              value={this.state.title}
+            />
+          ) : (
+            <p>{this.state.title}</p>
+          )}
           <br />
           {(description.length > 0 || this.state.editMode) && (
             <>Description: </>
           )}
           <br />
-          <>
-            {this.state.editMode ? (
-              <>
-                <input
-                  autoComplete="off"
-                  onChange={this.handleChange}
-                  name="description"
-                  style={this.getBg({ fontSize: "20px" })}
-                  value={this.state.description}
-                />
-              </>
-            ) : (
-              <p style={{ fontSize: "20px" }}>{this.state.description}</p>
-            )}
-            <br />
-          </>
+          {this.state.editMode ? (
+            <input
+              autoComplete="off"
+              onChange={this.handleChange}
+              name="description"
+              style={this.getBg({ fontSize: "20px" })}
+              value={this.state.description}
+            />
+          ) : (
+            <p style={{ fontSize: "20px" }}>{this.state.description}</p>
+          )}
+          <br />
           {(completeBy.length > 0 || this.state.editMode) && <>Complete By: </>}
           <br />
           {this.state.editMode ? (
