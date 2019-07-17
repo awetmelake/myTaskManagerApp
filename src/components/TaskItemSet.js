@@ -9,16 +9,7 @@ class TaskItemSet extends Component {
   toggleEdit = () => this.setState({ editMode: !this.state.editMode });
 
   render() {
-    const {
-      toggleEdit,
-      delTask,
-      id,
-      panel,
-      setTaskFocus,
-      toggleDel,
-      task,
-      changeWindow
-    } = this.props;
+    const { toggleEdit, delTask, task, changeWindow } = this.props;
 
     return (
       <ul className="task-item-set btn">

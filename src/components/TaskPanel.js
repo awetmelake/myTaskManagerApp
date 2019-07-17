@@ -18,28 +18,31 @@ class TaskPanel extends Component {
       delTask
     } = this.props;
 
-    return panels.map(panel => (
-      <div className="task-panel">
-        <TaskHeader
-          panel={panel}
-          addTask={addTask}
-          delPanel={delPanel}
-          toggleDel={toggleDel}
-          changeWindow={changeWindow}
-          editPanelTitle={editPanelTitle}
-          key={panel.id}
-        />
-        <Tasks
-          changeWindow={changeWindow}
-          userPrompt={userPrompt}
-          panel={panel}
-          editTask={editTask}
-          setTaskFocus={setTaskFocus}
-          toggleDel={toggleDel}
-          delTask={delTask}
-        />
+    return (
+      <div className="panels">
+        {panels.map(panel => (
+          <div className="task-panel" key={panel.id}>
+            <TaskHeader
+              panel={panel}
+              addTask={addTask}
+              delPanel={delPanel}
+              toggleDel={toggleDel}
+              changeWindow={changeWindow}
+              editPanelTitle={editPanelTitle}
+            />
+            <Tasks
+              changeWindow={changeWindow}
+              userPrompt={userPrompt}
+              panel={panel}
+              editTask={editTask}
+              setTaskFocus={setTaskFocus}
+              toggleDel={toggleDel}
+              delTask={delTask}
+            />
+          </div>
+        ))}
       </div>
-    ));
+    );
   }
 }
 

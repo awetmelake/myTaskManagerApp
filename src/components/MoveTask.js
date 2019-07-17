@@ -3,7 +3,7 @@ import React, { Component } from "react";
 class MoveTask extends Component {
   render() {
     const { panels, userPrompt, changeWindow, moveTask } = this.props;
-    const { type, target } = userPrompt;
+    const { target } = userPrompt;
     return (
       <div className="disappear-onclick-background">
         <div className="prompt-window move-task">

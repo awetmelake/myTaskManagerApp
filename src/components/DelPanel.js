@@ -8,7 +8,6 @@ class DelPanel extends Component {
   };
 
   render() {
-    const { type } = this.props.userPrompt;
     return (
       <div className="disappear-onclick-background">
         <form className="prompt-window">

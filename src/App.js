@@ -8,10 +8,8 @@ const uuidv4 = require("uuid/v4");
 
 /*
 TODO:
-Header menu nav
 
 replace class components with functional ones where possible ,
-proptype is required
 */
 class App extends Component {
   constructor(props) {
@@ -19,8 +17,9 @@ class App extends Component {
     this.state = {
       boards: [
         {
-          name: "TASKFLOW"
-        },
+          name: "Daily",
+          id: uuidv4(),
+        }
       ],
       panels: [
         {
@@ -56,7 +55,7 @@ class App extends Component {
           ]
         },
         {
-          title: "DONE",
+          title: "Done",
           id: uuidv4(),
           delMode: false,
           tasks: [
@@ -90,7 +89,10 @@ class App extends Component {
   };
 
   //delete panel by panel id
-  delPanel = panelId => this.setState({panels: this.state.panels.filter(panel => panel.id !== panelId)});
+  delPanel = panelId =>
+    this.setState({
+      panels: this.state.panels.filter(panel => panel.id !== panelId)
+    });
 
   //pass in task object and panel id
   addTask = (task, panelId) => {
@@ -208,8 +210,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header boards={this.state.boards} addPanel={this.addPanel} />
-        <div className="panels">
+        <Header
+          changeWindow={this.changeWindow}
+          boards={this.state.boards}
+          addPanel={this.addPanel}
+        />
           <TaskPanel
             panels={this.state.panels}
             changeWindow={this.changeWindow}
@@ -220,13 +225,13 @@ class App extends Component {
             editPanelTitle={this.editPanelTitle}
             delTask={this.delTask}
           />
-        </div>
         <UserPrompt
           panels={this.state.panels}
           toggleDel={this.toggleDel}
           userPrompt={this.state.userPrompt}
           changeWindow={this.changeWindow}
           addTask={this.addTask}
+          addPanel={this.addPanel}
           delFocused={this.delFocused}
           delPanel={this.delPanel}
           moveTask={this.moveTask}

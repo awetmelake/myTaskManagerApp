@@ -52,17 +52,8 @@ class TaskInfo extends Component {
   };
 
   render() {
-    const {
-      delTask,
-      task,
-      panel,
-      setTaskFocus,
-      toggleDel,
-      toggle,
-      moveTask,
-      changeWindow
-    } = this.props;
-    const { description, id, completeBy } = task;
+    const { task, toggle, moveTask, changeWindow } = this.props;
+    const { description, completeBy } = task;
     const { timer } = this.state;
     return (
       <div
@@ -84,13 +75,14 @@ class TaskInfo extends Component {
             }
           }}
         >
-        Title:
-        <img
-        onClick={toggle}
-        className="exit-btn-image btn"
-        src="./images/exit.png"
-        />
-        {timer.type !== "none" && <Timer type={timer.type} />}
+          Title:
+          <img
+            alt="exit btn"
+            onClick={toggle}
+            className="exit-btn-image btn"
+            src="./images/exit.png"
+          />
+          {timer.type !== "none" && <Timer type={timer.type} />}
           <>
             {this.state.editMode ? (
               <input
@@ -161,12 +153,7 @@ class TaskInfo extends Component {
           )}
           {
             <TaskItemSet
-              setTaskFocus={setTaskFocus}
               toggleEdit={this.toggleEdit}
-              id={id}
-              toggleDel={toggleDel}
-              panel={panel}
-              delTask={delTask}
               moveTask={moveTask}
               changeWindow={changeWindow}
               task={task}

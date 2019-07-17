@@ -25,7 +25,6 @@ class AddTask extends Component {
   };
 
   render() {
-    const { type } = this.props.userPrompt;
     return (
       <div className="disappear-onclick-background">
         <form
@@ -58,7 +57,7 @@ class AddTask extends Component {
           />
           <br />
           <br />
-          <ColorSelect handleChange={this.handleChange}/>
+          <ColorSelect handleChange={this.handleChange} />
         </form>
       </div>
     );

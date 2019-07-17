@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import AddTask from "./AddTask.js";
 import DelTask from "./DelTask.js";
+import AddPanel from "./AddPanel.js";
 import DelPanel from "./DelPanel.js";
 import MoveTask from "./MoveTask.js";
 
@@ -15,9 +16,10 @@ class UserPrompt extends Component {
       changeWindow,
       toggleDel,
       moveTask,
-      panels
+      panels,
+      addPanel
     } = this.props;
-    const { type, target } = userPrompt;
+    const { type } = userPrompt;
     return (
       <div
         onClick={e =>
@@ -45,6 +47,13 @@ class UserPrompt extends Component {
             changeWindow={changeWindow}
             delFocused={delFocused}
             toggleDel={toggleDel}
+          />
+        )}
+        {type === "addpanel" && (
+          <AddPanel
+            userPrompt={userPrompt}
+            changeWindow={changeWindow}
+            addPanel={addPanel}
           />
         )}
         {type === "moveTask" && (

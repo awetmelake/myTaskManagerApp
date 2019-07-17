@@ -3,7 +3,7 @@ import React, { Component } from "react";
 class AddPanel extends Component {
   state = {
     title: "",
-    id: null
+    tasks: []
   };
 
   handleChange = e => {
@@ -14,33 +14,31 @@ class AddPanel extends Component {
     e.preventDefault();
     if (this.state.title.length > 0) {
       this.props.addPanel(this.state);
-      this.setState({ title: "" }); //clear field
     }
-    this.props.toggle();
+    this.props.changeWindow("none", {});
   };
 
-  getStyle = () => {
-    return {
-      display: this.props.userPrompt.type === "addpanel" ? "initial" : "none"
-    };
-  };
   render() {
     return (
-      <form style={this.getStyle()}>
-        <div style={{ marginTop: "20px" }}>
+      <div className="disappear-onclick-background">
+        <form className="prompt-window">
           <label>New Panel Title</label>
           <br />
           <input name="title" onChange={this.handleChange} />
-        </div>
-        <button
-          style={{ marginTop: "10px" }}
-          type="submit"
-          onClick={this.handleClick}
-        >
-          OK
-        </button>
-      </form>
+          <button
+            style={{ marginTop: "10px" }}
+            type="submit"
+            onClick={this.handleClick}
+          >
+            OK
+          </button>
+        </form>
+      </div>
     );
+  }
+  componentWillUnmount() {
+    //reset state
+    this.setState({ title: "" }); //clear field
   }
 }
 
