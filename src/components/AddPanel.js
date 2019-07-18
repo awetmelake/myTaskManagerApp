@@ -21,16 +21,27 @@ class AddPanel extends Component {
   render() {
     return (
       <div className="disappear-onclick-background">
-        <form className="prompt-window">
-          <label>New Panel Title</label>
+        <form autocomplete="off" className="prompt-window">
+          <label>Add New Panel</label>
           <br />
-          <input name="title" onChange={this.handleChange} />
+          <br />
+          <input
+            placeholder="Title"
+            name="title"
+            onChange={this.handleChange}
+          />
           <button
             style={{ marginTop: "10px" }}
             type="submit"
             onClick={this.handleClick}
           >
-            OK
+            Submit
+          </button>
+          <button
+            className="btn"
+            onClick={e => this.props.changeWindow("none", {})}
+          >
+            Cancel
           </button>
         </form>
       </div>

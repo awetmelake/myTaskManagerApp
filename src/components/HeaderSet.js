@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Toggle from "./Toggle.js";
 
 class HeaderSet extends Component {
   render() {
@@ -21,25 +20,13 @@ class HeaderSet extends Component {
           <p className="header-set-title">Menu</p>
           <p
             className="header-set-item btn"
-            onClick={e => changeWindow("addpanel", {})}
+            onClick={e => {
+              toggle();
+              changeWindow("addpanel", {});
+            }}
           >
             Add Panel
           </p>
-          <Toggle>
-            {({ on, toggle }) => (
-              <>
-                <p onClick={toggle} className="header-set-item btn">
-                  Boards
-                </p>
-                {on &&
-                  boards.map(board => (
-                    <p key={board.id} className="header-set-item btn">
-                      {board.name}
-                    </p>
-                  ))}
-              </>
-            )}
-          </Toggle>
         </div>
       </div>
     );

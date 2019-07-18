@@ -6,7 +6,7 @@ class Header extends Component {
   render() {
     const { boards, addPanel, changeWindow } = this.props;
     return (
-      <div>
+      <header>
         <Toggle>
           {({ on, toggle }) => (
             <>
@@ -28,11 +28,8 @@ class Header extends Component {
             </>
           )}
         </Toggle>
-        <header>TASKFLOW</header>
-        <div>
-          <p>{}</p>
-        </div>
-      </div>
+        <p className='header-title'>TASKFLOW</p>
+      </header>
     );
   }
 }

@@ -8,7 +8,8 @@ class AddTask extends Component {
     completeBy: "",
     focused: false,
     panel: this.props.panel,
-    color: "yellow"
+    color: "yellow",
+    time: 0
   };
 
   handleChange = e => {
@@ -44,17 +45,25 @@ class AddTask extends Component {
           <br />
           <textarea
             name="description"
+            style={{ fontFamily: "arial" }}
             value={this.state.description}
             onChange={this.handleChange}
             placeholder="Description (optional)"
           />
           <br />
-          <input
-            type="submit"
+          <button
             className="btn"
-            style={{ marginTop: "5px" }}
+            style={{ margin: "5px 10px 0 0" }}
             onClick={this.handleClick}
-          />
+          >
+            Submit
+          </button>
+          <button
+            className="btn"
+            onClick={e => this.props.changeWindow("none", {})}
+          >
+            Cancel
+          </button>
           <br />
           <br />
           <ColorSelect handleChange={this.handleChange} />

@@ -65,9 +65,9 @@ class TaskHeader extends Component {
           <Toggle>
             {({ on, toggle }) => (
               <>
-                <p className="btn task-header-setting-btn" onClick={toggle}>
+                <button className="btn task-header-setting-btn" onClick={toggle}>
                   ...
-                </p>
+                </button>
                 {on && !this.state.editMode && (
                   <TaskHeaderSet
                     toggleEdit={this.toggleEdit}

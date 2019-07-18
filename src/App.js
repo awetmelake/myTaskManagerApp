@@ -8,19 +8,13 @@ const uuidv4 = require("uuid/v4");
 
 /*
 TODO:
-
-replace class components with functional ones where possible ,
+timer
 */
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      boards: [
-        {
-          name: "Daily",
-          id: uuidv4(),
-        }
-      ],
+
       panels: [
         {
           title: "To Do",
@@ -215,16 +209,16 @@ class App extends Component {
           boards={this.state.boards}
           addPanel={this.addPanel}
         />
-          <TaskPanel
-            panels={this.state.panels}
-            changeWindow={this.changeWindow}
-            toggleDel={this.toggleDel}
-            setTaskFocus={this.setTaskFocus}
-            editTask={this.editTask}
-            userPrompt={this.state.userPrompt}
-            editPanelTitle={this.editPanelTitle}
-            delTask={this.delTask}
-          />
+        <TaskPanel
+          panels={this.state.panels}
+          changeWindow={this.changeWindow}
+          toggleDel={this.toggleDel}
+          setTaskFocus={this.setTaskFocus}
+          editTask={this.editTask}
+          userPrompt={this.state.userPrompt}
+          editPanelTitle={this.editPanelTitle}
+          delTask={this.delTask}
+        />
         <UserPrompt
           panels={this.state.panels}
           toggleDel={this.toggleDel}

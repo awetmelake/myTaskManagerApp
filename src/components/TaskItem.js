@@ -28,14 +28,14 @@ class TaskItem extends Component {
       changeWindow
     } = this.props;
 
-    const { title, description, id } = task;
+    const { title, description, id, completeBy, time } = task;
 
     return (
       <Toggle>
         {({ on, toggle }) => (
           <>
             <div
-              className="task-item"
+              className="task-item btn"
               style={this.getStyle()}
               onClick={e => {
                 setTaskFocus(id, panel.id);
@@ -48,8 +48,18 @@ class TaskItem extends Component {
                 }
               }}
             >
-              {title}
-              <br />
+              <p style={{ marginBottom: "5px" }}>{title}</p>
+              {completeBy.length > 0 && (
+                <>
+                  <img
+                    className="task-item-clock-icon"
+                    src="./images/clock-icon.png"
+                    alt="clock icon"
+                  />
+                  <p>{completeBy}</p>
+                </>
+              )}
+
               <Toggle>
                 {({ on, toggle }) => (
                   <>
@@ -63,13 +73,16 @@ class TaskItem extends Component {
                         ...
                       </button>
                     )}
-                    {on && <p>{description}</p>}
+                    {on && (
+                      <p className="task-item-description">{description}</p>
+                    )}
                   </>
                 )}
               </Toggle>
             </div>
             {on && (
               <TaskInfo
+                time={time}
                 setTaskFocus={setTaskFocus}
                 editTask={editTask}
                 toggleDel={toggleDel}
