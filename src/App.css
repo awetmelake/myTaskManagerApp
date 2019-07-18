@@ -91,10 +91,7 @@ header {
   bottom: 43px;
   width: 50px;
 }
-.task-header-setting li {
-  width: fit-content;
-  margin: 0 auto;
-}
+
 .task-setting-btn {
   padding: 0 10px;
   font-size: 30px;

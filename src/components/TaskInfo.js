@@ -52,7 +52,7 @@ class TaskInfo extends Component {
   };
 
   render() {
-    const { task, toggle, moveTask, changeWindow } = this.props;
+    const { task, toggle, moveTask, changeWindow,delTask } = this.props;
     const { description, completeBy } = task;
     const { timer } = this.state;
     return (
@@ -139,6 +139,7 @@ class TaskInfo extends Component {
               moveTask={moveTask}
               changeWindow={changeWindow}
               task={task}
+              delTask={delTask}
             />
           }
         </div>

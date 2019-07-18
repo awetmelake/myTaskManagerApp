@@ -27,6 +27,15 @@ class HeaderSet extends Component {
           >
             Add Panel
           </p>
+          <p
+            className="header-set-item btn"
+            onClick={e => {
+              toggle();
+              changeWindow("timerset", {});
+            }}
+          >
+            Timer
+          </p>
         </div>
       </div>
     );
