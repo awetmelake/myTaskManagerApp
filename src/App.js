@@ -14,7 +14,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
       panels: [
         {
           title: "To Do",
@@ -28,7 +27,11 @@ class App extends Component {
               completeBy: "4:00pm",
               focused: false,
               color: "lightgreen",
-              time: 0
+              timer: {
+                time: 0,
+                isRunning: false,
+                type: "none"
+              }
             }
           ]
         },
@@ -44,7 +47,11 @@ class App extends Component {
               completeBy: "Thursday",
               focused: false,
               color: "yellow",
-              time: 0
+              timer: {
+                time: 0,
+                isRunning: false,
+                type: "none"
+              }
             }
           ]
         },
@@ -60,7 +67,11 @@ class App extends Component {
               completeBy: "5:00 am",
               focused: false,
               color: "red",
-              time: 0
+              timer: {
+                time: 0,
+                isRunning: false,
+                type: "none"
+              }
             }
           ]
         }
@@ -201,6 +212,23 @@ class App extends Component {
     }
   };
 
+  //set timer.isRunning and timer.time for task
+  setTimer = (taskId, panelId, state, newTime) => {
+    this.setState({
+      panels: this.state.panels.map(panel => {
+        if (panel.id === panelId) {
+          panel.tasks.map(task => {
+            if (task.id === taskId) {
+              task.timer.isRunning = state;
+              task.timer.time += newTime;
+            }
+            return task;
+          });
+        }
+        return panel;
+      })
+    });
+  };
   render() {
     return (
       <div className="App">
@@ -218,6 +246,7 @@ class App extends Component {
           userPrompt={this.state.userPrompt}
           editPanelTitle={this.editPanelTitle}
           delTask={this.delTask}
+          setTimer={this.setTimer}
         />
         <UserPrompt
           panels={this.state.panels}

@@ -9,7 +9,11 @@ class AddTask extends Component {
     focused: false,
     panel: this.props.panel,
     color: "yellow",
-    time: 0
+    timer: {
+      time: 0,
+      isRunning: 0,
+      type: "none"
+    }
   };
 
   handleChange = e => {

@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 class Tasks extends Component {
   render() {
     const {
+      task,
       panel,
       setTaskFocus,
       changeWindow,
@@ -13,7 +14,8 @@ class Tasks extends Component {
       userPrompt,
       editTask,
       moveTask,
-      delTask
+      delTask,
+      setTimer
     } = this.props;
     const { tasks } = panel;
     return tasks.map(task => (
@@ -29,6 +31,7 @@ class Tasks extends Component {
         setTaskFocus={setTaskFocus}
         moveTask={moveTask}
         delTask={delTask}
+        setTimer={setTimer}
       />
     ));
   }

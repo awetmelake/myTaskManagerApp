@@ -9,7 +9,7 @@ class TaskItemSet extends Component {
   toggleEdit = () => this.setState({ editMode: !this.state.editMode });
 
   render() {
-    const { toggleEdit, delTask, task, changeWindow } = this.props;
+    const { toggleEdit, delTask, task, changeWindow, setTimer, panel } = this.props;
 
     return (
       <ul className="task-item-set btn">
@@ -24,17 +24,17 @@ class TaskItemSet extends Component {
                   onClick={e => {
                     e.target.className ===
                       "disappear-onclick-background timer" && toggle();
-                    console.log(e.target.className);
                   }}
                   className="disappear-onclick-background timer"
                 >
                   <div className="prompt-window timer-set">
-                    <p className="btn" onClick={toggle}>
+                    <p className="btn" onClick={e=>{
+                      toggle();
+                      setTimer(task.id, panel.id, true, task.timer.time)
+                    }}>
                       Start Stopwatch
                     </p>
-                    <p className="btn" onClick={toggle}>
-                      Start Pomodoro
-                    </p>
+
                   </div>
                 </div>
               )}

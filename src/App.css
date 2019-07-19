@@ -274,3 +274,17 @@ header {
 .task-item-description{
   margin-left: 10px;
 }
+.timer-display{
+  float: right;
+  position: absolute;
+  bottom: 70px;
+  right: 30px;
+}
+p.timer-display{
+  font-size: 20px;
+}
+
+.timer-display-set {
+  bottom: 30px;
+  right: 23px;
+}

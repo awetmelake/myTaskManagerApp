@@ -25,7 +25,8 @@ class TaskItem extends Component {
       userPrompt,
       editTask,
       moveTask,
-      changeWindow
+      changeWindow,
+      setTimer
     } = this.props;
 
     const { title, description, id, completeBy, time } = task;
@@ -82,7 +83,7 @@ class TaskItem extends Component {
             </div>
             {on && (
               <TaskInfo
-                time={time}
+                setTimer={setTimer}
                 setTaskFocus={setTaskFocus}
                 editTask={editTask}
                 toggleDel={toggleDel}

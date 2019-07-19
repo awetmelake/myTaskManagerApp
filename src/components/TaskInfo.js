@@ -11,11 +11,7 @@ class TaskInfo extends Component {
     completeBy: this.props.task.completeBy,
     color: this.props.task.color,
     id: this.props.task.id,
-    timer: {
-      time: 0,
-      isRunning: 0,
-      type: "none"
-    }
+    timer: this.props.task.timer
   };
 
   handleChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -42,17 +38,32 @@ class TaskInfo extends Component {
     }
   };
 
-  toggleTimer = type => {
-    this.setState({
-      timer: {
-        isRunning: !this.state.timer.isRunning,
-        type: type
-      }
-    });
-  };
+  //set value of timer.time from seconds to hh:mm:ss
+  clockify = time => {
+    let totalSeconds = time;
+    let hours = Math.floor(totalSeconds / 3600);
+    totalSeconds %= 3600;
+    let minutes = Math.floor(totalSeconds / 60);
+    let seconds = totalSeconds % 60;
 
+    return (
+      String(hours).padStart(2, "0") +
+      ":" +
+      String(minutes).padStart(2, "0") +
+      ":" +
+      String(seconds).padStart(2, "0")
+    );
+  };
   render() {
-    const { task, toggle, moveTask, changeWindow,delTask } = this.props;
+    const {
+      task,
+      toggle,
+      moveTask,
+      changeWindow,
+      delTask,
+      setTimer,
+      panel
+    } = this.props;
     const { description, completeBy } = task;
     const { timer } = this.state;
     return (
@@ -70,7 +81,18 @@ class TaskInfo extends Component {
             className="exit-btn-image btn"
             src="./images/exit.png"
           />
-          {timer.type !== "none" && <Timer type={timer.type} />}
+          {timer.isRunning ? (
+            <Timer
+              panel={panel}
+              clockify={this.clockify}
+              setTimer={setTimer}
+              task={task}
+            />
+          ) : (
+            <p className="timer-display">
+              Time spent : {this.clockify(timer.time)}
+            </p>
+          )}
           {this.state.editMode ? (
             <input
               autoFocus={true}
@@ -140,6 +162,8 @@ class TaskInfo extends Component {
               changeWindow={changeWindow}
               task={task}
               delTask={delTask}
+              setTimer={setTimer}
+              panel={panel}
             />
           }
         </div>

@@ -15,7 +15,7 @@ class TaskPanel extends Component {
       userPrompt,
       editTask,
       editPanelTitle,
-      delTask
+      delTask, setTimer
     } = this.props;
 
     return (
@@ -38,6 +38,7 @@ class TaskPanel extends Component {
               setTaskFocus={setTaskFocus}
               toggleDel={toggleDel}
               delTask={delTask}
+              setTimer={setTimer}
             />
           </div>
         ))}
