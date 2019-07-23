@@ -3,7 +3,7 @@ import Toggle from "./Toggle.js";
 
 class Timer extends Component {
   state = {
-    time: 0
+    time: this.props.task.timer.time
   };
 
   resetTimer = () => {
@@ -11,7 +11,9 @@ class Timer extends Component {
       time: 0
     });
   };
+
   componentWillMount() {
+    //start timer on mount
     this.myInterval = setInterval(() => {
       this.setState({ time: this.state.time + 1 });
     }, 1000);
@@ -29,7 +31,7 @@ class Timer extends Component {
             {on && (
               <div className="timer-display btn timer-display-set">
                 <button
-                  onClick={e => this.resetTimer()}
+                  onClick={this.resetTimer.bind(this)}
                   style={{ marginRight: "10px" }}
                   className="btn"
                 >
@@ -52,7 +54,8 @@ class Timer extends Component {
     );
   }
   componentWillUnmount() {
-    clearInterval(this.myInterval);
+    const { task, panel, setTimer} = this.props;
+    setTimer(task.id, panel.id, true, this.state.time);
     this.setState({
       time: this.props.task.timer.time
     });

@@ -6,7 +6,7 @@ class MoveTask extends Component {
     const { target } = userPrompt;
     return (
       <div className="disappear-onclick-background">
-        <div className="prompt-window move-task">
+        <div className="prompt-window move-task animated flipInX">
           {panels.map(panel => (
             <p
               className="btn move-task-item"

@@ -212,14 +212,14 @@ class App extends Component {
     }
   };
 
-  //set timer.isRunning and timer.time for task
-  setTimer = (taskId, panelId, state, newTime) => {
+  //set timer.isRunning and add time to timer.time for task
+  setTimer = (taskId, panelId, running, newTime) => {
     this.setState({
       panels: this.state.panels.map(panel => {
         if (panel.id === panelId) {
           panel.tasks.map(task => {
             if (task.id === taskId) {
-              task.timer.isRunning = state;
+              task.timer.isRunning = running;
               task.timer.time += newTime;
             }
             return task;
@@ -229,6 +229,7 @@ class App extends Component {
       })
     });
   };
+
   render() {
     return (
       <div className="App">

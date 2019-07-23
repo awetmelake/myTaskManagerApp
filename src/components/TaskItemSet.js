@@ -27,7 +27,7 @@ class TaskItemSet extends Component {
                   }}
                   className="disappear-onclick-background timer"
                 >
-                  <div className="prompt-window timer-set">
+                  <div className="prompt-window timer-set animated flipInX">
                     <p className="btn" onClick={e=>{
                       toggle();
                       setTimer(task.id, panel.id, true, task.timer.time)
@@ -56,7 +56,7 @@ class TaskItemSet extends Component {
                   }
                   className="disappear-onclick-background delete"
                 >
-                  <div className="prompt-window delete-confirm">
+                  <div className="prompt-window delete-confirm animated flipInX">
                     <p style={{ fontSize: "15px" }}>Delete?</p>
                     <button
                       onClick={e => delTask(task.id)}

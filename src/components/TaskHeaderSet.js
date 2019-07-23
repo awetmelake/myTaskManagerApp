@@ -4,7 +4,7 @@ class TaskHeaderSet extends Component {
   render() {
     const { panel, toggleDel, changeWindow, toggle, toggleEdit } = this.props;
     return (
-      <ul className="task-header-set" onClick={toggle}>
+      <ul className="task-header-set animated flipInX" onClick={toggle}>
         <li>
           <img
             onClick={e => toggleEdit()}

@@ -10,7 +10,7 @@ class HeaderSet extends Component {
         }
         className="disappear-onclick-background"
       >
-        <div className="header-set">
+        <div className="header-set animated fadeInRight ">
           <img
             alt="exit btn"
             onClick={toggle}

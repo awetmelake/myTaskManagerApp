@@ -35,7 +35,7 @@ class AddTask extends Component {
         <form
           style={{ backgroundColor: this.state.color }}
           autoComplete="off"
-          className="prompt-window"
+          className="prompt-window animated bounceInUp"
         >
           <h2>Add new task</h2>
           <br />

@@ -91,6 +91,9 @@ header {
   bottom: 43px;
   width: 50px;
 }
+.task-header-set li {
+  display: inline;
+}
 
 .task-setting-btn {
   padding: 0 10px;
@@ -202,7 +205,7 @@ header {
 .timer-set {
   top: 330px;
   width: 150px;
-  left: 990px;
+  left: calc(50vw + 30px);
 }
 .timer-set p {
   text-align: center;
@@ -229,7 +232,7 @@ header {
   height: 60px;
   position: absolute;
   top: 437px;
-  left: 1040px;
+  left: calc(50vw + 80px);
 }
 #header-set-btn {
   float: right;
@@ -271,16 +274,16 @@ header {
   position: relative;
   top: 3px;
 }
-.task-item-description{
+.task-item-description {
   margin-left: 10px;
 }
-.timer-display{
+.timer-display {
   float: right;
   position: absolute;
   bottom: 70px;
   right: 30px;
 }
-p.timer-display{
+p.timer-display {
   font-size: 20px;
 }
 

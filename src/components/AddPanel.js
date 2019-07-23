@@ -21,7 +21,7 @@ class AddPanel extends Component {
   render() {
     return (
       <div className="disappear-onclick-background">
-        <form autocomplete="off" className="prompt-window">
+        <form autoComplete="off" className="prompt-window animated bounceInUp">
           <label>Add New Panel</label>
           <br />
           <br />

@@ -73,7 +73,7 @@ class TaskInfo extends Component {
           e.target.className === "disappear-onclick-background" && toggle()
         }
       >
-        <div style={this.getBg()} className="task-info">
+        <div style={this.getBg()} className="task-info animated fadeIn ">
           Title:
           <img
             alt="exit btn"

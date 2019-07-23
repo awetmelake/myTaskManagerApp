@@ -10,7 +10,7 @@ class DelPanel extends Component {
   render() {
     return (
       <div className="disappear-onclick-background">
-        <form className="prompt-window">
+        <form className="prompt-window  animated bounceInUp">
           <label>Delete Panel?</label>
           <br />
           <br />

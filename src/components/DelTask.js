@@ -12,7 +12,7 @@ class DelTask extends Component {
 
   render() {
     return (
-      <form className="prompt-window">
+      <form className="prompt-window animated bounceInUp">
         <label>Select Tasks to Delete</label>
         <br />
         <br />
