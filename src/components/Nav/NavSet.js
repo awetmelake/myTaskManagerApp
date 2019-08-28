@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class HeaderSet extends Component {
+class NavSet extends Component {
   render() {
     const { toggle, changeWindow, boards } = this.props;
     return (
@@ -42,4 +42,4 @@ class HeaderSet extends Component {
   }
 }
 
-export default HeaderSet;
+export default NavSet;

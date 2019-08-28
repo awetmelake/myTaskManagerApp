@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Toggle from "./Toggle.js";
-import TaskHeaderSet from "./TaskHeaderSet";
 
 class TaskHeader extends Component {
   state = {

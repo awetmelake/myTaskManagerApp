@@ -2,50 +2,45 @@ import React from "react";
 
 const ColorSelect = ({ handleChange }) => {
   return (
-    <ul id="color-select">
+    <ul className="color-select">
       <li>
         <button
-          className="btn"
+          className="btn-small yellow"
           name="color"
           value="yellow"
-          style={{ backgroundColor: "yellow" }}
           onClick={handleChange}
         />
       </li>
 
       <li>
         <button
-          className="btn"
+          className="btn-small red lighten-1"
           name="color"
-          value="red"
-          style={{ backgroundColor: "red" }}
+          value="red lighten-1"
           onClick={handleChange}
         />
       </li>
       <li>
         <button
-          className="btn"
+          className="btn-small light-green"
           name="color"
-          value="lightgreen"
-          style={{ backgroundColor: "lightgreen" }}
+          value="light-green"
           onClick={handleChange}
         />
       </li>
       <li>
         <button
-          className="btn"
+          className="btn-small light-blue darken-2"
           name="color"
-          value="lightblue"
-          style={{ backgroundColor: "lightblue" }}
+          value="light-blue darken-2"
           onClick={handleChange}
         />
       </li>
       <li>
         <button
-          className="btn"
+          className="btn-small orange darken-2"
           name="color"
-          value="orange"
-          style={{ backgroundColor: "orange" }}
+          value="orange darken-2"
           onClick={handleChange}
         />
       </li>

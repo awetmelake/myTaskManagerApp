@@ -1,0 +1,87 @@
+.task {
+  font-size: 1.2em;
+  padding: 0.5em;
+  margin: 0.5em;
+  border-radius: 3px;
+  font-family: "Roboto";
+  color: black;
+  cursor: pointer;
+  font-size: 15px;
+
+  &-title {
+    margin-bottom: 0.5em;
+    cursor: auto;
+    width: fit-content;
+  }
+
+  .description-btn {
+    // float: left;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  &-description {
+    font-size: 0.9em;
+    margin: auto;
+    width: 90%;
+    clear: both;
+    cursor: auto;
+  }
+
+  &-info {
+    min-width: 500px;
+    min-height: 350px;
+
+    &-title {
+      font-size: 15px !important;
+    }
+
+    .center {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      width: 50%;
+      margin: auto;
+      button {
+        // margin-right: 20px;
+      }
+    }
+  }
+}
+
+// add task prompt
+.add-task {
+  width: 400px;
+  height: 400px;
+  padding: 3em;
+
+  input,
+  textarea {
+    padding: 5px;
+  }
+  .container {
+    display: flex;
+    width: 200px;
+    justify-content: space-around;
+  }
+}
+
+.color-select {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 240px;
+  margin: 0 auto 1em;
+  position: relative;
+
+  button {
+    width: 20px;
+  }
+}
+
+// override MUI
+.MuiPaper-elevation24 {
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
