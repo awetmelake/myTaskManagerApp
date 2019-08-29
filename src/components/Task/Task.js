@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-// import PropTypes from "prop-types";
-// import Toggle from "./Toggle.js";
-// import TaskInfo from "./TaskInfo.js";
+import { firestoreConnect } from "react-redux-firebase";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { Redirect } from "react-router-dom";
 
 // components
 import TaskInfo from "./TaskInfo";
+
+// actions
 
 // styles
 import "./Task.scss";
@@ -57,12 +60,15 @@ class Task extends Component {
           task={task}
         />
 
-        <i
-          className="tiny material-icons description-btn"
-          onClick={this.toggleDesc}
-        >
-          description
-        </i>
+        {task.description.length > 0 && (
+          <i
+            className="tiny material-icons description-btn"
+            onClick={this.toggleDesc}
+              title="Show description"
+          >
+            description
+          </i>
+        )}
 
         {this.state.showDesc && (
           <div className="task-description">{task.description}</div>
@@ -72,4 +78,15 @@ class Task extends Component {
   }
 }
 
-export default Task;
+const mapStateToProps = state => ({
+  auth: state.firebase.auth,
+  panels: state.panels.panels,
+  tasks: state.tasks.tasks
+});
+
+export default compose(
+  connect(
+    mapStateToProps,
+    {}
+  )
+)(Task);

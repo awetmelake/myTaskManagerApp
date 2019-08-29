@@ -4,7 +4,11 @@ import {
   FETCHED_USER_BOARDS
 } from "../actions/types";
 
-const initialState = [];
+const initialState = {
+  boards: [],
+  showLegend: false,
+
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -12,22 +16,11 @@ export default (state = initialState, action) => {
       return {};
     case DELETED_BOARD:
       return {};
-    case FETCHED_USER_BOARDS:
-      return [...action.payload];
-    // store ordered data in state.board
-    case "@@reduxFirestore/LISTENER_RESPONSE":
-      return [...action.payload.ordered];
-    // case "CREATED_PANEL":
-    //   return [...state.boards.map(board =>{
-    //     board.id === action.payload.boardId
-    //   } )];
 
-    case "DELETED_PANEL":
-      return {};
-    case "CREATED_TASK":
-      return {};
-    case "DELETED_TASK":
-      return {};
+    case "@@reduxFirestore/LISTENER_RESPONSE":
+      if (action.meta.subcollections[0].collection === "boards") {
+        return { ...state, boards: [...action.payload.ordered] };
+      }
 
     default:
       return state;

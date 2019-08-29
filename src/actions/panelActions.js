@@ -8,7 +8,7 @@ import { CREATED_PANEL, DELETED_PANEL, CHANGED_PANEL_TITLE } from "./types";
 //params newPanel object, target board id
 export const createPanel = (newPanel, boardId) => (dispatch, getState) => {
   const userId = getState().firebase.auth.uid;
-  const boards = getState().boards;
+  const boards = getState().boards.boards;
   // const curBoard = boards.filter(board => board.id === boardId);
 
   db.collection("users")
@@ -31,7 +31,7 @@ export const changePanelTitle = (newTitle, panelTitle, boardId) => (
   getState
 ) => {
   const userId = getState().firebase.auth.uid;
-  const boards = getState().boards;
+  const boards = getState().boards.boards;
   const curBoard = boards.filter(board => board.id === boardId)[0];
   const curPanel = curBoard.panels.filter(panel => panel.title === panelTitle);
   curPanel.title = newTitle;
@@ -54,7 +54,7 @@ export const changePanelTitle = (newTitle, panelTitle, boardId) => (
 //params newPanelTitle, target panelTitle, target board id
 export const deletePanel = (panelTitle, boardId) => (dispatch, getState) => {
   const userId = getState().firebase.auth.uid;
-  const boards = getState().boards;
+  const boards = getState().boards.boards;
   const targetBoard = boards.filter(board => board.id === boardId)[0];
   const newPanels = targetBoard.panels.filter(
     panel => panel.title !== panelTitle

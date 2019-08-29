@@ -19,11 +19,6 @@ const SignedInLinks = ({ signOut }) => {
         </NavLink>
       </li>
 
-      <li>
-        <a className="dropdown-trigger" href="#!" data-target="dropdown1">
-          Dropdown<i className="material-icons right">arrow_drop_down</i>
-        </a>
-      </li>
     </ul>
   );
 };

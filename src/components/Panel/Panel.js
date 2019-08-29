@@ -1,10 +1,14 @@
 import React, { Component } from "react";
+import { firestoreConnect } from "react-redux-firebase";
 import { connect } from "react-redux";
+import { compose } from "redux";
+import { Redirect } from "react-router-dom";
 
 // components
 import Task from "../Task/Task";
 import AddTask from "../Task/AddTask";
 import DelPanel from "./DelPanel";
+import Toggle from "../Toggle/Toggle";
 
 // actions
 import {
@@ -13,7 +17,7 @@ import {
   changePanelTitle
 } from "../../actions/panelActions";
 
-import {createTask} from "../../actions/taskActions";
+import { createTask } from "../../actions/taskActions";
 
 // styles
 import "./Panel.scss";
@@ -21,36 +25,27 @@ import "./Panel.scss";
 class Panel extends Component {
   state = {
     showSet: false,
-    editMode: false,
-    title: "",
-    showAddTask: false
+    editTitleMode: false,
+    title: this.props.panel.title,
+    id: this.props.panel.id,
+    showAddTask: false,
+    showDelPanel: false
   };
 
-  toggleSet = () => {
+  toggleDelPanel = e => {
     this.setState({
-      showSet: !this.state.showSet
+      showDelPanel: !this.state.showDelPanel
     });
   };
 
-  toggleEdit = () => {
+  toggleEdit = e => {
     this.setState({
-      editMode: !this.state.editMode
+      editTitleMode: !this.state.editTitleMode
     });
   };
-
-  // toggleDelPanel = e => {
-  //   if (e.target.className) {
-  //     this.setState({
-  //       showAddPanel: !this.state.showAddPanel
-  //     });
-  //   } else {
-  //     this.setState({
-  //       showAddPanel: !this.state.showAddPanel
-  //     });
-  //   }
-  // };
 
   toggleAddTask = e => {
+    e.preventDefault();
     if (e.target.id === "toggleAddTask") {
       this.setState({
         showAddTask: true
@@ -71,21 +66,26 @@ class Panel extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.changePanelTitle(
-      this.state.title,
-      this.props.panel.title,
-      this.props.board.id
-    );
+    this.toggleEdit();
+    this.props.changePanelTitle(this.state.title);
   };
 
   render() {
-    const { panel, board, deletePanel } = this.props;
-
+    const {
+      panel,
+      board,
+      deletePanel,
+      tasks,
+      createTask,
+      updateTasks,
+      editBoardMode
+    } = this.props;
+    const { editTitleMode, title } = this.state;
     return (
-      <div className="panel white " key={panel.id}>
+      <div className="panel white ">
         <div className="panel-header  grey lighten-2">
           <div className="panel-title">
-            {!this.state.editMode ? (
+            {!editTitleMode ? (
               panel.title
             ) : (
               <form className="form-field" onSubmit={this.handleSubmit}>
@@ -95,28 +95,78 @@ class Panel extends Component {
                   id="panel-title"
                   type="text"
                   title="title"
+                  value={title}
+                  className="center"
+                  style={{ width: "80%", fontSize: "20px" }}
                 />
+                <br />
+                <div className="container center">
+                  <button className="btn-small" onClick={this.handleSubmit}>
+                    Save
+                  </button>
+                  <button className="btn-small" onClick={this.toggleEdit}>
+                    Cancel
+                  </button>
+                </div>
               </form>
             )}
           </div>
 
-          <i
-            className="material-icons add-task-btn"
-            id="toggleAddTask"
-            onClick={this.toggleAddTask}
-          >
-            add
-          </i>
+          {!editBoardMode ? (
+            <i
+              className="material-icons add-task-btn"
+              id="toggleAddTask"
+              onClick={this.toggleAddTask}
+              title="Create new panel"
+            >
+              add
+            </i>
+          ) : (
+            <Toggle>
+              {({ on, toggle }) => (
+                <div>
+                  <i
+                    className="material-icons add-task-btn black-text"
+                    id="toggleAddTask"
+                    title="See more options"
+                    onClick={toggle}
+                  >
+                    more
+                  </i>
+                  {on && (
+                    <div className="card white panel-settings">
+                      <ul className="">
+                        <li
+                          onClick={e => {
+                            this.toggleEdit();
+                            toggle();
+                          }}
+                        >
+                          Edit
+                        </li>
+                        <li>Move Left</li>
+                        <li>Move Right</li>
+                        <li onClick={this.toggleDelPanel}>Delete</li>
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )}
+            </Toggle>
+          )}
         </div>
 
         <div className="panel-tasks">
-          {panel.tasks.map(task => (
-            <Task task={task} key={task.title} deletePanel={deletePanel} />
-          ))}
+          {tasks.map(
+            task =>
+              panel.id === task.panel && (
+                <Task task={task} key={task.id} deletePanel={deletePanel} />
+              )
+          )}
         </div>
 
         <DelPanel
-          visibility={false}
+          visibility={this.state.showDelPanel}
           toggleVisibility={this.toggleDelPanel}
           board={board}
           panel={panel}
@@ -124,6 +174,8 @@ class Panel extends Component {
         />
 
         <AddTask
+          panel={panel}
+          createTask={createTask}
           visibility={this.state.showAddTask}
           toggleVisibility={this.toggleAddTask}
         />
@@ -132,9 +184,15 @@ class Panel extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  auth: state.firebase.auth,
+  boards: state.boards.boards,
+  tasks: state.tasks.tasks
+});
 
-export default connect(
-  mapStateToProps,
-  { createPanel, deletePanel, changePanelTitle }
+export default compose(
+  connect(
+    mapStateToProps,
+    { createPanel, deletePanel, changePanelTitle, createTask }
+  )
 )(Panel);

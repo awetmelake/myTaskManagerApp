@@ -3,12 +3,7 @@
 //firestore
 import { db } from "../config/fbConfig";
 
-import {
-  CREATED_BOARD,
-  DELETED_BOARD,
-  FETCHED_USER_BOARDS,
-  CHANGED_BOARD_TITLE
-} from "./types";
+import { CREATED_BOARD, DELETED_BOARD, FETCHED_USER_BOARDS } from "./types";
 
 export const createBoard = board => (dispatch, getState) => {
   dispatch({
@@ -28,7 +23,6 @@ export const deleteBoard = id => (dispatch, getState) => {
 export const changeBoardTitle = newTitle => (dispatch, getState) => {
   pushUserBoards();
   dispatch({
-    type: CHANGED_BOARD_TITLE
   });
 };
 
@@ -56,15 +50,12 @@ export const fetchUserBoards = id => (dispatch, getState) => {
 
 export const pushUserBoards = () => (dispatch, getState) => {
   const userId = getState().firebase.auth.uid;
-  const boards = getState().boards;
-
+  const boards = getState().boards.boards;
   boards.forEach(board => {
-    db.doc(`users/${userId}/boards/${board.title}`)
-      .set(board)
-      .then(() => {
-        dispatch({
-          type: "PUSHED_USER_BOARDS"
-        });
-      });
+    db.doc(`users/${userId}/boards/${board.id}`).set(board);
+
+    dispatch({
+      type: "PUSHED_USER_BOARD"
+    });
   });
 };

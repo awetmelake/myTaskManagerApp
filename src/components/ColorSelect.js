@@ -22,25 +22,25 @@ const ColorSelect = ({ handleChange }) => {
       </li>
       <li>
         <button
-          className="btn-small light-green"
+          className="btn-small  light-green darken-1"
           name="color"
-          value="light-green"
+          value=" light-green darken-1"
           onClick={handleChange}
         />
       </li>
       <li>
         <button
-          className="btn-small light-blue darken-2"
+          className="btn-small blue lighten-1"
           name="color"
-          value="light-blue darken-2"
+          value="blue lighten-1"
           onClick={handleChange}
         />
       </li>
       <li>
         <button
-          className="btn-small orange darken-2"
+          className="btn-small orange lighten-2 "
           name="color"
-          value="orange darken-2"
+          value="orange lighten-2 "
           onClick={handleChange}
         />
       </li>

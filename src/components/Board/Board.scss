@@ -8,7 +8,63 @@
 
   &-panels {
     display: flex;
-    border: 1px solid grey;
-    margin: .5em;
+    border-left: 1px solid grey;
+    margin: 0.5em;
+    transition: transform 0.3s;
+
+    &-edit {
+      width: 60%;
+    }
   }
+
+  &-header {
+    height: 50px;
+
+    header {
+      position: relative;
+      bottom: 15px;
+      left: 10px;
+    }
+
+    li {
+      height: 50px;
+      position: relative;
+      bottom: 0px;
+    }
+
+    a {
+      padding: 0.5em;
+    }
+
+    &-boards-display {
+      width: 200px;
+      position: absolute;
+      top: 120px;
+      left: 110px;
+      border: 1px solid black;
+      box-shadow: 1px 1px 10px grey;
+      &-items {
+        padding:  0 !important;
+        font-size: 1.5em;
+        width: 100%;
+        padding: 0.5em;
+      }
+    }
+
+    .menu-icon {
+      font-size: 30px;
+      margin-left: 1em;
+    }
+  }
+}
+.add-panel-btn {
+  font-size: 70px;
+}
+
+.del-board {
+  background-color: white;
+  height: 300px;
+  width: 400px;
+  display: initial;
+  position: relative;
 }

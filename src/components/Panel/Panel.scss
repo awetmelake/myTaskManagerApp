@@ -1,11 +1,12 @@
 .panel {
   border-right: 1px solid grey;
-  width: fit-content;
-
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
   min-width: 300px;
-  height: 80vh;
+  height: 85vh;
   float: left;
   font-size: 15px;
+  flex-grow: 1;
 
   &-header {
     width: 100%;
@@ -37,7 +38,23 @@
     right: 5px;
   }
 
-  &-tasks {
+  &-settings {
+    float: right;
+    position: relative;
+    border: 1px solid grey;
+    left: 120px;
+    width: 120px;
+
+    li {
+      padding: .2em 0.5em ;
+      font-size: 16px;
+      font-weight: 500;
+      transition: background-color 0.3s;
+      &:hover {
+        cursor: pointer;
+        background-color: grey;
+      }
+    }
   }
 }
 

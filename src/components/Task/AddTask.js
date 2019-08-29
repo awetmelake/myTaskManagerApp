@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+// import uuid from 'uuidv4';
 // components
 import ColorSelect from "../ColorSelect";
 
@@ -14,7 +15,8 @@ class AddTask extends Component {
     title: "",
     description: "",
     completeBy: "",
-    color: "yellow"
+    color: "yellow",
+    panel: this.props.panel.id
   };
 
   handleChange = e => {
@@ -27,9 +29,6 @@ class AddTask extends Component {
     this.props.createTask(this.state)
   };
 
-  componentWillUnmount() {
-    console.log("unmounting");
-  }
   render() {
     const { toggleVisibility, visibility} = this.props;
     return (

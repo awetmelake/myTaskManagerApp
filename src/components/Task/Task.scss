@@ -5,27 +5,24 @@
   border-radius: 3px;
   font-family: "Roboto";
   color: black;
-  cursor: pointer;
-  font-size: 15px;
+  font-size: 12px;
 
   &-title {
-    margin-bottom: 0.5em;
     cursor: auto;
     width: fit-content;
   }
 
   .description-btn {
-    // float: left;
     cursor: pointer;
     user-select: none;
+    margin-top: 5px;
   }
 
   &-description {
-    font-size: 0.9em;
-    margin: auto;
-    width: 90%;
+    padding: .5em 0 0;
     clear: both;
     cursor: auto;
+    border-top: 1px dotted black;
   }
 
   &-info {
@@ -36,15 +33,37 @@
       font-size: 15px !important;
     }
 
+    &-edit-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    &-del-btn {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+    }
+
+    &-del-confirm {
+      position: absolute;
+      bottom: 0px;
+      right: 10px;
+      width: 150px;
+      padding: 1em;
+
+      .card-footer {
+        display: flex;
+        justify-content: space-around;
+      }
+    }
+
     .center {
       display: flex;
       align-items: center;
       justify-content: space-around;
       width: 50%;
       margin: auto;
-      button {
-        // margin-right: 20px;
-      }
     }
   }
 }
@@ -78,10 +97,4 @@
   button {
     width: 20px;
   }
-}
-
-// override MUI
-.MuiPaper-elevation24 {
-  box-shadow: none !important;
-  background-color: transparent !important;
 }

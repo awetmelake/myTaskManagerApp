@@ -8,21 +8,33 @@ import { Redirect } from "react-router-dom";
 import {
   createBoard,
   deleteBoard,
-  fetchUserBoards,
-  pushUserBoards
+  fetchUserBoards
 } from "../../actions/boardActions";
 import { changePanelTitle } from "../../actions/panelActions";
 
 // components
 import Spinner from "../Spinner/Spinner";
 import Panel from "../Panel/Panel";
+import BoardHeader from "./BoardHeader";
 
 // styles
 import "./Board.scss";
 
 class Board extends Component {
+  state = {
+    editBoardMode: false
+  };
+
+  toggleEdit = () => {
+    this.setState({
+      editBoardMode: !this.state.editBoardMode
+    });
+  };
+
   render() {
-    const { auth, boards, match } = this.props;
+    const { auth, boards, match, panels } = this.props;
+    const { editBoardMode } = this.state;
+
     if (!auth.uid) {
       return <Redirect to="/" />;
     }
@@ -36,10 +48,27 @@ class Board extends Component {
       }
       return (
         <div className="board ">
-          <div className="board-panels">
-            {board.panels.map(panel => (
-              <Panel panel={panel} key={panel.title} board={board} />
-            ))}
+          <BoardHeader
+            boards={boards}
+            board={board}
+            toggleEdit={this.toggleEdit}
+          />
+          <div
+            className={`board-panels board-panels-${editBoardMode ? "edit" : ""}`}
+          >
+            {panels.map(
+              panel =>
+                panel.board === board.id && (
+                  <Panel panel={panel} key={panel.id} board={board} editBoardMode={editBoardMode}/>
+                )
+            )}
+            {editBoardMode && (
+              <div className="valign-wrapper">
+                <a className="green-text material-icons add-panel-btn pointer">
+                  add
+                </a>
+              </div>
+            )}
           </div>
         </div>
       );
@@ -49,7 +78,9 @@ class Board extends Component {
 
 const mapStateToProps = state => ({
   auth: state.firebase.auth,
-  boards: state.boards
+  boards: state.boards.boards,
+  panels: state.panels.panels,
+  showLegend: state.boards.showLegend
 });
 
 export default compose(
@@ -59,9 +90,12 @@ export default compose(
       createBoard,
       deleteBoard,
       fetchUserBoards,
-      changePanelTitle,
-      pushUserBoards
+      changePanelTitle
     }
   ),
-  firestoreConnect(props => [`users/${props.auth.uid}/boards`])
+  firestoreConnect(props => [
+    `users/${props.auth.uid}/boards`,
+    `users/${props.auth.uid}/panels`,
+    `users/${props.auth.uid}/tasks`
+  ])
 )(Board);

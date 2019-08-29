@@ -4,19 +4,25 @@ import { Link } from "react-router-dom";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 
+// mui
+import Dialog from "@material-ui/core/Dialog";
+
 // components
 import Spinner from "../Spinner/Spinner";
 
 // actions
-import {
-  createBoard,
-  deleteBoard,
-  fetchUserBoards
-} from "../../actions/boardActions";
+import { createBoard, deleteBoard } from "../../actions/boardActions";
 
 class Boards extends Component {
+  state = { showDelBoard: false };
+
+  toggleDelBoard = () => {
+    this.setState({
+      showDelBoard: !this.state.showDelBoard
+    });
+  };
   render() {
-    const { boards, deleteBoard } = this.props;
+    const { boards, deleteBoard, panels } = this.props;
 
     const boardItems = boards.length ? (
       boards.map(board => (
@@ -26,45 +32,53 @@ class Boards extends Component {
               <div className="card-content white-text">
                 <span className="card-title">{board.title}</span>
 
-                {board.panels.map(panel => (
-                  <span
-                    key={panel.title}
-                    className="grey-text darken-4"
-                    style={{ marginRight: "1em" }}
-                  >
-                    - {panel.title}
-                  </span>
-                ))}
+                {panels.map(
+                  panel =>
+                    panel.board === board.id && (
+                      <span
+                        key={panel.id}
+                        className="grey-text darken-4"
+                        style={{ marginRight: "1em" }}
+                      >
+                        - {panel.title}
+                      </span>
+                    )
+                )}
               </div>
 
               <div className="card-action">
                 <Link to={`/${board.id}`}>Go to board</Link>
 
-                <a className="modal-trigger" href="#modal1">
+                <a className="pointer" onClick={this.toggleDelBoard}>
                   Delete this board
                 </a>
 
-                <div id="modal1" className="modal">
-                  <div className="modal-content">
-                    <h4 className="red-text darken-3">DELETE BOARD</h4>
-                    <p>
-                      Are you sure you want to delete this board? This action
-                      cannot be undone.
-                    </p>
+                <Dialog open={this.state.showDelBoard}>
+                  <div className="del-board modal">
+                    <div className="modal-content">
+                      <h4 className="red-text darken-3">DELETE BOARD</h4>
+                      <p>
+                        Are you sure you want to delete this board? This action
+                        cannot be undone.
+                      </p>
+                    </div>
+                    <div className="modal-footer">
+                      <button
+                        onClick={this.toggleDelBoard}
+                        className="modal-close btn-flat black-text"
+                      >
+                        Nevermind!
+                      </button>
+                      <button
+                        className="modal-close btn-flat black-text"
+                        onClick={e => deleteBoard(board.id)}
+                      >
+                        I'm Sure
+                      </button>
+                    </div>
                   </div>
-                  <div className="modal-footer">
-                    <a href="#!" className="modal-close btn-flat black-text">
-                      Nevermind!
-                    </a>
-                    <a
-                      href="#!"
-                      className="modal-close btn-flat black-text"
-                      onClick={e => deleteBoard(board.id)}
-                    >
-                      I'm Sure
-                    </a>
-                  </div>
-                </div>
+                </Dialog>
+
               </div>
             </div>
           </div>
@@ -96,14 +110,18 @@ class Boards extends Component {
 }
 
 const mapStateToProps = state => ({
-  boards: state.boards,
+  boards: state.boards.boards,
+  panels: state.panels.panels,
   auth: state.firebase.auth
 });
 
 export default compose(
   connect(
     mapStateToProps,
-    { createBoard, deleteBoard, fetchUserBoards }
+    { createBoard, deleteBoard }
   ),
-  firestoreConnect(props => [`users/${props.auth.uid}/boards`])
+  firestoreConnect(props => [
+    `users/${props.auth.uid}/boards`,
+    `users/${props.auth.uid}/panels`
+  ])
 )(Boards);

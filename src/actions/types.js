@@ -2,7 +2,6 @@
 export const CREATED_BOARD = "CREATED_BOARD";
 export const DELETED_BOARD = "DELETED_BOARD";
 export const FETCHED_USER_BOARDS = "FETCHED_USER_BOARDS";
-export const CHANGED_BOARD_TITLE = "CHANGED_BOARD_TITLE";
 
 // panels
 export const CREATED_PANEL = "CREATED_PANEL";
@@ -12,8 +11,7 @@ export const CHANGED_PANEL_TITLE = "CHANGED_PANEL_TITLE";
 // tasks
 export const CREATED_TASK = "CREATED_TASK";
 export const DELETED_TASK = "DELETED_TASK";
-export const CHANGED_TASK_TITLE = "CHANGED_TASK_TITLE";
-
+export const EDITED_TASK = "EDITED_TASK";
 
 // auth
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
