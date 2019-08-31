@@ -5,24 +5,22 @@ import { compose } from "redux";
 import { Redirect } from "react-router-dom";
 
 // actions
-import {
-  createBoard,
-  deleteBoard,
-  fetchUserBoards
-} from "../../actions/boardActions";
-import { changePanelTitle } from "../../actions/panelActions";
+import { createBoard, deleteBoard } from "../../actions/boardActions";
+import { changePanelTitle, createPanel } from "../../actions/panelActions";
 
 // components
 import Spinner from "../Spinner/Spinner";
 import Panel from "../Panel/Panel";
 import BoardHeader from "./BoardHeader";
+import Toggle from "../Toggle/Toggle";
 
 // styles
 import "./Board.scss";
 
 class Board extends Component {
   state = {
-    editBoardMode: false
+    editBoardMode: false,
+    panelTitle: ""
   };
 
   toggleEdit = () => {
@@ -31,8 +29,23 @@ class Board extends Component {
     });
   };
 
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  handleCreatePanel = (e, boardId) => {
+    e.preventDefault();
+    this.props.createPanel(this.state.panelTitle, boardId);
+    // reset state
+    this.setState({
+      panelTitle: ""
+    });
+  };
+
   render() {
-    const { auth, boards, match, panels } = this.props;
+    const { auth, boards, match, panels, panelErr } = this.props;
     const { editBoardMode } = this.state;
 
     if (!auth.uid) {
@@ -47,28 +60,93 @@ class Board extends Component {
         return <Redirect to="/" />;
       }
       return (
-        <div className="board ">
+        <div>
           <BoardHeader
             boards={boards}
             board={board}
             toggleEdit={this.toggleEdit}
+            editBoardMode={editBoardMode}
           />
-          <div
-            className={`board-panels board-panels-${editBoardMode ? "edit" : ""}`}
-          >
-            {panels.map(
-              panel =>
-                panel.board === board.id && (
-                  <Panel panel={panel} key={panel.id} board={board} editBoardMode={editBoardMode}/>
-                )
-            )}
-            {editBoardMode && (
-              <div className="valign-wrapper">
-                <a className="green-text material-icons add-panel-btn pointer">
-                  add
-                </a>
-              </div>
-            )}
+
+          <div className="board ">
+            <div
+              className={`board-panels board-panels-${
+                editBoardMode ? "edit" : ""
+              }`}
+            >
+              {panels
+                .sort((a, b) => a.index - b.index)
+                .map(
+                  panel =>
+                    panel.board === board.id && (
+                      <Panel
+                        panel={panel}
+                        key={panel.id}
+                        board={board}
+                        editBoardMode={editBoardMode}
+                      />
+                    )
+                )}
+
+              {editBoardMode && (
+                <div className="valign-wrapper">
+                  <Toggle>
+                    {({ on, toggle }) => (
+                      <div>
+                        {on && (
+                          <div className="card add-panel-form panel grey lighten-4">
+                            <div className="form">
+                              <div className="input-field">
+                                {!panelErr ? (
+                                  <label htmlFor="panelTitle">
+                                    Panel title
+                                  </label>
+                                ) : (
+                                  <label htmlFor="panelTitle">{panelErr}</label>
+                                )}
+
+                                <input
+                                  autoFocus
+                                  type="text"
+                                  id="panelTitle"
+                                  name="panelTitle"
+                                  value={this.state.panelTitle}
+                                  onChange={this.handleChange}
+                                />
+                              </div>
+
+                              <div className="add-panel-form-btns">
+                                <button
+                                  className="btn-small"
+                                  onClick={e =>
+                                    this.handleCreatePanel(e, board.id)
+                                  }
+                                >
+                                  Add
+                                </button>
+
+                                <button className="btn-small" onClick={toggle}>
+                                  Cancel
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+
+                        {!on && (
+                          <button
+                            onClick={toggle}
+                            className="white-text add-panel-btn pointer green btn darken-1"
+                          >
+                            Add Panel
+                          </button>
+                        )}
+                      </div>
+                    )}
+                  </Toggle>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       );
@@ -80,7 +158,8 @@ const mapStateToProps = state => ({
   auth: state.firebase.auth,
   boards: state.boards.boards,
   panels: state.panels.panels,
-  showLegend: state.boards.showLegend
+  showLegend: state.boards.showLegend,
+  panelErr: state.panels.err
 });
 
 export default compose(
@@ -89,8 +168,8 @@ export default compose(
     {
       createBoard,
       deleteBoard,
-      fetchUserBoards,
-      changePanelTitle
+      changePanelTitle,
+      createPanel
     }
   ),
   firestoreConnect(props => [

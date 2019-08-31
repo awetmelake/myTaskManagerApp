@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { firestoreConnect } from "react-redux-firebase";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { Redirect } from "react-router-dom";
 
 // components
 import Task from "../Task/Task";
@@ -10,11 +8,16 @@ import AddTask from "../Task/AddTask";
 import DelPanel from "./DelPanel";
 import Toggle from "../Toggle/Toggle";
 
+// mui
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+
 // actions
 import {
   createPanel,
   deletePanel,
-  changePanelTitle
+  changePanelTitle,
+  moveLeft,
+  moveRight
 } from "../../actions/panelActions";
 
 import { createTask } from "../../actions/taskActions";
@@ -28,6 +31,7 @@ class Panel extends Component {
     editTitleMode: false,
     title: this.props.panel.title,
     id: this.props.panel.id,
+
     showAddTask: false,
     showDelPanel: false
   };
@@ -67,7 +71,7 @@ class Panel extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.toggleEdit();
-    this.props.changePanelTitle(this.state.title);
+    this.props.changePanelTitle(this.state.title, this.props.panel.id);
   };
 
   render() {
@@ -77,12 +81,16 @@ class Panel extends Component {
       deletePanel,
       tasks,
       createTask,
-      updateTasks,
-      editBoardMode
+      editBoardMode,
+      moveLeft,
+      moveRight
     } = this.props;
     const { editTitleMode, title } = this.state;
     return (
-      <div className="panel white ">
+      <div
+        className="panel white "
+        style={editBoardMode ? { flexGrow: 0 } : { flexGrow: 1 }}
+      >
         <div className="panel-header  grey lighten-2">
           <div className="panel-title">
             {!editTitleMode ? (
@@ -96,6 +104,7 @@ class Panel extends Component {
                   type="text"
                   title="title"
                   value={title}
+                  autoFocus
                   className="center"
                   style={{ width: "80%", fontSize: "20px" }}
                 />
@@ -135,19 +144,29 @@ class Panel extends Component {
                   </i>
                   {on && (
                     <div className="card white panel-settings">
-                      <ul className="">
-                        <li
-                          onClick={e => {
-                            this.toggleEdit();
-                            toggle();
-                          }}
-                        >
-                          Edit
-                        </li>
-                        <li>Move Left</li>
-                        <li>Move Right</li>
-                        <li onClick={this.toggleDelPanel}>Delete</li>
-                      </ul>
+                      <ClickAwayListener onClickAway={toggle}>
+                        <ul className="">
+                          <li
+                            onClick={e => {
+                              this.toggleEdit();
+                              toggle();
+                            }}
+                          >
+                            Edit
+                          </li>
+                          {panel.index > 0 && (
+                            <li onClick={e => moveLeft(panel.id, panel.index)}>
+                              Move Left
+                            </li>
+                          )}
+                          {panel.index < board.panels - 2 && (
+                            <li onClick={e => moveRight(panel.id, panel.index)}>
+                              Move Right
+                            </li>
+                          )}
+                          <li onClick={this.toggleDelPanel}>Delete</li>
+                        </ul>
+                      </ClickAwayListener>
                     </div>
                   )}
                 </div>
@@ -159,9 +178,7 @@ class Panel extends Component {
         <div className="panel-tasks">
           {tasks.map(
             task =>
-              panel.id === task.panel && (
-                <Task task={task} key={task.id} deletePanel={deletePanel} />
-              )
+              panel.id === task.panel && <Task task={task} key={task.id} />
           )}
         </div>
 
@@ -193,6 +210,13 @@ const mapStateToProps = state => ({
 export default compose(
   connect(
     mapStateToProps,
-    { createPanel, deletePanel, changePanelTitle, createTask }
+    {
+      createPanel,
+      deletePanel,
+      changePanelTitle,
+      createTask,
+      moveRight,
+      moveLeft
+    }
   )
 )(Panel);

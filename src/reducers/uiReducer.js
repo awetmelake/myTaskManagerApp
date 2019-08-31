@@ -1,8 +1,9 @@
-import {} from "../actions/types";
+import { CHANGED_PANEL_TITLE } from "../actions/types";
 
 const initialState = {
   update: 0,
-  loading: false
+  loading: false,
+  notification: ""
 };
 
 export default (state = initialState, action) => {
@@ -11,6 +12,11 @@ export default (state = initialState, action) => {
       return { ...state, loading: true };
     case "UI_LOADING_COMPLETE":
       return { ...state, loading: false };
+    case CHANGED_PANEL_TITLE:
+      return {
+        ...state,
+        notification: `Changed panel ${action.payload.from} title to ${action.payload.to}`
+      };
     default:
       return state;
   }

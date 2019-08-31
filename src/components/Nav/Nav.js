@@ -10,8 +10,8 @@ import SignedOutLinks from "./SignedOutLinks";
 //actions
 import { signOut } from "../../actions/authActions";
 
-//icons
-// import hamburger from "../../images/Hamburger_icon.svg.png";
+// styles
+import "./Nav.scss";
 
 class Nav extends Component {
   render() {
@@ -22,7 +22,7 @@ class Nav extends Component {
       <SignedOutLinks />
     );
     return (
-      <div className="navbar-fixed">
+      <div className="navbar-fixed main-nav">
         <nav className="grey darken-4">
           <header className="brand-logo center">
             <NavLink to="/">TASKFLOW</NavLink>

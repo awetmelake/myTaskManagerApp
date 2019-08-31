@@ -1,44 +1,48 @@
-import React, { Component } from "react";
+import React from "react";
 
 import Toggle from "../Toggle/Toggle";
 
-const BoardHeader = ({ board, toggleEdit, boards }) => {
+const BoardHeader = ({ board, toggleEdit, boards, editBoardMode }) => {
   return (
-    <nav className="grey darken-1 board-header">
-      <Toggle>
-        {({ on, toggle }) => (
-          <div>
-            <header className=" left ">
-              <h4>{board.title}</h4>
-            </header>
-            <a className="material-icons menu-icon pointer" onClick={toggle}>
-              menu
+    <nav className="grey darken-1 board-header ">
+      <header className=" left brand-logo">
+          {!editBoardMode ? "" : "layout:"} {board.title}
+      </header>
+      {!editBoardMode && (
+        <a className="material-icons menu-icon pointer">menu</a>
+      )}
+
+      {editBoardMode && (
+        <button onClick={toggleEdit} className="btn white-text green toggle-board-edit">
+          Done
+        </button>
+      )}
+      <ul className="right">
+        {!editBoardMode ? (
+          <li>
+            <a
+              title="Edit board"
+              className="material-icons"
+              onClick={toggleEdit}
+            >
+              edit
             </a>
-
-            {on && (
-              <ul className="board-header-boards-display white black-text">
-                {boards.map(board => (
-                  <li
-                    className="board-header-boards-display-items pointer center"
-                    key={board.id}
-                  >
-                    {board.title}
-                  </li>
-                ))}
-              </ul>
-            )}
-
-            <ul className="right">
-              <li>
-                <a title="Edit board" className="material-icons" onClick={toggleEdit}>
-                  edit
-                </a>
-                <a title="Timer" className="material-icons ">access_time</a>
-              </li>
-            </ul>
-          </div>
+            <a title="Timer" className="material-icons ">
+              access_time
+            </a>
+          </li>
+        ) : (
+          <li>
+            <a
+              title="Exit edit mode"
+              className="material-icons "
+              onClick={toggleEdit}
+            >
+              close
+            </a>
+          </li>
         )}
-      </Toggle>
+      </ul>
     </nav>
   );
 };

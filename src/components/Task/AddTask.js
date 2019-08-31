@@ -16,7 +16,8 @@ class AddTask extends Component {
     description: "",
     completeBy: "",
     color: "yellow",
-    panel: this.props.panel.id
+    panel: this.props.panel.id,
+    time: null
   };
 
   handleChange = e => {
@@ -26,11 +27,11 @@ class AddTask extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.createTask(this.state)
+    this.props.createTask(this.state);
   };
 
   render() {
-    const { toggleVisibility, visibility} = this.props;
+    const { toggleVisibility, visibility } = this.props;
     return (
       <Dialog open={visibility} onBackdropClick={toggleVisibility}>
         <div className={` add-task ${this.state.color} `}>
@@ -59,8 +60,12 @@ class AddTask extends Component {
             <br />
 
             <div className="container center">
-              <button className="btn grey darken-1" onClick={this.handleSubmit}>Save</button>
-              <button className="btn grey darken-1" onClick={toggleVisibility}>Cancel</button>
+              <button className="btn grey darken-1" onClick={this.handleSubmit}>
+                Save
+              </button>
+              <button className="btn grey darken-1" onClick={toggleVisibility}>
+                Cancel
+              </button>
             </div>
           </form>
         </div>

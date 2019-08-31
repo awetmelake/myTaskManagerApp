@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { firestoreConnect } from "react-redux-firebase";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { Redirect } from "react-router-dom";
 
 // components
 import TaskInfo from "./TaskInfo";

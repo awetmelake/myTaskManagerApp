@@ -14,21 +14,27 @@ const DelPanel = ({
   board
 }) => (
   <Dialog open={visibility} onBackdropClick={toggleVisibility}>
-    <div className="add-panel grey lighten-2">
-      <h5 className="center">
-        Are you sure you want to delete this panel. <br />
-      </h5>
-      <p className="center red-text"> This action cannot be undone.</p>
-      <div className="container center">
-        <button className="btn grey " onClick={toggleVisibility}>
-          no
+    <div className="del-panel  modal">
+      <div className="modal-content">
+        <h4 className="red-text darken-3">DELETE PANEL?</h4>
+        <p>
+          Are you sure you want to delete this board? This action
+          cannot be undone.
+        </p>
+      </div>
+      <div className="modal-footer">
+        <button className="modal-close btn-flat " onClick={toggleVisibility}>
+          Nevermind!
         </button>
         <button
-          className="btn grey"
+          className="modal-close btn-flat "
           type="submit"
-          onClick={e => deletePanel(panel.title, board.id)}
+          onClick={e => {
+            toggleVisibility();
+            deletePanel(panel.id, board.id);
+          }}
         >
-          yes
+          I'm Sure
         </button>
       </div>
     </div>

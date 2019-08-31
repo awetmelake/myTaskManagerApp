@@ -1,6 +1,8 @@
 .board {
   display: flex;
   flex-direction: column;
+  padding-top: 50px;
+
   &-title {
     font-size: 2em;
     padding: 0.5em 1em;
@@ -11,25 +13,30 @@
     border-left: 1px solid grey;
     margin: 0.5em;
     transition: transform 0.3s;
-
-    &-edit {
-      width: 60%;
-    }
   }
 
   &-header {
     height: 50px;
+    position: fixed;
 
     header {
       position: relative;
-      bottom: 15px;
+      bottom: 5px;
       left: 10px;
     }
 
-    li {
-      height: 50px;
+    .toggle-board-edit {
       position: relative;
-      bottom: 0px;
+      left: 50px;
+      bottom: 8px;
+    }
+
+    .right {
+      li {
+        height: 50px;
+        position: relative;
+        bottom: 0px;
+      }
     }
 
     a {
@@ -37,14 +44,17 @@
     }
 
     &-boards-display {
-      width: 200px;
+      width: 150px;
       position: absolute;
-      top: 120px;
-      left: 110px;
-      border: 1px solid black;
-      box-shadow: 1px 1px 10px grey;
+      top: 20px;
+      left: 160px;
+      li {
+        padding: 0.3em !important;
+        line-height: 1;
+        text-align: left;
+      }
+
       &-items {
-        padding:  0 !important;
         font-size: 1.5em;
         width: 100%;
         padding: 0.5em;
@@ -56,9 +66,31 @@
       margin-left: 1em;
     }
   }
-}
-.add-panel-btn {
-  font-size: 70px;
+
+  .valign-wrapper {
+    .add-panel-btn {
+      position: relative;
+      float: right;
+      left: 1em;
+    }
+
+    .add-panel-form {
+      float: left;
+      margin: 0;
+      padding: 1em;
+
+      .input-field {
+        margin: 0;
+      }
+
+      &-btns {
+        display: flex;
+        justify-content: space-between;
+        width: 90%;
+        margin: auto;
+      }
+    }
+  }
 }
 
 .del-board {
@@ -67,4 +99,26 @@
   width: 400px;
   display: initial;
   position: relative;
+}
+
+.new-board {
+  width: 240px;
+  position: absolute;
+  z-index: 5;
+  padding: 0.5em;
+  right: 0;
+  top: -7px;
+  .card-content {
+    padding: 0 0.5em;
+  }
+  .card-action {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 600px) {
+  .board-header {
+    top: 64px;
+  }
 }

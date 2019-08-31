@@ -30,12 +30,20 @@ class TaskInfo extends Component {
 
   handleChange = e => this.setState({ [e.target.name]: e.target.value });
 
-  toggleEdit = e => this.setState({ editMode: !this.state.editMode });
+  toggleEdit = e =>
+    this.setState({
+      title: this.props.task.title,
+      description: this.props.task.description,
+      color: this.props.task.color,
+      editMode: !this.state.editMode
+    });
 
   handleSubmit = e => {
     e.preventDefault();
     this.props.editTask(this.state);
-    this.toggleEdit();
+    this.setState({
+      editMode: false
+    });
   };
 
   render() {
@@ -95,12 +103,14 @@ class TaskInfo extends Component {
                 type="submit"
                 className="btn-small grey darken-1"
                 onClick={this.handleSubmit}
+                name="submit"
               >
                 save changes
               </button>
               <button
                 onClick={this.toggleEdit}
                 className="btn-small grey darken-1 "
+                name="cancel"
               >
                 cancel
               </button>
@@ -128,7 +138,10 @@ class TaskInfo extends Component {
                   <div className="task-info-del-confirm card white red-text">
                     <p>Delete task?</p>
                     <div className="card-footer">
-                      <button className="btn-small" onClick={e => delTask(task.id)}>
+                      <button
+                        className="btn-small"
+                        onClick={e => delTask(task.id)}
+                      >
                         Yes
                       </button>
                       <button className="btn-small" onClick={toggle}>

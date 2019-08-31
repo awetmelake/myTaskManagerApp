@@ -5,26 +5,35 @@ import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 
 // mui
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Dialog from "@material-ui/core/Dialog";
 
 // components
 import Spinner from "../Spinner/Spinner";
+import Toggle from "../Toggle/Toggle";
 
 // actions
 import { createBoard, deleteBoard } from "../../actions/boardActions";
 
 class Boards extends Component {
-  state = { showDelBoard: false };
+  state = { showDelBoard: false, newBoardTitle: "" };
 
   toggleDelBoard = () => {
     this.setState({
       showDelBoard: !this.state.showDelBoard
     });
   };
-  render() {
-    const { boards, deleteBoard, panels } = this.props;
 
-    const boardItems = boards.length ? (
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  render() {
+    const { boards, deleteBoard, panels, createBoard, boardErr, loading } = this.props;
+
+    const boardItems = boards.length && !loading ? (
       boards.map(board => (
         <div className="row" key={board.id}>
           <div className="col s12 m8 offset-m2 l6 offset-l3">
@@ -53,10 +62,13 @@ class Boards extends Component {
                   Delete this board
                 </a>
 
-                <Dialog open={this.state.showDelBoard}>
+                <Dialog
+                  open={this.state.showDelBoard}
+                  onBackdropClick={this.toggleDelBoard}
+                >
                   <div className="del-board modal">
                     <div className="modal-content">
-                      <h4 className="red-text darken-3">DELETE BOARD</h4>
+                      <h4 className="red-text darken-3">DELETE BOARD?</h4>
                       <p>
                         Are you sure you want to delete this board? This action
                         cannot be undone.
@@ -78,7 +90,6 @@ class Boards extends Component {
                     </div>
                   </div>
                 </Dialog>
-
               </div>
             </div>
           </div>
@@ -91,7 +102,65 @@ class Boards extends Component {
       <div className="row">
         <div className="section">
           <div className="col s12 m8 offset-m2 ">
-            <h2>Your Boards</h2>
+            <Toggle>
+              {({ on, toggle }) => (
+                <div
+                  style={{
+                    position: "relative"
+                  }}
+                >
+                  <h2
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between"
+                    }}
+                  >
+                    Your Boards
+                    <button className="btn right" onClick={toggle}>
+                      New Board
+                    </button>
+                  </h2>
+                  {on && (
+                    <ClickAwayListener onClickAway={toggle}>
+                      <div className="card new-board">
+                        <h5 className="center"> Create new board</h5>
+                        <div className="card-content">
+                          <div className="input-field">
+                            <label htmlFor="newBoardTitle">
+                              {boardErr ? boardErr : "Title"}
+                            </label>
+                            <input
+                              id="newBoardTitle"
+                              type="text"
+                              name="newBoardTitle"
+                              onChange={this.handleChange}
+                              value={this.state.newBoardTitle}
+                            />
+                          </div>
+                        </div>
+                        <div className="card-action">
+                          <button
+                            className="btn"
+                            onClick={e => {
+                              createBoard(this.state.newBoardTitle);
+                              this.setState({
+                                newBoardTitle: ""
+                              });
+                            }}
+                          >
+                            Add
+                          </button>
+                          <button className="btn" onClick={toggle}>
+                            Cancel
+                          </button>
+                        </div>
+                      </div>
+                    </ClickAwayListener>
+                  )}
+                </div>
+              )}
+            </Toggle>
             <div className="divider"></div>
             <br />
           </div>
@@ -112,7 +181,9 @@ class Boards extends Component {
 const mapStateToProps = state => ({
   boards: state.boards.boards,
   panels: state.panels.panels,
-  auth: state.firebase.auth
+  auth: state.firebase.auth,
+  boardErr: state.boards.err,
+  loading: state.ui.loading
 });
 
 export default compose(
