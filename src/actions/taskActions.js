@@ -44,3 +44,21 @@ export const editTask = newTask => (dispatch, getState) => {
       });
     });
 };
+
+export const setTime = time => (dispatch, getState) => {
+  const userId = getState().firebase.auth.uid;
+  const taskId = getState().timer.timerTarget;
+  const tasks = getState().tasks.tasks;
+  const taskTime = tasks.filter(task => task.id !== taskId)[0].time;
+  taskTime += time;
+
+  db.doc(`users/${userId}/tasks/${taskId}`)
+    .update({
+      time: taskTime
+    })
+    .then(() => {
+      dispatch({
+        type: "SET_TASK_TIME"
+      });
+    });
+};

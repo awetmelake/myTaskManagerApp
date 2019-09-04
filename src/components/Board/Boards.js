@@ -31,12 +31,12 @@ class Boards extends Component {
   };
 
   render() {
-    const { boards, deleteBoard, panels, createBoard, boardErr, loading } = this.props;
+    const { boards, deleteBoard, panels, createBoard, boardErr, isLoading } = this.props;
 
-    const boardItems = boards.length && !loading ? (
+    const boardItems = boards.length && !isLoading ? (
       boards.map(board => (
         <div className="row" key={board.id}>
-          <div className="col s12 m8 offset-m2 l6 offset-l3">
+          <div className="col s8 offset-s2 ">
             <div className="card grey darken-2">
               <div className="card-content white-text">
                 <span className="card-title">{board.title}</span>
@@ -56,7 +56,7 @@ class Boards extends Component {
               </div>
 
               <div className="card-action">
-                <Link to={`/${board.id}`}>Go to board</Link>
+                <Link to={`/board_${board.id}`}>Go to board</Link>
 
                 <a className="pointer" onClick={this.toggleDelBoard}>
                   Delete this board
@@ -101,7 +101,7 @@ class Boards extends Component {
     return (
       <div className="row">
         <div className="section">
-          <div className="col s12 m8 offset-m2 ">
+          <div className="col  s8 offset-s2 ">
             <Toggle>
               {({ on, toggle }) => (
                 <div
@@ -183,7 +183,7 @@ const mapStateToProps = state => ({
   panels: state.panels.panels,
   auth: state.firebase.auth,
   boardErr: state.boards.err,
-  loading: state.ui.loading
+  isLoading: state.ui.isLoading
 });
 
 export default compose(

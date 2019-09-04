@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-// import TaskItemSet from "./TaskItemSet.js";
-// import ColorSelect from "./ColorSelect.js";
-// import Timer from "./Timer";
-
 // mui
 import Dialog from "@material-ui/core/Dialog";
 
@@ -13,7 +9,7 @@ import { editTask, delTask } from "../../actions/taskActions";
 
 // components
 import ColorSelect from "../ColorSelect";
-import Toggle from "../Toggle/Toggle";
+import DelTask from "./DelTask";
 
 // styles
 import "./Task.scss";
@@ -52,6 +48,7 @@ class TaskInfo extends Component {
     return (
       <Dialog open={visible} onBackdropClick={toggleVisibility}>
         <div className={`card task-info ${this.state.color}`}>
+        
           <div className="card-content">
             <div className="task-info-title">
               Title:
@@ -91,6 +88,7 @@ class TaskInfo extends Component {
                 </div>
               )}
             </div>
+
           </div>
 
           {this.state.editMode && (
@@ -103,14 +101,12 @@ class TaskInfo extends Component {
                 type="submit"
                 className="btn-small grey darken-1"
                 onClick={this.handleSubmit}
-                name="submit"
               >
                 save changes
               </button>
               <button
                 onClick={this.toggleEdit}
-                className="btn-small grey darken-1 "
-                name="cancel"
+                className="btn-small grey darken-1"
               >
                 cancel
               </button>
@@ -124,35 +120,7 @@ class TaskInfo extends Component {
             edit
           </i>
 
-          <Toggle>
-            {({ on, toggle }) => (
-              <div className="container">
-                <i
-                  className="material-icons pointer small task-info-del-btn"
-                  onClick={toggle}
-                  title="Delete Task"
-                >
-                  delete
-                </i>
-                {on && (
-                  <div className="task-info-del-confirm card white red-text">
-                    <p>Delete task?</p>
-                    <div className="card-footer">
-                      <button
-                        className="btn-small"
-                        onClick={e => delTask(task.id)}
-                      >
-                        Yes
-                      </button>
-                      <button className="btn-small" onClick={toggle}>
-                        No
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-          </Toggle>
+          <DelTask task={task} delTask={delTask} />
         </div>
       </Dialog>
     );

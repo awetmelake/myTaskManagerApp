@@ -15,28 +15,18 @@ import {
 
 export const createBoard = boardTitle => (dispatch, getState) => {
   const userId = getState().firebase.auth.uid;
-  let newBoardId;
+  const defaultPanels = [
+    { title: "To do", index: 0 },
+    { title: "In progress", index: 1 },
+    { title: "Done", index: 2 }
+  ];
 
   const newBoard = {
     title: boardTitle,
     panels: 3
   };
 
-  const defaultPanels = [
-    {
-      title: "To do",
-      index: 0
-    },
-    {
-      title: "In progress",
-      index: 1
-    },
-    {
-      title: "Done",
-      index: 2
-    }
-  ];
-
+  let newBoardId;
   if (boardTitle.length > 0) {
     dispatch({ type: UI_LOADING_INIT });
 
@@ -52,7 +42,13 @@ export const createBoard = boardTitle => (dispatch, getState) => {
           .then(() => {
             // populate new board with default panels
             defaultPanels.forEach(panel => {
-              dispatch(createPanel(panel.title, newBoardId, panel.index));
+              db.collection(`users/${userId}/panels`)
+                .add(panel)
+                .then(docRef =>
+                  db
+                    .doc(`users/${userId}/panels/${docRef.id}`)
+                    .update({ id: docRef.id, board: newBoardId })
+                );
             });
           });
       })
@@ -71,15 +67,17 @@ export const createBoard = boardTitle => (dispatch, getState) => {
 
 export const deleteBoard = boardId => (dispatch, getState) => {
   const userId = getState().firebase.auth.uid;
-  const deletePanelIds = [];
-  const deletePanels = getState().panels.panels.filter(panel => {
-    deletePanelIds.push(panel.id);
-    return panel.board !== boardId;
-  });
-  const tasks = getState().tasks.tasks;
-  const deleteTasks = tasks.filter(task =>
-    deletePanelIds.some(id => task.panel === id)
+  const panelIdsToDelete = [];
+  const panelsToDelete = getState().panels.panels.filter(panel =>
+    panel.board !== boardId ? true : panelIdsToDelete.push(panel.id)
   );
+  const tasks = getState().tasks.tasks;
+  const taskIdsToDelete = tasks.filter(task =>
+    panelIdsToDelete.some(id => task.panel === id)
+  );
+  dispatch({
+    type: UI_LOADING_INIT
+  });
   db.doc(`users/${userId}/boards/${boardId}`)
     .delete()
     .then(() => {
@@ -87,11 +85,17 @@ export const deleteBoard = boardId => (dispatch, getState) => {
         type: DELETED_BOARD
       });
       // delete panels and tasks associated with board
-      deletePanels.forEach(panel => {
-        db.doc(`users/${userId}/panels/${panel.id}`).delete();
-      });
-      deleteTasks.forEach(task => {
-        db.doc(`users/${userId}/tasks/${task.id}`).delete();
+      panelIdsToDelete.forEach(id => {
+        db.doc(`users/${userId}/panels/${id}`)
+          .delete()
+          .then(async () => {
+            await taskIdsToDelete.forEach(async task => {
+              await db.doc(`users/${userId}/tasks/${task.id}`).delete();
+            });
+            dispatch({
+              type: UI_LOADING_COMPLETE
+            });
+          });
       });
     });
 };

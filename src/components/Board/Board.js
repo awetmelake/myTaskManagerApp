@@ -7,6 +7,8 @@ import { Redirect } from "react-router-dom";
 // actions
 import { createBoard, deleteBoard } from "../../actions/boardActions";
 import { changePanelTitle, createPanel } from "../../actions/panelActions";
+import { toggleSelectMode } from "../../actions/uiActions";
+
 
 // components
 import Spinner from "../Spinner/Spinner";
@@ -45,7 +47,16 @@ class Board extends Component {
   };
 
   render() {
-    const { auth, boards, match, panels, panelErr } = this.props;
+    const {
+      auth,
+      boards,
+      match,
+      panels,
+      panelErr,
+      selectMode,
+      toggleSelectMode,
+      timer
+    } = this.props;
     const { editBoardMode } = this.state;
 
     if (!auth.uid) {
@@ -66,6 +77,7 @@ class Board extends Component {
             board={board}
             toggleEdit={this.toggleEdit}
             editBoardMode={editBoardMode}
+            timer={timer}
           />
 
           <div className="board ">
@@ -74,6 +86,23 @@ class Board extends Component {
                 editBoardMode ? "edit" : ""
               }`}
             >
+              {selectMode && (
+                <div className="board-select-mode-popup ">
+                  <div className="card grey lighten-2 center">
+                    <div className="card-content">
+                      <p className="card-title">
+                        Select task to start timer
+                      </p>
+                    </div>
+                    <div className="card-action">
+                      <button className="btn-small red" onClick={toggleSelectMode}>
+                        cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {panels
                 .sort((a, b) => a.index - b.index)
                 .map(
@@ -159,7 +188,9 @@ const mapStateToProps = state => ({
   boards: state.boards.boards,
   panels: state.panels.panels,
   showLegend: state.boards.showLegend,
-  panelErr: state.panels.err
+  panelErr: state.panels.err,
+  selectMode: state.ui.selectMode,
+  timer: state.timer
 });
 
 export default compose(
@@ -169,7 +200,8 @@ export default compose(
       createBoard,
       deleteBoard,
       changePanelTitle,
-      createPanel
+      createPanel,
+      toggleSelectMode
     }
   ),
   firestoreConnect(props => [

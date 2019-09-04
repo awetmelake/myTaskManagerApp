@@ -24,24 +24,12 @@ class Nav extends Component {
     return (
       <div className="navbar-fixed main-nav">
         <nav className="grey darken-4">
-          <header className="brand-logo center">
-            <NavLink to="/">TASKFLOW</NavLink>
-          </header>
-
-          <ul id="dropdown1" className="dropdown-content">
-            <li>
-              <a href="#!">one</a>
-            </li>
-            <li>
-              <a href="#!">two</a>
-            </li>
-            <li className="divider"></li>
-            <li>
-              <a href="#!">three</a>
-            </li>
-          </ul>
-          {links}
-          {/* <img alt="..." className="btn" src={hamburger} /> */}
+          <div className="nav-wrapper">
+            <header className="brand-logo center" >
+              <NavLink to="/">TASKFLOW</NavLink>
+            </header>
+            {links}
+          </div>
         </nav>
       </div>
     );

@@ -1,10 +1,9 @@
 import React from "react";
-// import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 
 const SignedInLinks = ({ signOut }) => {
   return (
-    <ul className="right">
+    <ul className="right ">
       <li>
         <NavLink to="/user-boards">Boards</NavLink>
       </li>
@@ -18,11 +17,8 @@ const SignedInLinks = ({ signOut }) => {
           Sign out
         </NavLink>
       </li>
-
     </ul>
   );
 };
-
-
 
 export default SignedInLinks;

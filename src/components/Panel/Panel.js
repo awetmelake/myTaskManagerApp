@@ -159,7 +159,7 @@ class Panel extends Component {
                               Move Left
                             </li>
                           )}
-                          {panel.index < board.panels - 2 && (
+                          {panel.index < board.panels - 1 && (
                             <li onClick={e => moveRight(panel.id, panel.index)}>
                               Move Right
                             </li>

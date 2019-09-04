@@ -1,35 +1,33 @@
-import React, { Component } from "react";
+import React from "react";
+import Toggle from "../Toggle/Toggle";
 
-class DelTask extends Component {
-  handleClick = e => {
-    e.preventDefault();
-    if (e.target.title === "delete") {
-      this.props.delFocused(this.props.userPrompt.target);
-    }
-    this.props.toggleDel(this.props.userPrompt.target);
-    this.props.changeWindow("none", {});
-  };
-
-  render() {
-    return (
-      <form className="prompt-window animated bounceInUp">
-        <label>Select Tasks to Delete</label>
-        <br />
-        <br />
-        <button
-          title="delete"
-          className="btn"
-          onClick={this.handleClick}
-          style={{ marginRight: "10px" }}
+const DelTask = ({ task, delTask }) => (
+  <Toggle>
+    {({ on, toggle }) => (
+      <div className="container">
+        <i
+          className="material-icons pointer small task-info-del-btn"
+          onClick={toggle}
+          title="Delete Task"
         >
-          Delete
-        </button>
-        <button className="btn" title="cancel" onClick={this.handleClick}>
-          Cancel
-        </button>
-      </form>
-    );
-  }
-}
+          delete
+        </i>
+        {on && (
+          <div className="task-info-del-confirm card white red-text">
+            <p>Delete task?</p>
+            <div className="card-footer">
+              <button className="btn-small" onClick={e => delTask(task.id)}>
+                Yes
+              </button>
+              <button className="btn-small" onClick={toggle}>
+                No
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    )}
+  </Toggle>
+);
 
 export default DelTask;

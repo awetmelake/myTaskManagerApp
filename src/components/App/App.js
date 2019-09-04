@@ -11,12 +11,14 @@ import Boards from "../Board/Boards";
 import Board from "../Board/Board";
 import LogIn from "../Auth/LogIn";
 import SignUp from "../Auth/SignUp";
+import NoMatch from "../NoMatch";
+import Notification from "../Notification";
 
 // style
 import "./App.scss";
 
-const App = ({ auth }) => {
-  if (!isLoaded(auth)) {
+const App = ({ auth, isLoading, timer }) => {
+  if (!isLoaded(auth) || isLoading) {
     return <Spinner />;
   }
   return (
@@ -25,19 +27,21 @@ const App = ({ auth }) => {
         <Nav />
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/user-boards" component={Boards} />
           <Route path="/log-in" component={LogIn} />
+          <Route path="/user-boards" component={Boards} />
           <Route path="/sign-up" component={SignUp} />
-          <Route path="/:id" component={Board} />
+          <Route path="/board_:id" component={Board} />
+          <Route component={NoMatch} />
         </Switch>
       </div>
+      <Notification />
     </Router>
   );
 };
 
 const mapStateToProps = state => ({
-  auth: state.firebase.auth
-  // loading: state.ui.isLoading
+  auth: state.firebase.auth,
+  isLoading: state.ui.isLoading
 });
 
 export default connect(

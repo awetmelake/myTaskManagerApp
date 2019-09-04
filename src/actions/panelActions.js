@@ -23,7 +23,7 @@ export const createPanel = (newPanelTitle, boardId) => (
   const newPanel = {
     board: boardId,
     title: newPanelTitle,
-    index: getState().boards.boards.length
+    index: getState().panels.panels.length
   };
 
   if (newPanel.title.length > 0) {
@@ -90,34 +90,30 @@ export const changePanelTitle = (newTitle, panelId) => (dispatch, getState) => {
   }
 };
 
-//params newPanelTitle, target panelTitle, target board id
 export const moveRight = (panelId, curIndex) => (dispatch, getState) => {
   const userId = getState().firebase.auth.uid;
   // panel which we are swaping position with
-  const adjustPanel = getState().panels.panels.filter(
+  const panelToAdjust = getState().panels.panels.filter(
     panel => panel.index === curIndex + 1
   )[0];
   db.doc(`users/${userId}/panels/${panelId}`).update({
     index: curIndex + 1
   });
-
-  db.doc(`users/${userId}/panels/${adjustPanel.id}`).update({
+  db.doc(`users/${userId}/panels/${panelToAdjust.id}`).update({
     index: curIndex
   });
 };
 
-//params newPanelTitle, target panelTitle, target board id
 export const moveLeft = (panelId, curIndex) => (dispatch, getState) => {
   const userId = getState().firebase.auth.uid;
   // panel which we are swaping position with
-  const adjustPanel = getState().panels.panels.filter(
+  const panelToAdjust = getState().panels.panels.filter(
     panel => panel.index === curIndex - 1
   )[0];
   db.doc(`users/${userId}/panels/${panelId}`).update({
     index: curIndex - 1
   });
-
-  db.doc(`users/${userId}/panels/${adjustPanel.id}`).update({
+  db.doc(`users/${userId}/panels/${panelToAdjust.id}`).update({
     index: curIndex
   });
 };

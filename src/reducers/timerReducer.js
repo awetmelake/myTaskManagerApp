@@ -7,6 +7,8 @@ import {
 
 const initialState = {
   isRunning: false,
+  value: 0,
+  type: "pomodoro",
   timerTarget: null,
   err: null
 };
@@ -22,20 +24,23 @@ export default (state = initialState, action) => {
         ...state,
         timerTarget: false
       };
+    case "SET_TIMER_TYPE":
+      return {
+        ...state,
+        type: action.payload
+      };
 
     case START_TIMER:
-      return state.timerTarget
-        ? {
-            ...state,
-            isRunning: true,
-            err: null
-          }
-        : { ...state, err: "Please select a task to initiate timer" };
-
+      return {
+        ...state,
+        isRunning: true,
+        err: null
+      };
     case STOP_TIMER:
-      return { ...state };
+      return { ...state, isRunning: false };
       break;
     default:
       return state;
   }
+
 };

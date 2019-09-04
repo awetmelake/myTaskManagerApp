@@ -25,6 +25,9 @@ export const SIGNUP_ERROR = "SIGNUP_ERROR";
 // ui
 export const UI_LOADING_INIT = "UI_LOADING_INIT";
 export const UI_LOADING_COMPLETE = "UI_LOADING_COMPLETE";
+export const CLEARED_NOTIFICATION = "CLEAR_NOTIFICATION";
+export const SET_NOTIFICATION = "SET_NOTIFICATION";
+
 
 // timer
 export const START_TIMER = "START_TIMER";

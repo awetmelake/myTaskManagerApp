@@ -1,4 +1,8 @@
-import { CREATED_BOARD, DELETED_BOARD } from "../actions/types";
+import {
+  CREATED_BOARD,
+  DELETED_BOARD,
+  CHANGED_BOARD_TITLE,BOARD_ERR
+} from "../actions/types";
 
 const initialState = {
   boards: [],
@@ -12,7 +16,9 @@ export default (state = initialState, action) => {
       return { ...state, err: null };
     case DELETED_BOARD:
       return state;
-    case "BOARD_ERR":
+    case CHANGED_BOARD_TITLE:
+      return { state };
+    case BOARD_ERR:
       return { ...state, err: action.payload };
 
     case "@@reduxFirestore/LISTENER_RESPONSE":

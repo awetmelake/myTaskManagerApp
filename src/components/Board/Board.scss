@@ -3,6 +3,28 @@
   flex-direction: column;
   padding-top: 50px;
 
+  &-settings-drawer {
+    width: 250px;
+    li {
+      margin-top: 1em;
+      a {
+        padding: 0.5em;
+        width: 100%;
+        font-size: 1.5em;
+        color: inherit;
+        cursor: pointer;
+      }
+    }
+  }
+  &-select-mode-popup {
+    position: absolute;
+    top: 70px;
+    left: 40%;
+    z-index: 100;
+    .card {
+    }
+  }
+
   &-title {
     font-size: 2em;
     padding: 0.5em 1em;
@@ -48,6 +70,7 @@
       position: absolute;
       top: 20px;
       left: 160px;
+
       li {
         padding: 0.3em !important;
         line-height: 1;
@@ -62,8 +85,7 @@
     }
 
     .menu-icon {
-      font-size: 30px;
-      margin-left: 1em;
+      font-size: 25px;
     }
   }
 
@@ -114,11 +136,5 @@
   .card-action {
     display: flex;
     justify-content: space-between;
-  }
-}
-
-@media (max-width: 600px) {
-  .board-header {
-    top: 64px;
   }
 }

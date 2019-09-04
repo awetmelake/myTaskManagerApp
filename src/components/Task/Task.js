@@ -6,19 +6,21 @@ import { compose } from "redux";
 import TaskInfo from "./TaskInfo";
 
 // actions
-
+import { setTimerTarget } from "../../actions/timerActions";
+import { toggleSelectMode } from "../../actions/uiActions";
 // styles
 import "./Task.scss";
 
 class Task extends Component {
   state = {
     showDesc: false,
-    taskInfo: false
+    taskInfo: false,
+    focused: false
   };
 
   //dotted border on (focus == true)
   getStyle = () => ({
-    border: this.props.task.focused ? "1px dotted black" : "1px solid black"
+    border: this.state.focused ? "2px dotted black" : "1px solid black"
   });
 
   toggleDesc = () => {
@@ -28,8 +30,10 @@ class Task extends Component {
   };
 
   toggleTaskInfo = e => {
-    // console.log(e.target.className);
-    if (e.target.className === `task ${this.props.task.color}`) {
+    if (
+      e.target.className === `task ${this.props.task.color}` &&
+      !this.props.selectMode
+    ) {
       this.setState({
         taskInfo: true
       });
@@ -42,13 +46,27 @@ class Task extends Component {
     }
   };
 
+  toggleFocus = () => {
+    this.setState({
+      focused: !this.state.focused
+    });
+  };
+
   render() {
-    const { task } = this.props;
+    const { task, selectMode, setTimerTarget, toggleSelectMode } = this.props;
     return (
       <div
         className={`task ${task.color}`}
         style={this.getStyle()}
-        onClick={this.toggleTaskInfo}
+        onClick={e => {
+          if (selectMode) {
+            setTimerTarget(task.id);
+            this.toggleFocus();
+            toggleSelectMode();
+          } else {
+            this.toggleTaskInfo(e);
+          }
+        }}
       >
         <div className="task-title">{task.title}</div>
 
@@ -62,7 +80,7 @@ class Task extends Component {
           <i
             className="tiny material-icons description-btn"
             onClick={this.toggleDesc}
-              title="Show description"
+            title="Show description"
           >
             description
           </i>
@@ -79,12 +97,13 @@ class Task extends Component {
 const mapStateToProps = state => ({
   auth: state.firebase.auth,
   panels: state.panels.panels,
-  tasks: state.tasks.tasks
+  tasks: state.tasks.tasks,
+  selectMode: state.ui.selectMode
 });
 
 export default compose(
   connect(
     mapStateToProps,
-    {}
+    { setTimerTarget, toggleSelectMode }
   )
 )(Task);

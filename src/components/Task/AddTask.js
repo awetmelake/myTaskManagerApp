@@ -28,6 +28,7 @@ class AddTask extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.createTask(this.state);
+    this.props.toggleVisibility(e);
   };
 
   render() {
