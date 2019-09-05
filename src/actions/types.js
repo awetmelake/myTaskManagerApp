@@ -14,6 +14,8 @@ export const PANEL_ERR = "PANEL_ERR";
 export const CREATED_TASK = "CREATED_TASK";
 export const DELETED_TASK = "DELETED_TASK";
 export const EDITED_TASK = "EDITED_TASK";
+export const SET_TASK_TIME = "SET_TASK_TIME";
+export const TOGGLE_FOCUS = "TOGGLE_FOCUS";
 
 // auth
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
@@ -33,4 +35,5 @@ export const SET_NOTIFICATION = "SET_NOTIFICATION";
 export const START_TIMER = "START_TIMER";
 export const STOP_TIMER = "STOP_TIMER";
 export const SET_TIMER_TARGET = "SET_TIMER_TARGET";
-export const UNSET_TIMER_TARGET = "UNSET_TIMER_TARGET";
+export const TOGGLED_SELECT_MODE = "TOGGLED_SELECT_MODE";
+export const SET_TIMER_TYPE = "SET_TIMER_TYPE";

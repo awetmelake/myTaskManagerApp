@@ -1,4 +1,4 @@
-import {} from "../actions/types";
+import {STOP_TIMER, TOGGLE_FOCUS, EDITED_TASK} from "../actions/types";
 
 const initialState = {
   tasks: [],
@@ -11,7 +11,6 @@ export default (state = initialState, action) => {
       if (action.meta.subcollections[0].collection === "tasks") {
         return { ...state, tasks: [...action.payload.ordered] };
       }
-
     case "@@reduxFirestore/DOCUMENT_MODIFIED":
       if (action.meta.subcollections[0].collection === "tasks") {
         return {
@@ -31,7 +30,6 @@ export default (state = initialState, action) => {
           })
         };
       }
-
     case "@@reduxFirestore/DOCUMENT_ADDED":
       if (action.meta.subcollections[0].collection === "tasks") {
         return {
@@ -39,7 +37,6 @@ export default (state = initialState, action) => {
           tasks: [...state.tasks, action.payload.data]
         };
       }
-
     case "@@reduxFirestore/DOCUMENT_REMOVED":
       if (action.meta.subcollections[0].collection === "tasks") {
         return {
@@ -49,10 +46,19 @@ export default (state = initialState, action) => {
           )
         };
       }
-
-    case "EDITED_TASK":
+    case EDITED_TASK:
       return { ...state };
-
+    case TOGGLE_FOCUS:
+      return {
+        ...state,
+        tasks: state.tasks.map(task =>
+          task.id === action.payload
+            ? { ...task, focused: true }
+            : { ...task, focused: false }
+        )
+      };
+    case STOP_TIMER:
+      return { ...state };
     default:
       return state;
   }

@@ -13,6 +13,7 @@ import LogIn from "../Auth/LogIn";
 import SignUp from "../Auth/SignUp";
 import NoMatch from "../NoMatch";
 import Notification from "../Notification";
+import Footer from "../Footer/Footer";
 
 // style
 import "./App.scss";
@@ -35,6 +36,7 @@ const App = ({ auth, isLoading, timer }) => {
         </Switch>
       </div>
       <Notification />
+      <Footer />
     </Router>
   );
 };

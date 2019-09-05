@@ -29,8 +29,19 @@ class AddTask extends Component {
     e.preventDefault();
     this.props.createTask(this.state);
     this.props.toggleVisibility(e);
+    this.resetState();
   };
 
+  resetState = () => {
+    this.setState({
+      title: "",
+      description: "",
+      completeBy: "",
+      color: "yellow",
+      panel: this.props.panel.id,
+      time: null
+    });
+  };
   render() {
     const { toggleVisibility, visibility } = this.props;
     return (

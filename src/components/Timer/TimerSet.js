@@ -13,7 +13,8 @@ import {
   startTimer,
   setTimerTarget,
   stopTimer,
-  setType
+  setTimerType,
+  toggleSelectMode
 } from "../../actions/timerActions";
 
 class TimerSet extends Component {
@@ -29,8 +30,9 @@ class TimerSet extends Component {
       startTimer,
       setTimerTarget,
       stopTimer,
-      setType,
-      tasks
+      setTimerType,
+      tasks,
+      toggleSelectMode
     } = this.props;
     return (
       <Toggle>
@@ -62,7 +64,7 @@ class TimerSet extends Component {
                         value="stopwatch"
                         type="button"
                         name="type"
-                        onClick={e => setType("stopwatch")}
+                        onClick={e => setTimerType("stopwatch")}
                       />
                       <input
                         className={`btn-small white-text ${
@@ -71,19 +73,26 @@ class TimerSet extends Component {
                         value="pomodoro"
                         type="button"
                         name="type"
-                        onClick={e => setType("pomodoro")}
+                        onClick={e => setTimerType("pomodoro")}
                       />
                     </form>
-                    <br/>
+                    <br />
                     <div className="white-text center">
-                      <p>
-                        {timer.timerTarget
-                          ? tasks.filter(task => task.id === timer.timerTarget)[0].title
+                      <p
+                        onClick={e => {
+                          toggleSelectMode();
+                          toggle();
+                        }}
+                        className="pointer"
+                      >
+                        {timer.target
+                          ? tasks.filter(
+                              task => task.id === timer.target
+                            )[0].title
                           : "No selected task"}
-                        </p>
-                      </div>
+                      </p>
+                    </div>
                   </div>
-
 
                   <div
                     className="card-action"
@@ -103,7 +112,6 @@ class TimerSet extends Component {
                       className="btn red"
                       onClick={e => {
                         stopTimer();
-                        toggle();
                       }}
                       disabled={!timer.isRunning}
                     >
@@ -127,5 +135,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { startTimer, setTimerTarget, stopTimer, setType }
+  { startTimer, setTimerTarget, stopTimer, setTimerType, toggleSelectMode }
 )(TimerSet);

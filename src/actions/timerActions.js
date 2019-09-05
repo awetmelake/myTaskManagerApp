@@ -1,14 +1,22 @@
 //firebase
 // import { fb } from "../config/fbConfig";
 //firestore
-import { START_TIMER, STOP_TIMER, SET_TIMER_TARGET } from "./types";
+import {
+  START_TIMER,
+  STOP_TIMER,
+  SET_TIMER_TARGET,
+  TOGGLED_SELECT_MODE,
+  SET_TIMER_TYPE
+} from "./types";
+
+import { setTime } from "./taskActions";
 
 //params task object, the target panel and the target board id/title
 export const startTimer = () => (dispatch, getState) => {
   const timer = getState().timer;
 
-  if (!timer.timerTarget) {
-    dispatch({ type: "TOGGLED_SELECT_MODE" });
+  if (!timer.target) {
+    dispatch({ type: TOGGLED_SELECT_MODE });
   } else {
     dispatch({ type: START_TIMER });
   }
@@ -19,12 +27,15 @@ export const setTimerTarget = taskId => (dispatch, getState) => {
   dispatch({ type: START_TIMER });
 };
 
-export const stopTimer = () => (dispatch, getState) => {
+export const setTimerType = type => (dispatch, getState) => {
+  dispatch({ type: SET_TIMER_TYPE, payload: type });
+};
+
+export const toggleSelectMode = () => (dispatch, getState) => {
+  dispatch({ type: TOGGLED_SELECT_MODE });
+};
+
+export const stopTimer = time => (dispatch, getState) => {
+  dispatch(setTime(time));
   dispatch({ type: STOP_TIMER });
 };
-
-export const setType = type => (dispatch, getState) => {
-  dispatch({ type: "SET_TIMER_TYPE", payload: type });
-};
-
-export const setSettings = type => (dispatch, getState) => {};

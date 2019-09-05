@@ -14,7 +14,7 @@ const DelTask = ({ task, delTask }) => (
         </i>
         {on && (
           <div className="task-info-del-confirm card white red-text">
-            <p>Delete task?</p>
+            <p style={{ textAlign: "center" ,fontSize: '1.1em'}}>Delete task?</p>
             <div className="card-footer">
               <button className="btn-small" onClick={e => delTask(task.id)}>
                 Yes

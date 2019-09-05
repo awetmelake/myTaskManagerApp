@@ -8,19 +8,22 @@ import TaskInfo from "./TaskInfo";
 // actions
 import { setTimerTarget } from "../../actions/timerActions";
 import { toggleSelectMode } from "../../actions/uiActions";
+import { toggleFocus } from "../../actions/taskActions";
 // styles
 import "./Task.scss";
 
 class Task extends Component {
   state = {
     showDesc: false,
-    taskInfo: false,
-    focused: false
+    taskInfo: false
   };
 
   //dotted border on (focus == true)
   getStyle = () => ({
-    border: this.state.focused ? "2px dotted black" : "1px solid black"
+    border:
+      this.props.task.focused && this.props.timerRunning
+        ? "2px solid black"
+        : "1px solid black"
   });
 
   toggleDesc = () => {
@@ -46,14 +49,14 @@ class Task extends Component {
     }
   };
 
-  toggleFocus = () => {
-    this.setState({
-      focused: !this.state.focused
-    });
-  };
-
   render() {
-    const { task, selectMode, setTimerTarget, toggleSelectMode } = this.props;
+    const {
+      task,
+      selectMode,
+      setTimerTarget,
+      toggleSelectMode,
+      toggleFocus
+    } = this.props;
     return (
       <div
         className={`task ${task.color}`}
@@ -61,7 +64,7 @@ class Task extends Component {
         onClick={e => {
           if (selectMode) {
             setTimerTarget(task.id);
-            this.toggleFocus();
+            toggleFocus(task.id);
             toggleSelectMode();
           } else {
             this.toggleTaskInfo(e);
@@ -98,12 +101,13 @@ const mapStateToProps = state => ({
   auth: state.firebase.auth,
   panels: state.panels.panels,
   tasks: state.tasks.tasks,
-  selectMode: state.ui.selectMode
+  selectMode: state.ui.selectMode,
+  timerRunning: state.timer.isRunning
 });
 
 export default compose(
   connect(
     mapStateToProps,
-    { setTimerTarget, toggleSelectMode }
+    { setTimerTarget, toggleSelectMode, toggleFocus }
   )
 )(Task);

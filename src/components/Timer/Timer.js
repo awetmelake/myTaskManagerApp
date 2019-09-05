@@ -7,26 +7,42 @@ import { stopTimer } from "../../actions/timerActions";
 
 class Timer extends Component {
   state = {
-    pomodoroCount: 1500,
+    pomodoroCount: 5,
     stopwatchCount: 0,
-    session: 1500,
-    break: 300
+    break: false,
+    elapsedTime: 0
   };
-  stopwatch;
-  pomodoro;
 
   startPomodoro = () => {
     this.pomodoro = setInterval(() => {
+      if (this.state.pomodoroCount === 0 && !this.state.break) {
+        this.startBreak();
+      }
       this.setState({
-        pomodoroCount: this.state.pomodoroCount - 1
+        pomodoroCount: this.state.pomodoroCount - 1,
+        elapsedTime: this.state.elapsedTime + 1
       });
     }, 1000);
+  };
+
+  startBreak = () => {
+    this.setState({
+      break: true,
+      pomodoroCount: 300
+    });
+  };
+
+  startSession = () => {
+    this.setState({
+      break: false
+    });
   };
 
   startStopwatch = () => {
     this.stopwatch = setInterval(() => {
       this.setState({
-        stopwatchCount: this.state.stopwatchCount + 1
+        stopwatchCount: this.state.stopwatchCount + 1,
+        elapsedTime: this.state.elapsedTime + 1
       });
     }, 1000);
   };
@@ -57,7 +73,7 @@ class Timer extends Component {
 
     return (
       <div className="timer grey lighten-2">
-        <button className="btn red" onClick={stopTimer}></button>
+        <button className="btn red" onClick={e => stopTimer(this.state.elapsedTime)}></button>
         <div style={{ float: "right" }}>
           {type === "pomodoro" ? (
             <p>{this.timeFormat(this.state.pomodoroCount)}</p>

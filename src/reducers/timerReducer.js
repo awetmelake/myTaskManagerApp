@@ -7,23 +7,16 @@ import {
 
 const initialState = {
   isRunning: false,
-  value: 0,
   type: "pomodoro",
-  timerTarget: null,
+  target: null,
   err: null
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case SET_TIMER_TARGET:
-      return !state.isRunning
-        ? { ...state, timerTarget: action.payload }
-        : state;
-    case UNSET_TIMER_TARGET:
-      return {
-        ...state,
-        timerTarget: false
-      };
+      return !state.isRunning ? { ...state, target: action.payload } : state;
+
     case "SET_TIMER_TYPE":
       return {
         ...state,
@@ -37,10 +30,9 @@ export default (state = initialState, action) => {
         err: null
       };
     case STOP_TIMER:
-      return { ...state, isRunning: false };
+      return { ...state, isRunning: false, target: null };
       break;
     default:
       return state;
   }
-
 };

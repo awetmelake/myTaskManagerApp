@@ -2,7 +2,13 @@
 // import { fb } from "../config/fbConfig";
 //firestore
 import { db } from "../config/fbConfig";
-import { EDITED_TASK, CREATED_TASK, DELETED_TASK } from "./types";
+import {
+  EDITED_TASK,
+  CREATED_TASK,
+  DELETED_TASK,
+  TOGGLE_FOCUS,
+  SET_TASK_TIME
+} from "./types";
 
 //params task object, the target panel and the target board id/title
 export const createTask = newTask => (dispatch, getState) => {
@@ -47,9 +53,9 @@ export const editTask = newTask => (dispatch, getState) => {
 
 export const setTime = time => (dispatch, getState) => {
   const userId = getState().firebase.auth.uid;
-  const taskId = getState().timer.timerTarget;
+  const taskId = getState().timer.target;
   const tasks = getState().tasks.tasks;
-  const taskTime = tasks.filter(task => task.id !== taskId)[0].time;
+  let taskTime = tasks.filter(task => task.id !== taskId)[0].time;
   taskTime += time;
 
   db.doc(`users/${userId}/tasks/${taskId}`)
@@ -58,7 +64,11 @@ export const setTime = time => (dispatch, getState) => {
     })
     .then(() => {
       dispatch({
-        type: "SET_TASK_TIME"
+        type: SET_TASK_TIME
       });
     });
+};
+
+export const toggleFocus = taskId => (dispatch, getState) => {
+  dispatch({ type: TOGGLE_FOCUS, payload: taskId });
 };

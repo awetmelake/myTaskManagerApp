@@ -42,13 +42,23 @@ class TaskInfo extends Component {
     });
   };
 
+  pad = num => {
+    return ("0" + num).slice(-2);
+  };
+
+  timeFormat = secs => {
+    var minutes = Math.floor(secs / 60);
+    secs = secs % 60;
+    minutes = minutes % 60;
+    return `${minutes > 0 ? this.pad(minutes) + "m" : ""} ${this.pad(secs)}s`;
+  };
+
   render() {
     const { task, visible, toggleVisibility, delTask } = this.props;
 
     return (
       <Dialog open={visible} onBackdropClick={toggleVisibility}>
         <div className={`card task-info ${this.state.color}`}>
-        
           <div className="card-content">
             <div className="task-info-title">
               Title:
@@ -73,7 +83,7 @@ class TaskInfo extends Component {
             <div className="task-info-title">
               Description:
               {!this.state.editMode ? (
-                <h5> {task.description}</h5>
+                <h5 style={{ fontSize: "1.3em" }} > {task.description}</h5>
               ) : (
                 <div className="form-field">
                   <label htmlFor="panel-title"></label>
@@ -89,6 +99,14 @@ class TaskInfo extends Component {
               )}
             </div>
 
+            <div className="task-info-title">
+              {!this.state.editMode && task.time > 0 && (
+                <div>
+                  Time spent:
+                  {" " + this.timeFormat(task.time)}
+                </div>
+              )}
+            </div>
           </div>
 
           {this.state.editMode && (
