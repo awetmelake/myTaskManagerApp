@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
+import Footer from "../Footer/Footer";
 
 //actions
 import { guestLogin, logIn } from "../../actions/authActions";
@@ -23,83 +24,93 @@ class LogIn extends Component {
   };
 
   render() {
-    if (this.props.auth.uid) {
+    const { auth, authErr } = this.props;
+    if (auth.uid) {
       return <Redirect to="/" />;
     }
     return (
       <div>
-        <br />
-        <br />
-        <div className="row">
-          <div className="col s12 m4 offset-m4 ">
-            <div className="card">
-              <div className="card-content  light-blue darken-4 white-text">
-                <h3>Log In</h3>
+        <div style={{ minHeight: "100vh" }}>
+          <br />
+          <br />
+          <div className="row">
+            <div className="col s12 m4 offset-m4 ">
+              <div className="card">
+                <div className="card-content  light-blue darken-4 white-text">
+                  <h3>Log In</h3>
+                </div>
+
+                <div className="card-content">
+                  <form onSubmit={this.handleSubmit}>
+                    <div className="input-field">
+                      <label htmlFor="email">email</label>
+                      <input
+                        title="email"
+                        onChange={this.handleChange}
+                        type="email"
+                        id="email"
+                      />
+                    </div>
+                    <br />
+
+                    <div className="input-field">
+                      <label htmlFor="password">password</label>
+                      <input
+                        title="password"
+                        onChange={this.handleChange}
+                        type="password"
+                        id="password"
+                      />
+                    </div>
+                    <br />
+
+                    <p className="center red-text">
+                      <i>{authErr}</i>
+                    </p>
+
+                    <div className="input-field">
+                      <button
+                        className="btn-large light-blue darken-4"
+                        type="submit"
+                        style={{ width: "100%" }}
+                      >
+                        Login
+                      </button>
+                    </div>
+                    <br />
+                  </form>
+                </div>
               </div>
-
-              <div className="card-content">
-                <form onSubmit={this.handleSubmit}>
-                  <div className="input-field">
-                    <label htmlFor="email">email</label>
-                    <input
-                      title="email"
-                      onChange={this.handleChange}
-                      type="email"
-                      id="email"
-                    />
-                  </div>
-                  <br />
-
-                  <div className="input-field">
-                    <label htmlFor="password">password</label>
-                    <input
-                      title="password"
-                      onChange={this.handleChange}
-                      type="password"
-                      id="password"
-                    />
-                  </div>
-                  <br />
-
-                  <div className="input-field">
+            </div>
+          </div>
+          <div className="row">
+            <div className="col s12 m4 offset-m4">
+              <div className="card">
+                <div className="card-content">
+                  <Link to="/">
                     <button
-                      className="btn-large light-blue darken-4"
-                      type="submit"
+                      className="btn-large green darken-2 "
                       style={{ width: "100%" }}
+                      onClick={e => this.props.guestLogin()}
                     >
-                      Login
+                      Login as guest
                     </button>
-                  </div>
-                  <br />
-                </form>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col s12 m4 offset-m4">
-            <div className="card">
-              <div className="card-content">
-                <Link to="/">
-                  <button
-                    className="btn-large green darken-2 "
-                    style={{ width: "100%" }}
-                    onClick={e => this.props.guestLogin()}
-                  >
-                    Login as guest
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
+
+        <Footer />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  auth: state.firebase.auth
+  auth: state.firebase.auth,
+  authErr: state.auth.err
 });
 
 export default connect(

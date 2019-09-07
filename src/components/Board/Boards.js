@@ -11,6 +11,7 @@ import Dialog from "@material-ui/core/Dialog";
 // components
 import Spinner from "../Spinner/Spinner";
 import Toggle from "../Toggle/Toggle";
+import Footer from "../Footer/Footer";
 
 // actions
 import { createBoard, deleteBoard } from "../../actions/boardActions";
@@ -111,80 +112,83 @@ class Boards extends Component {
         <Spinner />
       );
     return (
-      <div className="row">
-        <div className="section">
-          <div className="col  s8 offset-s2 ">
-            <Toggle>
-              {({ on, toggle }) => (
-                <div
-                  style={{
-                    position: "relative"
-                  }}
-                >
-                  <h2
+      <div>
+        <div className="row" style={{ minHeight: "100vh" }}>
+          <div className="section">
+            <div className="col  s8 offset-s2 ">
+              <Toggle>
+                {({ on, toggle }) => (
+                  <div
                     style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between"
+                      position: "relative"
                     }}
                   >
-                    Your Boards
-                    <button className="btn right" onClick={toggle}>
-                      New Board
-                    </button>
-                  </h2>
-                  {on && (
-                    <ClickAwayListener onClickAway={toggle}>
-                      <div className="card new-board">
-                        <h5 className="center"> Create new board</h5>
-                        <div className="card-content">
-                          <div className="input-field">
-                            <label htmlFor="newBoardTitle">
-                              {boardErr ? boardErr : "Title"}
-                            </label>
-                            <input
-                              id="newBoardTitle"
-                              type="text"
-                              name="newBoardTitle"
-                              onChange={this.handleChange}
-                              value={this.state.newBoardTitle}
-                            />
+                    <h2
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between"
+                      }}
+                    >
+                      Your Boards
+                      <button className="btn right" onClick={toggle}>
+                        New Board
+                      </button>
+                    </h2>
+                    {on && (
+                      <ClickAwayListener onClickAway={toggle}>
+                        <div className="card new-board">
+                          <h5 className="center"> Create new board</h5>
+                          <div className="card-content">
+                            <div className="input-field">
+                              <label htmlFor="newBoardTitle">
+                                {boardErr ? boardErr : "Title"}
+                              </label>
+                              <input
+                                id="newBoardTitle"
+                                type="text"
+                                name="newBoardTitle"
+                                onChange={this.handleChange}
+                                value={this.state.newBoardTitle}
+                              />
+                            </div>
+                          </div>
+                          <div className="card-action">
+                            <button
+                              className="btn"
+                              onClick={e => {
+                                createBoard(this.state.newBoardTitle);
+                                this.setState({
+                                  newBoardTitle: ""
+                                });
+                              }}
+                            >
+                              Add
+                            </button>
+                            <button className="btn" onClick={toggle}>
+                              Cancel
+                            </button>
                           </div>
                         </div>
-                        <div className="card-action">
-                          <button
-                            className="btn"
-                            onClick={e => {
-                              createBoard(this.state.newBoardTitle);
-                              this.setState({
-                                newBoardTitle: ""
-                              });
-                            }}
-                          >
-                            Add
-                          </button>
-                          <button className="btn" onClick={toggle}>
-                            Cancel
-                          </button>
-                        </div>
-                      </div>
-                    </ClickAwayListener>
-                  )}
-                </div>
-              )}
-            </Toggle>
-            <div className="divider"></div>
-            <br />
+                      </ClickAwayListener>
+                    )}
+                  </div>
+                )}
+              </Toggle>
+              <div className="divider"></div>
+              <br />
+            </div>
           </div>
-        </div>
 
-        {boards.length ? (
-          boardItems
-        ) : (
-          <div className="col s12 m8 offset-m2">
-            <h5 className="left">You haven't created any boards yet</h5>
-          </div>
-        )}
+          {boards.length ? (
+            boardItems
+          ) : (
+            <div className="col s12 m8 offset-m2">
+              <h5 className="left">You haven't created any boards yet</h5>
+            </div>
+          )}
+        </div>
+        <Footer />
       </div>
     );
   }

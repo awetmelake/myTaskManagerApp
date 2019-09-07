@@ -13,7 +13,6 @@ import LogIn from "../Auth/LogIn";
 import SignUp from "../Auth/SignUp";
 import NoMatch from "../NoMatch";
 import Notification from "../Notification";
-import Footer from "../Footer/Footer";
 import ScrollTop from "../ScrollTop";
 
 // style
@@ -38,7 +37,6 @@ const App = ({ auth, isLoading, timer }) => {
           </Switch>
         </div>
         <Notification />
-        <Footer />
       </ScrollTop>
     </Router>
   );

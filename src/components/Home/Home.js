@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { isLoaded } from "react-redux-firebase";
+import Footer from "../Footer/Footer";
 
 import landingImg from "../../images/planning-productivity.jpg";
 import taskflow from "../../images/taskflow.png";
@@ -91,6 +92,7 @@ const Home = ({ auth }) => {
             <button className="btn">Get started</button>
           </Link>
         </div>
+        <Footer />
       </div>
     );
   } else {

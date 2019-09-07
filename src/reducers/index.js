@@ -4,9 +4,9 @@ import { firestoreReducer } from "redux-firestore";
 import boardReducer from "./boardReducer";
 import taskReducer from "./taskReducer";
 import panelReducer from "./panelReducer";
-import userReducer from "./userReducer";
 import timerReducer from "./timerReducer";
 import uiReducer from "./uiReducer";
+import authReducer from "./authReducer";
 
 export default combineReducers({
   firebase: firebaseReducer,
@@ -14,7 +14,7 @@ export default combineReducers({
   boards: boardReducer,
   panels: panelReducer,
   tasks: taskReducer,
-  user: userReducer,
   ui: uiReducer,
   timer: timerReducer,
+  auth: authReducer
 });
