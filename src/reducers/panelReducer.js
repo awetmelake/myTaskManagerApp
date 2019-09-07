@@ -19,6 +19,8 @@ export default (state = initialState, action) => {
     case "@@reduxFirestore/LISTENER_RESPONSE":
       if (action.meta.subcollections[0].collection === "panels") {
         return { ...state, panels: [...action.payload.ordered] };
+      } else {
+        return state;
       }
 
     case "@@reduxFirestore/DOCUMENT_MODIFIED":
@@ -37,6 +39,8 @@ export default (state = initialState, action) => {
             }
           })
         };
+      } else {
+        return state;
       }
 
     case "@@reduxFirestore/DOCUMENT_ADDED":
@@ -45,6 +49,8 @@ export default (state = initialState, action) => {
           ...state,
           panels: [...state.panels, action.payload.data]
         };
+      } else {
+        return state;
       }
     case "@@reduxFirestore/DOCUMENT_REMOVED":
       if (action.meta.subcollections[0].collection === "panels") {
@@ -54,6 +60,8 @@ export default (state = initialState, action) => {
             panel.id === action.payload.data.id ? {} : panel
           )
         };
+      } else {
+        return state;
       }
     default:
       return state;

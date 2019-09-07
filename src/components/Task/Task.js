@@ -34,8 +34,12 @@ class Task extends Component {
 
   toggleTaskInfo = e => {
     if (
-      e.target.className === `task ${this.props.task.color}` &&
-      !this.props.selectMode
+      e.target.className ===
+        `task ${this.props.task.color} task-${
+          this.props.largeNames ? "large-tasks" : ""
+        }` &&
+      !this.props.selectMode &&
+      !this.props.editMode
     ) {
       this.setState({
         taskInfo: true
@@ -55,11 +59,12 @@ class Task extends Component {
       selectMode,
       setTimerTarget,
       toggleSelectMode,
-      toggleFocus
+      toggleFocus,
+      largeNames
     } = this.props;
     return (
       <div
-        className={`task ${task.color}`}
+        className={`task ${task.color} task-${largeNames ? "large-tasks" : ""}`}
         style={this.getStyle()}
         onClick={e => {
           if (selectMode) {
@@ -102,7 +107,9 @@ const mapStateToProps = state => ({
   panels: state.panels.panels,
   tasks: state.tasks.tasks,
   selectMode: state.ui.selectMode,
-  timerRunning: state.timer.isRunning
+  timerRunning: state.timer.isRunning,
+  largeNames: state.tasks.largeNames,
+  editMode: state.boards.editMode
 });
 
 export default compose(

@@ -28,7 +28,7 @@ export default (state = initialState, action) => {
     case CHANGED_BOARD_TITLE:
       return {
         ...state,
-        notification: `Renamed board ${action.payload.from} to ${action.payload.to}`
+        notification: `Renamed board "${action.payload.from}" to "${action.payload.to}"`
       };
     case SET_NOTIFICATION:
       return {
@@ -45,6 +45,8 @@ export default (state = initialState, action) => {
         ...state,
         selectMode: !state.selectMode
       };
+    case "@@reduxFirestore/DOCUMENT_MODIFIED":
+      return { ...state, notification: "Changes saved" };
     default:
       return state;
   }

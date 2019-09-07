@@ -5,6 +5,8 @@ import { isLoaded } from "react-redux-firebase";
 
 import landingImg from "../../images/planning-productivity.jpg";
 import taskflow from "../../images/taskflow.png";
+import timer from "../../images/timer-2.png";
+import task from "../../images/task-1.png";
 
 import "./Home.scss";
 
@@ -13,7 +15,7 @@ const Home = ({ auth }) => {
     return (
       <div className="home grey lighten-4">
         <div className="wrapper">
-          <div className="landing blue lighten-3">
+          <div className="landing blue lighten-1">
             <h2 className="white-text">
               PROJECT MANAGEMENT <u>SIMPLIFIED</u>.
             </h2>
@@ -31,25 +33,58 @@ const Home = ({ auth }) => {
           </div>
         </div>
 
-        <div className="row section section-right" data-aos="fade-left">
+        <div
+          className="row section section-right"
+          data-aos="fade-left"
+          data-aos-duration="2000"
+        >
           <div className="left">
-            <h3>Completely customizable</h3>
-            <h6>Personalize with customizable panel titles and task colors</h6>
+            <h3>Organize Tasks</h3>
+            <h6>
+              Arrange your tasks into panels. Add or delete panels and give them
+              custom titles.
+            </h6>
           </div>
 
-          <img src={taskflow} alt="" className="responsive-img right " />
+          <img src={taskflow} alt="" className=" right " />
         </div>
-        <div className="row section section-left" data-aos="fade-right">
-          <img src={taskflow} alt="" className="responsive-img right " />
-          <div className="left">
-            <h3>Time management</h3>
+
+        <div
+          className="row section section-left"
+          data-aos="fade-right"
+          data-aos-duration="2000"
+        >
+          <img src={timer} alt="" className="left " />
+          <div className="right">
+            <h3>Manage your time</h3>
             <h6>
               Built in pomodoro/stopwatch timer and 'time spent' indicator on
-              tasks allows users to visualize their time management
+              tasks allows users to visualize their time management.
             </h6>
           </div>
         </div>
-        <div className="row  section-last center" data-aos="fade-up">
+
+        <div
+          className="row section section-right"
+          data-aos="fade-left"
+          data-aos-duration="2000"
+        >
+          <div className="left">
+            <h3>Customize tasks</h3>
+            <h6>
+              Add as many new tasks as you want. Edit, save or delete them as
+              you choose. Give task items custom colors and descriptions.
+            </h6>
+          </div>
+
+          <img src={task} alt="" className=" right " />
+        </div>
+
+        <div
+          className="row  section-last center"
+          data-aos="fade-up"
+          data-aos-duration="2000"
+        >
           <h3>Login or sign up to get started</h3>
           <br />
           <Link to="/log-in">

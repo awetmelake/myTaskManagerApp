@@ -7,7 +7,7 @@ import { stopTimer } from "../../actions/timerActions";
 
 class Timer extends Component {
   state = {
-    pomodoroCount: 5,
+    pomodoroCount: 1500,
     stopwatchCount: 0,
     break: false,
     elapsedTime: 0

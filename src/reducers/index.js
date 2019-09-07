@@ -16,5 +16,5 @@ export default combineReducers({
   tasks: taskReducer,
   user: userReducer,
   ui: uiReducer,
-  timer: timerReducer
+  timer: timerReducer,
 });

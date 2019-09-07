@@ -17,7 +17,8 @@ class AddTask extends Component {
     completeBy: "",
     color: "yellow",
     panel: this.props.panel.id,
-    time: null
+    time: 0,
+    visible: true
   };
 
   handleChange = e => {

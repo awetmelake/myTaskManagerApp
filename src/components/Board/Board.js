@@ -5,15 +5,20 @@ import { compose } from "redux";
 import { Redirect } from "react-router-dom";
 
 // actions
-import { createBoard, deleteBoard } from "../../actions/boardActions";
+import {
+  createBoard,
+  deleteBoard,
+  toggleLegend,
+  toggleBoardEditMode
+} from "../../actions/boardActions";
 import { changePanelTitle, createPanel } from "../../actions/panelActions";
 import { toggleSelectMode } from "../../actions/uiActions";
-
 
 // components
 import Spinner from "../Spinner/Spinner";
 import Panel from "../Panel/Panel";
 import BoardHeader from "./BoardHeader";
+import Legend from "./Legend";
 import Toggle from "../Toggle/Toggle";
 
 // styles
@@ -21,14 +26,7 @@ import "./Board.scss";
 
 class Board extends Component {
   state = {
-    editBoardMode: false,
     panelTitle: ""
-  };
-
-  toggleEdit = () => {
-    this.setState({
-      editBoardMode: !this.state.editBoardMode
-    });
   };
 
   handleChange = e => {
@@ -55,9 +53,12 @@ class Board extends Component {
       panelErr,
       selectMode,
       toggleSelectMode,
-      timer
+      timer,
+      toggleLegend,
+      showLegend,
+      editMode,
+      toggleBoardEditMode
     } = this.props;
-    const { editBoardMode } = this.state;
 
     if (!auth.uid) {
       return <Redirect to="/" />;
@@ -75,27 +76,27 @@ class Board extends Component {
           <BoardHeader
             boards={boards}
             board={board}
-            toggleEdit={this.toggleEdit}
-            editBoardMode={editBoardMode}
+            toggleBoardEditMode={toggleBoardEditMode}
+            editMode={editMode}
             timer={timer}
+            toggleLegend={toggleLegend}
           />
 
           <div className="board ">
             <div
-              className={`board-panels board-panels-${
-                editBoardMode ? "edit" : ""
-              }`}
+              className={`board-panels board-panels-${editMode ? "edit" : ""}`}
             >
               {selectMode && (
                 <div className="board-select-mode-popup ">
                   <div className="card grey lighten-2 center">
                     <div className="card-content">
-                      <p className="card-title">
-                        Select task to start timer
-                      </p>
+                      <p className="card-title">Select task to start timer</p>
                     </div>
                     <div className="card-action">
-                      <button className="btn-small red" onClick={toggleSelectMode}>
+                      <button
+                        className="btn-small red"
+                        onClick={toggleSelectMode}
+                      >
                         cancel
                       </button>
                     </div>
@@ -112,12 +113,12 @@ class Board extends Component {
                         panel={panel}
                         key={panel.id}
                         board={board}
-                        editBoardMode={editBoardMode}
+                        editMode={editMode}
                       />
                     )
                 )}
 
-              {editBoardMode && (
+              {editMode && (
                 <div className="valign-wrapper">
                   <Toggle>
                     {({ on, toggle }) => (
@@ -177,6 +178,7 @@ class Board extends Component {
               )}
             </div>
           </div>
+          {showLegend && <Legend />}
         </div>
       );
     }
@@ -190,7 +192,9 @@ const mapStateToProps = state => ({
   showLegend: state.boards.showLegend,
   panelErr: state.panels.err,
   selectMode: state.ui.selectMode,
-  timer: state.timer
+  timer: state.timer,
+  showLegend: state.boards.showLegend,
+  editMode: state.boards.editMode
 });
 
 export default compose(
@@ -201,12 +205,15 @@ export default compose(
       deleteBoard,
       changePanelTitle,
       createPanel,
-      toggleSelectMode
+      toggleSelectMode,
+      toggleLegend,
+      toggleBoardEditMode
     }
   ),
   firestoreConnect(props => [
     `users/${props.auth.uid}/boards`,
     `users/${props.auth.uid}/panels`,
-    `users/${props.auth.uid}/tasks`
+    `users/${props.auth.uid}/tasks`,
+    `users/${props.auth.uid}/legend`
   ])
 )(Board);

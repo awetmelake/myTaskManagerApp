@@ -72,3 +72,11 @@ export const setTime = time => (dispatch, getState) => {
 export const toggleFocus = taskId => (dispatch, getState) => {
   dispatch({ type: TOGGLE_FOCUS, payload: taskId });
 };
+
+export const toggleTaskSize = () => (dispatch, getState) => {
+  dispatch({ type: "TOGGLED_TASK_SIZE" });
+};
+
+export const setTaskFilter = filter => (dispatch, getState) => {
+  dispatch({ type: "SET_TASK_FILTER" , payload: filter});
+};

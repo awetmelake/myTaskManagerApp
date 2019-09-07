@@ -14,6 +14,7 @@ import SignUp from "../Auth/SignUp";
 import NoMatch from "../NoMatch";
 import Notification from "../Notification";
 import Footer from "../Footer/Footer";
+import ScrollTop from "../ScrollTop";
 
 // style
 import "./App.scss";
@@ -24,19 +25,21 @@ const App = ({ auth, isLoading, timer }) => {
   }
   return (
     <Router>
-      <div className="App">
-        <Nav />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/log-in" component={LogIn} />
-          <Route path="/user-boards" component={Boards} />
-          <Route path="/sign-up" component={SignUp} />
-          <Route path="/board_:id" component={Board} />
-          <Route component={NoMatch} />
-        </Switch>
-      </div>
-      <Notification />
-      <Footer />
+      <ScrollTop>
+        <div className="App">
+          <Nav />
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/log-in" component={LogIn} />
+            <Route path="/user-boards" component={Boards} />
+            <Route path="/sign-up" component={SignUp} />
+            <Route path="/board_:id" component={Board} />
+            <Route component={NoMatch} />
+          </Switch>
+        </div>
+        <Notification />
+        <Footer />
+      </ScrollTop>
     </Router>
   );
 };

@@ -122,3 +122,11 @@ export const changeBoardTitle = (newTitle, boardId) => (dispatch, getState) => {
 
   dispatch({});
 };
+
+export const toggleLegend = () => dispatch => {
+  dispatch({ type: "TOGGLED_LEGEND" });
+};
+
+export const toggleBoardEditMode = () => dispatch => {
+  dispatch({ type: "TOGGLE_BOARD_EDIT_MODE" });
+};

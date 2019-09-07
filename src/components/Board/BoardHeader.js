@@ -4,42 +4,42 @@ import Timer from "../Timer/Timer";
 import TimerSet from "../Timer/TimerSet";
 import BoardSet from "./BoardSet";
 
-const BoardHeader = ({ board, toggleEdit, boards, editBoardMode, timer }) => {
+const BoardHeader = ({ board, toggleBoardEditMode, boards, editMode, timer, toggleLegend }) => {
   return (
     <nav className="grey darken-1 board-header ">
       <header className=" left brand-logo">
-        {!editBoardMode ? "" : "layout:"} {board.title}
+        {!editMode ? "" : "layout:"} {board.title}
       </header>
 
-      {editBoardMode && (
+      {editMode && (
         <button
-          onClick={toggleEdit}
+          onClick={toggleBoardEditMode}
           className="btn white-text green toggle-board-edit"
         >
           Done
         </button>
       )}
       <ul className="right">
-        {!editBoardMode ? (
+        {!editMode ? (
           <li>
 
             <TimerSet />
             <a
               title="Edit board"
               className="material-icons"
-              onClick={toggleEdit}
+              onClick={toggleBoardEditMode}
               >
                 edit
               </a>
 
-            <BoardSet />
+            <BoardSet toggleBoardEditMode={toggleBoardEditMode} toggleLegend={toggleLegend}/>
           </li>
         ) : (
           <li>
             <a
               title="Exit edit mode"
               className="material-icons "
-              onClick={toggleEdit}
+              onClick={toggleBoardEditMode}
             >
               close
             </a>

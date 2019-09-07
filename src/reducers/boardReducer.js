@@ -1,13 +1,15 @@
 import {
   CREATED_BOARD,
   DELETED_BOARD,
-  CHANGED_BOARD_TITLE,BOARD_ERR
+  CHANGED_BOARD_TITLE,
+  BOARD_ERR
 } from "../actions/types";
 
 const initialState = {
   boards: [],
-  showLegend: false,
-  err: null
+  showLegend: true,
+  err: null,
+  editMode: false
 };
 
 export default (state = initialState, action) => {
@@ -20,10 +22,15 @@ export default (state = initialState, action) => {
       return { state };
     case BOARD_ERR:
       return { ...state, err: action.payload };
+    case "TOGGLE_BOARD_EDIT_MODE":
+      return { ...state, editMode: !state.editMode };
 
     case "@@reduxFirestore/LISTENER_RESPONSE":
       if (action.meta.subcollections[0].collection === "boards") {
         return { ...state, boards: [...action.payload.ordered] };
+      }
+      else {
+        return state;
       }
 
     case "@@reduxFirestore/DOCUMENT_MODIFIED":
@@ -42,6 +49,8 @@ export default (state = initialState, action) => {
             }
           })
         };
+      } else {
+        return state;
       }
 
     case "@@reduxFirestore/DOCUMENT_ADDED":
@@ -50,6 +59,9 @@ export default (state = initialState, action) => {
           ...state,
           boards: [...state.boards, action.payload.data]
         };
+      }
+      else {
+        return state;
       }
     case "@@reduxFirestore/DOCUMENT_REMOVED":
       if (action.meta.subcollections[0].collection === "boards") {
@@ -60,6 +72,15 @@ export default (state = initialState, action) => {
           )
         };
       }
+      else {
+        return state;
+      }
+    case "TOGGLED_LEGEND":
+      return {
+        ...state,
+        showLegend: !state.showLegend
+      };
+
     default:
       return state;
   }

@@ -81,15 +81,16 @@ class Panel extends Component {
       deletePanel,
       tasks,
       createTask,
-      editBoardMode,
+      editMode,
       moveLeft,
+      filter,
       moveRight
     } = this.props;
     const { editTitleMode, title } = this.state;
     return (
       <div
         className="panel white "
-        style={editBoardMode ? { flexGrow: 0 } : { flexGrow: 1 }}
+        style={editMode ? { flexGrow: 0 } : { flexGrow: 1 }}
       >
         <div className="panel-header  grey lighten-2">
           <div className="panel-title">
@@ -121,7 +122,7 @@ class Panel extends Component {
             )}
           </div>
 
-          {!editBoardMode ? (
+          {!editMode ? (
             <i
               className="material-icons add-task-btn"
               id="toggleAddTask"
@@ -176,10 +177,17 @@ class Panel extends Component {
         </div>
 
         <div className="panel-tasks">
-          {tasks.map(
-            task =>
-              panel.id === task.panel && <Task task={task} key={task.id} />
-          )}
+          {tasks.map(task => {
+            if (panel.id === task.panel) {
+              if (filter !== null) {
+                if (task.color.includes(filter)) {
+                  return <Task task={task} key={task.id} />;
+                }
+              } else {
+                return <Task task={task} key={task.id} />;
+              }
+            }
+          })}
         </div>
 
         <DelPanel
@@ -204,7 +212,8 @@ class Panel extends Component {
 const mapStateToProps = state => ({
   auth: state.firebase.auth,
   boards: state.boards.boards,
-  tasks: state.tasks.tasks
+  tasks: state.tasks.tasks,
+  filter: state.tasks.filter
 });
 
 export default compose(

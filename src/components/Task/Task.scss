@@ -1,11 +1,16 @@
 .task {
-  font-size: 1.2em;
   padding: 0.5em;
   margin: 0.5em;
   border-radius: 3px;
   font-family: "Roboto";
   color: black;
   font-size: 12px;
+
+  &-large-tasks {
+    .task-title {
+      font-size: 15px;
+    }
+  }
 
   h5 {
     margin: 0;

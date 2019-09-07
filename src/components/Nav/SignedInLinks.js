@@ -9,10 +9,6 @@ const SignedInLinks = ({ signOut }) => {
       </li>
 
       <li>
-        <NavLink to="/settings">Settings</NavLink>
-      </li>
-
-      <li>
         <NavLink to="/" onClick={signOut}>
           Sign out
         </NavLink>

@@ -1,15 +1,20 @@
-import {STOP_TIMER, TOGGLE_FOCUS, EDITED_TASK} from "../actions/types";
+import { STOP_TIMER, TOGGLE_FOCUS, EDITED_TASK } from "../actions/types";
 
 const initialState = {
   tasks: [],
-  filter: ""
+  filter: null,
+  largeNames: false
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case "TOGGLED_TASK_SIZE":
+      return { ...state, largeNames: !state.largeNames };
     case "@@reduxFirestore/LISTENER_RESPONSE":
       if (action.meta.subcollections[0].collection === "tasks") {
         return { ...state, tasks: [...action.payload.ordered] };
+      } else {
+        return state;
       }
     case "@@reduxFirestore/DOCUMENT_MODIFIED":
       if (action.meta.subcollections[0].collection === "tasks") {
@@ -29,6 +34,8 @@ export default (state = initialState, action) => {
             }
           })
         };
+      } else {
+        return state;
       }
     case "@@reduxFirestore/DOCUMENT_ADDED":
       if (action.meta.subcollections[0].collection === "tasks") {
@@ -36,6 +43,8 @@ export default (state = initialState, action) => {
           ...state,
           tasks: [...state.tasks, action.payload.data]
         };
+      } else {
+        return state;
       }
     case "@@reduxFirestore/DOCUMENT_REMOVED":
       if (action.meta.subcollections[0].collection === "tasks") {
@@ -45,6 +54,8 @@ export default (state = initialState, action) => {
             task.id === action.payload.data.id ? {} : task
           )
         };
+      } else {
+        return state;
       }
     case EDITED_TASK:
       return { ...state };
@@ -56,6 +67,11 @@ export default (state = initialState, action) => {
             ? { ...task, focused: true }
             : { ...task, focused: false }
         )
+      };
+    case "SET_TASK_FILTER":
+      return {
+        ...state,
+        filter: action.payload
       };
     case STOP_TIMER:
       return { ...state };
