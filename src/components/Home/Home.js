@@ -22,10 +22,8 @@ const Home = ({ auth }) => {
                 PROJECT MANAGEMENT <u>SIMPLIFIED</u>.
               </h2>
 
-              <p className="center grey-text text-darken-4">
-                <i>
+              <p className="center white-text">
                   A task management app that helps you maximize productivity
-                </i>
               </p>
               <div
                 className="landing-img"
