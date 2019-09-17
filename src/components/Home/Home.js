@@ -28,7 +28,7 @@ const Home = ({ auth }) => {
                 </i>
               </p>
               <div
-                className="landing-img row"
+                className="landing-img"
               >
                 <img src={landingImg} alt="" className="responsive-img" />
               </div>

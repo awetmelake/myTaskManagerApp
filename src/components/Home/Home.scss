@@ -8,6 +8,8 @@
 
   .row {
     padding-top: 50px;
+    margin-bottom: 100px;
+    // border-bottom: 2px solid grey;
 
     .landing {
       min-height: 800px;
@@ -33,18 +35,22 @@
       overflow: hidden;
       position: relative;
       top: 40px;
-      img{
+      border-bottom: 2px solid grey;
+
+      img {
         max-height: 100%;
+        border-top: 2px solid grey;
       }
     }
   }
 
   .section {
     width: 90%;
+    height: 500px;
     display: grid;
     align-items: center;
     grid-gap: 2em;
-    margin: 0 auto 10em;
+    margin: auto;
   }
 
   .section-right {
