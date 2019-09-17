@@ -1,4 +1,4 @@
-import { STOP_TIMER, TOGGLE_FOCUS, EDITED_TASK } from "../actions/types";
+import { STOP_TIMER, TOGGLED_TASK_FOCUS, EDITED_TASK } from "../actions/types";
 
 const initialState = {
   tasks: [],
@@ -59,13 +59,14 @@ export default (state = initialState, action) => {
       }
     case EDITED_TASK:
       return { ...state };
-    case TOGGLE_FOCUS:
+    case TOGGLED_TASK_FOCUS:
       return {
         ...state,
         tasks: state.tasks.map(task =>
           task.id === action.payload
-            ? { ...task, focused: true }
+            ? { ...task, focused: !task.focused }
             : { ...task, focused: false }
+
         )
       };
     case "SET_TASK_FILTER":

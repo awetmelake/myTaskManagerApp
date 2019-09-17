@@ -20,10 +20,10 @@ class Task extends Component {
 
   //dotted border on (focus == true)
   getStyle = () => ({
-    border:
+    boxShadow:
       this.props.task.focused && this.props.timerRunning
-        ? "2px solid black"
-        : "1px solid black"
+        ? "2px 2px 5px black"
+        : "0 0 0 white"
   });
 
   toggleDesc = () => {

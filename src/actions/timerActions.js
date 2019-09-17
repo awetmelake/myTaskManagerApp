@@ -9,7 +9,7 @@ import {
   SET_TIMER_TYPE
 } from "./types";
 
-import { setTime } from "./taskActions";
+import { setTime, toggleFocus } from "./taskActions";
 
 //params task object, the target panel and the target board id/title
 export const startTimer = () => (dispatch, getState) => {
@@ -36,6 +36,9 @@ export const toggleSelectMode = () => (dispatch, getState) => {
 };
 
 export const stopTimer = time => (dispatch, getState) => {
+  console.log(time)
+  const taskId = getState().timer.target
   dispatch(setTime(time));
   dispatch({ type: STOP_TIMER });
+  dispatch(toggleFocus(taskId));
 };

@@ -15,7 +15,7 @@ export const CREATED_TASK = "CREATED_TASK";
 export const DELETED_TASK = "DELETED_TASK";
 export const EDITED_TASK = "EDITED_TASK";
 export const SET_TASK_TIME = "SET_TASK_TIME";
-export const TOGGLE_FOCUS = "TOGGLE_FOCUS";
+export const TOGGLED_TASK_FOCUS = "TOGGLED_TASK_FOCUS";
 
 // auth
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";

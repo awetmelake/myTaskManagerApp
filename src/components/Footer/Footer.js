@@ -52,10 +52,10 @@ class Footer extends Component {
                 Portfolio:
                 <a
                   className="grey-text text-lighten-3"
-                  href="http://www.awettech.com"
+                  href="https://www.awettech.com"
                 >
                   {" "}
-                  www.awettech.com
+                  https://www.awettech.com
                 </a>
               </p>
               <p className="grey-text text-lighten-4" data-aos="fade-left" data-aos-delay="300">
@@ -64,7 +64,7 @@ class Footer extends Component {
               <p className="grey-text text-lighten-4" data-aos="fade-left" data-aos-delay="400">
                 View source:{" "}
                 <a href="https://github.com/awetmelake/myTaskManagerApp">
-                  github.com/awetmelake/myTaskManagerApp
+                  https://github.com/awetmelake/myTaskManagerApp
                 </a>
               </p>
             </div>
@@ -72,8 +72,6 @@ class Footer extends Component {
         </div>
         <div
           className="footer-copyright"
-          data-aos="fade-left"
-          data-aos-delay="200"
         >
           <div className="container">
             © 2019 <br /> Made by Awet Melake

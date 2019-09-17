@@ -6,7 +6,7 @@ import {
   EDITED_TASK,
   CREATED_TASK,
   DELETED_TASK,
-  TOGGLE_FOCUS,
+  TOGGLED_TASK_FOCUS,
   SET_TASK_TIME
 } from "./types";
 
@@ -64,13 +64,13 @@ export const setTime = time => (dispatch, getState) => {
     })
     .then(() => {
       dispatch({
-        type: SET_TASK_TIME
+        type: SET_TASK_TIME, payload: taskTime
       });
     });
 };
 
 export const toggleFocus = taskId => (dispatch, getState) => {
-  dispatch({ type: TOGGLE_FOCUS, payload: taskId });
+  dispatch({ type: TOGGLED_TASK_FOCUS, payload: taskId });
 };
 
 export const toggleTaskSize = () => (dispatch, getState) => {

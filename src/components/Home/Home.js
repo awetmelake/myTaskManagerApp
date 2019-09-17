@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { isLoaded } from "react-redux-firebase";
 import Footer from "../Footer/Footer";
 
-import landingImg from "../../images/planning-productivity.jpg";
+import landingImg from "../../images/agenda-concept-development-7376.jpg";
 import taskflow from "../../images/taskflow.png";
 import timer from "../../images/timer-2.png";
 import task from "../../images/task-1.png";
@@ -15,21 +15,23 @@ const Home = ({ auth }) => {
   if (!auth.uid) {
     return (
       <div className="home grey lighten-4">
-        <div className="wrapper">
-          <div className="landing blue lighten-1">
-            <h2 className="white-text">
-              PROJECT MANAGEMENT <u>SIMPLIFIED</u>.
-            </h2>
+        <div className="row blue darken-2">
+          <div className="wrapper">
+            <div className="landing ">
+              <h2 className="white-text">
+                PROJECT MANAGEMENT <u>SIMPLIFIED</u>.
+              </h2>
 
-            <p className="center">
-              <i>A task management app that helps you maximize productivity</i>
-            </p>
-            <div
-              className="landing-img row"
-              data-aos="fade-in"
-              data-aos-duration="2000"
-            >
-              <img src={landingImg} alt="" className="responsive-img" />
+              <p className="center grey-text text-darken-4">
+                <i>
+                  A task management app that helps you maximize productivity
+                </i>
+              </p>
+              <div
+                className="landing-img row"
+              >
+                <img src={landingImg} alt="" className="responsive-img" />
+              </div>
             </div>
           </div>
         </div>
