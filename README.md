@@ -38,19 +38,15 @@ export const rrfProps = {
  #### Your database should look like this:
  ```
  collection: users
-  document: *user1*
-    collection:
-     boards
-      document:
-        *boardId*
-     panels
-      documents:
-        *panelId*
-     tasks
-      documents:
-        *taskId*
+  document: userId
+    collection: boards
+      document: boardId
+    collection: panels
+      document: panelId
+    collection: tasks
+      document: taskId
         
-  document: *user2*
+  document: user2
     ...
   ```
 5. Run 'npm start', Have fun :)
