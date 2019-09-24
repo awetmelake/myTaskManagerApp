@@ -34,6 +34,7 @@ export const rrfProps = {
 };
 ```
  Move CRUD operations to the back-end using Express to call Firebase functions if you want a more secure setup.
+ 
 4. Set up your collections, enable authorization within your firebase console. Set them up how ever you like and change the CRUD actions within src/actions to match
  #### Your database should look like this:
  ```
