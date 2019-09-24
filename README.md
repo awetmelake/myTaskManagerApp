@@ -4,7 +4,37 @@ React app that lets users organize their tasks. Users can sign in and create tas
 # How to run the app 
 1. Fork/clone repo
 2. Install dependencies with "npm install" from within the root
-3. Create a folder 'config' in root with a file 'fbConfig.js' and put your firebase configuration data in there, see Firebase project panel for more info. You need to connect your Redux store to your firebase app. Move CRUD operations to the back-end with Express and Firebase functions if you want a more secure setup.
+3. Create a folder 'config' in root with a file 'fbConfig.js' and put your firebase configuration data in there, see Firebase project panel for more info. Connect your Redux store to your firebase app.
+```
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore"; // <- needed if using firestore
+import { createFirestoreInstance } from "redux-firestore";
+import store from "../store";
+
+var firebaseConfig = {
+// Your web app's Firebase configuration here
+};
+
+// Initialize Firebase
+export const fb = firebase.initializeApp(firebaseConfig);
+export const db = firebase.firestore();
+
+const rrfConfig = {
+  userProfile: "users", //Pass in the collection where user data is stored, change to which ever collection you use
+  useFirestoreForProfile: true 
+};
+
+export const rrfProps = {
+  firebase,
+  config: rrfConfig,
+  dispatch: store.dispatch,
+  createFirestoreInstance // <- needed if using firestore
+};
+```
+ Move CRUD operations to the back-end with Express and Firebase functions if you want a more secure setup.
+
+4. Run 'npm start', Have fun :)
 
 ## Dependencies
 * React
@@ -19,4 +49,4 @@ React app that lets users organize their tasks. Users can sign in and create tas
 * Node Sass
 
 ## What the app looks like 
-![alt-text](https://github.com/awetmelake/myTaskManagerApp/blob/master/chrome_2019-09-24_15-07-10.png)
+![Markdown Logo](https://github.com/awetmelake/myTaskManagerApp/blob/master/chrome_2019-09-24_15-07-10.png)
