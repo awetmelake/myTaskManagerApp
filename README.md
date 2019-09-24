@@ -4,7 +4,8 @@ React app that lets users organize their tasks. Users can sign in and create tas
 # How to run the app 
 1. Fork/clone repo
 2. Install dependencies with "npm install" from within the root
-3. Create a folder 'config' in root with a file 'fbConfig.js' and put your firebase configuration data in there, see Firebase project panel for more info. Connect your Redux store to your firebase app.
+3. Create a folder 'config' in /src with a file 'fbConfig.js' and put your firebase configuration data in there, see Firebase console for more info. Connect your Redux store to your firebase app.
+#### src/config/fbConfig.js :
 ```
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -13,7 +14,7 @@ import { createFirestoreInstance } from "redux-firestore";
 import store from "../store";
 
 var firebaseConfig = {
-// Your web app's Firebase configuration here
+// Your web app's Firebase configuration here, from firebase console
 };
 
 // Initialize Firebase
@@ -32,9 +33,25 @@ export const rrfProps = {
   createFirestoreInstance // <- needed if using firestore
 };
 ```
- Move CRUD operations to the back-end with Express and Firebase functions if you want a more secure setup.
+ Move CRUD operations to the back-end using Express to call Firebase functions if you want a more secure setup.
+4. Set up your collections, enable authorization within your firebase console. Set them up how ever you like and change the CRUD actions within src/actions to match
+ #### Your database should look like this:
+ collection: users
+  document: *user1*
+    collection:
+     boards
+      document:
+        *boardId*
+     panels
+      documents:
+        *panelId*
+     tasks
+      documents:
+        *taskId*
+  document: *user2*
+    ...
 
-4. Run 'npm start', Have fun :)
+5. Run 'npm start', Have fun :)
 
 ## Dependencies
 * React
