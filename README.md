@@ -1,11 +1,11 @@
 # Taskflow
 React app that lets users organize their tasks.
 
-# How to run the app 
+## How to run the app 
 1. Fork/clone repo
 2. Install dependencies with "npm install" from within the root
 3. Create a folder 'config' in /src with a file 'fbConfig.js' and put your firebase configuration data in there, see Firebase console for more info. Connect your Redux store to your firebase app.
-#### src/config/fbConfig.js :
+##### src/config/fbConfig.js :
 ```
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -36,7 +36,7 @@ export const rrfProps = {
  Move CRUD operations to the back-end using Express to call Firebase functions if you want a more secure setup.
  
 4. Set up your collections, enable authorization within your firebase console. Set them up how ever you like and change the CRUD actions within src/actions to match
- #### Your database should look like this:
+ ##### Your database should look like this:
  ```
  collection: users
   document: userId
@@ -52,7 +52,7 @@ export const rrfProps = {
   ```
 5. Run 'npm start', Have fun :)
 
-## Features
+### Features
 * Sign in as guest or create an account, authorization provided by Firebase
 * Create boards with custom names
 * Within boards, create panels with custom titles and the ability to change their order
@@ -61,7 +61,7 @@ export const rrfProps = {
 * Toggleable color legend. Filter tasks by color.
 * Changes are updated live, no refresh necessary 
 
-## Dependencies
+### Dependencies
 * React
 * Redux
 * Redux-thunk
