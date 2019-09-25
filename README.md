@@ -1,5 +1,5 @@
 # Taskflow
-React app that lets users organize their tasks. Users can sign in and create task boards that contain sections/panels that contain tasks. Customize board, panel, and task names and their order. Create tasks with custom descriptions and colors signifying whatever you want then to, ability to filter tasks by color. Also includes the ability to select a task and set a timer - pomodoro/stopwatch. When the timer is stopped the elapsed time is added to the tasks "time spent" property, which you can see when you click on the task, for time tracking. Uses Firebase for authentication and Firestore for storing user info with realtime update functionality. React router handles routing and 404 pages.
+React app that lets users organize their tasks.
 
 # How to run the app 
 1. Fork/clone repo
@@ -51,6 +51,15 @@ export const rrfProps = {
     ...
   ```
 5. Run 'npm start', Have fun :)
+
+## Features
+* Sign in as guest or create an account, authorization provided by Firebase
+* Create boards with custom names
+* Within boards, create panels with custom titles and the ability to change their order
+* Within panels, create tasks with custom titles, colors, and descriptions
+* Timer for tracking time spent on tasks. Choose the type of timer you want to use (Pomodoro, Stopwatch) and select a task to work on. Once the timer is stopped, the time is added to the tasks 'time spent' property. Use it to track total time spent on task.
+* Toggleable color legend. Filter tasks by color.
+* Changes are updated live, no refresh necessary 
 
 ## Dependencies
 * React
