@@ -7,7 +7,7 @@ import Footer from "../Footer/Footer";
 import landingImg from "../../images/agenda-concept-development-7376.jpg";
 import taskflow from "../../images/taskflow.png";
 import timer from "../../images/timer-2.png";
-import task from "../../images/task-1.png";
+import task from "../../images/chrome_2019-09-06_11-24-35.png";
 
 import "./Home.scss";
 
