@@ -23,7 +23,7 @@ const DelPanel = ({
         </p>
       </div>
       <div className="modal-footer">
-        <button className="modal-close btn-flat " onClick={toggleVisibility}>
+        <button className=" z-depth-0 modal-close btn-flat " onClick={toggleVisibility}>
           Nevermind!
         </button>
         <button

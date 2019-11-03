@@ -111,10 +111,10 @@ class Panel extends Component {
                 />
                 <br />
                 <div className="container center">
-                  <button className="btn-small" onClick={this.handleSubmit}>
+                  <button className=" z-depth-0 btn-small" onClick={this.handleSubmit}>
                     Save
                   </button>
-                  <button className="btn-small" onClick={this.toggleEdit}>
+                  <button className="red z-depth-0 btn-small" onClick={this.toggleEdit}>
                     Cancel
                   </button>
                 </div>
@@ -127,7 +127,7 @@ class Panel extends Component {
               className="material-icons add-task-btn"
               id="toggleAddTask"
               onClick={this.toggleAddTask}
-              title="Create new panel"
+              title="Create new task"
             >
               add
             </i>
