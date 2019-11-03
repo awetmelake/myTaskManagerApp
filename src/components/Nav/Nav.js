@@ -22,10 +22,10 @@ class Nav extends Component {
       <SignedOutLinks />
     );
     return (
-      <div className="navbar-fixed main-nav">
-        <nav className="grey darken-4">
-          <div className="nav-wrapper">
-            <header className="brand-logo center" >
+      <div className="navbar main-nav" >
+        <nav className="grey darken-4 z-depth-0" id='main-nav'>
+          <div className="nav-wrapper z-depth-0">
+            <header className="brand-logo center" id="brand-logo" >
               <NavLink to="/">TASKFLOW</NavLink>
             </header>
             {links}
