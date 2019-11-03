@@ -73,7 +73,7 @@ class Timer extends Component {
 
     return (
       <div className="timer grey lighten-2">
-        <button className="btn red" onClick={e => stopTimer(this.state.elapsedTime)}></button>
+        <button className="z-depth-0 btn red" onClick={e => stopTimer(this.state.elapsedTime)}></button>
         <div style={{ float: "right" }}>
           {type === "pomodoro" ? (
             <p>{this.timeFormat(this.state.pomodoroCount)}</p>
