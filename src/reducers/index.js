@@ -1,6 +1,12 @@
-import { combineReducers } from "redux";
-import { firebaseReducer } from "react-redux-firebase";
-import { firestoreReducer } from "redux-firestore";
+import {
+  combineReducers
+} from "redux";
+import {
+  firebaseReducer
+} from "react-redux-firebase";
+import {
+  firestoreReducer
+} from "redux-firestore";
 import boardReducer from "./boardReducer";
 import taskReducer from "./taskReducer";
 import panelReducer from "./panelReducer";
@@ -8,7 +14,7 @@ import timerReducer from "./timerReducer";
 import uiReducer from "./uiReducer";
 import authReducer from "./authReducer";
 
-export default combineReducers({
+const rootReducer = combineReducers({
   firebase: firebaseReducer,
   firestore: firestoreReducer,
   boards: boardReducer,
@@ -18,3 +24,5 @@ export default combineReducers({
   timer: timerReducer,
   auth: authReducer
 });
+
+export default rootReducer;
