@@ -13,13 +13,13 @@ const DelTask = ({ task, delTask }) => (
           delete
         </i>
         {on && (
-          <div className="task-info-del-confirm card white red-text">
+          <div className="task-info-del-confirm card white ">
             <p style={{ textAlign: "center" ,fontSize: '1.1em'}}>Delete task?</p>
             <div className="card-footer">
-              <button className="btn-small" onClick={e => delTask(task.id)}>
+              <button className=" z-depth-0 btn-small z-depth-0 red" onClick={e => delTask(task.id)}>
                 Yes
               </button>
-              <button className="btn-small" onClick={toggle}>
+              <button className=" z-depth-0 btn-small z-depth-0" onClick={toggle}>
                 No
               </button>
             </div>

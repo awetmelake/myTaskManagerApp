@@ -51,7 +51,7 @@ class TaskHeader extends Component {
               >
                 save
               </button>
-              <button className="btn" name="cancel" onClick={this.handleSubmit}>
+              <button className=" z-depth-0 btn" name="cancel" onClick={this.handleSubmit}>
                 cancel
               </button>
             </div>
@@ -63,7 +63,7 @@ class TaskHeader extends Component {
           <Toggle>
             {({ on, toggle }) => (
               <>
-                <button className="btn task-header-setting-btn" onClick={toggle}>
+                <button className=" z-depth-0 btn task-header-setting-btn" onClick={toggle}>
                   ...
                 </button>
                 {on && !this.state.editMode && (

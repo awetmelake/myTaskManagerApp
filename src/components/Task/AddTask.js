@@ -73,10 +73,10 @@ class AddTask extends Component {
             <br />
 
             <div className="container center">
-              <button className="btn grey darken-1" onClick={this.handleSubmit}>
+              <button className=" z-depth-0 btn grey darken-1" onClick={this.handleSubmit}>
                 Save
               </button>
-              <button className="btn grey darken-1" onClick={toggleVisibility}>
+              <button className=" z-depth-0 btn grey darken-1" onClick={toggleVisibility}>
                 Cancel
               </button>
             </div>

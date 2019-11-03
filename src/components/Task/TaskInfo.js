@@ -81,7 +81,9 @@ class TaskInfo extends Component {
             </div>
 
             <div className="task-info-title">
-              Description:
+              {task.description || this.state.editMode ?
+                "Description:" : null
+              }
               {!this.state.editMode ? (
                 <h5 style={{ fontSize: "1.3em" }} > {task.description}</h5>
               ) : (
@@ -117,14 +119,14 @@ class TaskInfo extends Component {
             <div className="center">
               <button
                 type="submit"
-                className="btn-small grey darken-1"
+                className="btn-small darken-1 z-depth-0 green"
                 onClick={this.handleSubmit}
               >
                 save changes
               </button>
               <button
                 onClick={this.toggleEdit}
-                className="btn-small grey darken-1"
+                className="btn-small darken-1 z-depth-0 red"
               >
                 cancel
               </button>
