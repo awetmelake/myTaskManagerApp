@@ -50,7 +50,7 @@ class Boards extends Component {
         boards.map(board => (
           <div className="row" key={board.id}>
             <div className="col s8 offset-s2 ">
-              <div className="card grey darken-2">
+              <div className="card grey darken-2 z-depth-0">
                 <div className="card-content white-text">
                   <span className="card-title">{board.title}</span>
 
@@ -155,7 +155,7 @@ class Boards extends Component {
                           </div>
                           <div className="card-action">
                             <button
-                              className="btn"
+                              className="btn z-depth-0"
                               onClick={e => {
                                 createBoard(this.state.newBoardTitle);
                                 this.setState({
@@ -165,7 +165,7 @@ class Boards extends Component {
                             >
                               Add
                             </button>
-                            <button className=" z-depth-0 btn" onClick={toggle}>
+                            <button className="red z-depth-0 btn" onClick={toggle}>
                               Cancel
                             </button>
                           </div>
