@@ -28,7 +28,7 @@ const BoardSet = ({
 
         <Drawer open={on} onClose={toggle} anchor="right">
           <div className="menu-header grey lighten-1">
-            <h6 className="center">Menu</h6>
+            <h6 className="center"><strong>Menu</strong></h6>
             <div className="divider black"></div>
           </div>
 

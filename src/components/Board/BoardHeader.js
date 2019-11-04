@@ -6,7 +6,7 @@ import BoardSet from "./BoardSet";
 
 const BoardHeader = ({ board, toggleBoardEditMode, boards, editMode, timer, toggleLegend }) => {
   return (
-    <nav className="grey darken-1 board-header ">
+    <nav className="grey darken-1 board-header z-depth-0 ">
       <header className=" left brand-logo">
         {!editMode ? "" : "layout:"} {board.title}
       </header>
@@ -14,7 +14,7 @@ const BoardHeader = ({ board, toggleBoardEditMode, boards, editMode, timer, togg
       {editMode && (
         <button
           onClick={toggleBoardEditMode}
-          className="btn white-text green toggle-board-edit"
+          className="btn white-text green toggle-board-edit z-depth-0"
         >
           Done
         </button>

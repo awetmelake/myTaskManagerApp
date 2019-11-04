@@ -155,7 +155,7 @@ class Board extends Component {
                                   Add
                                 </button>
 
-                                <button className="btn-small" onClick={toggle}>
+                                <button className=" z-depth-0 btn-small" onClick={toggle}>
                                   Cancel
                                 </button>
                               </div>

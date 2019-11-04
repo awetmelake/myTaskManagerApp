@@ -131,7 +131,7 @@ class Boards extends Component {
                       }}
                     >
                       Your Boards
-                      <button className="btn right" onClick={toggle}>
+                      <button className=" z-depth-0 btn right z-depth-0" onClick={toggle}>
                         New Board
                       </button>
                     </h2>
@@ -165,7 +165,7 @@ class Boards extends Component {
                             >
                               Add
                             </button>
-                            <button className="btn" onClick={toggle}>
+                            <button className=" z-depth-0 btn" onClick={toggle}>
                               Cancel
                             </button>
                           </div>

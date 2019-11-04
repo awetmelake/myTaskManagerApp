@@ -1,7 +1,10 @@
+@import '../../styles.scss';
+
 .board {
   display: flex;
   flex-direction: column;
   padding-top: 50px;
+  overflow-x: scroll;
 
   &-settings-drawer {
     width: 250px;
@@ -119,16 +122,22 @@
   }
 
   &-color-legend {
-    width: 100%;
     display: flex !important;
     flex-direction: row;
-    border: 1px solid black;
+    justify-content: space-between;
     margin: 0 auto;
+    width: 99%;
+    position: absolute;
+    bottom: 1px;
+    left: 6px;
     li {
+      padding: .3em 0 .3em;
       float: left;
-      width: 20%;
+      width: 19.9%;
       text-align: center;
       font-size: 14px;
+      border: 1px solid grey;
+      border-radius: 5px;
     }
   }
 }
