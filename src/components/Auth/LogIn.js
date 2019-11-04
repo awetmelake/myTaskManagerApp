@@ -96,10 +96,9 @@ class LogIn extends Component {
                     <p style={{ paddingBottom: ".5em" }} class="grey-text">
                       New here?
                     </p>
-                    <Link to="/">
+                    <Link to="/sign-up">
                       <button
                         className="btn blue darken-2 z-depth-0"
-                        onClick={e => this.props.guestLogin()}
                       >
                         Sign up
                       </button>
