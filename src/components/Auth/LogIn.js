@@ -29,12 +29,12 @@ class LogIn extends Component {
       return <Redirect to="/" />;
     }
     return (
-      <div class="blue darken-3">
+      <div className="blue darken-3">
         <div className="row" style={{minHeight: "92vh"}}>
           <div className="col s12 m8 offset-m2 l4 offset-l4" style={{ marginTop: "4em"}}>
             <div className="card">
               <div className="card-content center">
-                <h3 class="center">Log In</h3>
+                <h3 className="center">Log In</h3>
                 <br />
                 <form onSubmit={this.handleSubmit}>
                   <div className="input-field">
@@ -79,7 +79,7 @@ class LogIn extends Component {
                   <div className="col s12 ">
                     <div className="left">
 
-                    <p style={{ paddingBottom: ".5em" }} class="grey-text">
+                    <p style={{ paddingBottom: ".5em" }} className="grey-text">
                       Just looking around?
                     </p>
                     <Link to="/">
@@ -92,8 +92,8 @@ class LogIn extends Component {
                       <div className="clearfix"></div>
                     </Link>
                   </div>
-                  <div class="right">
-                    <p style={{ paddingBottom: ".5em" }} class="grey-text">
+                  <div className="right">
+                    <p style={{ paddingBottom: ".5em" }} className="grey-text">
                       New here?
                     </p>
                     <Link to="/sign-up">

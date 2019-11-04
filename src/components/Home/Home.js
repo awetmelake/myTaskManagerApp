@@ -15,7 +15,7 @@ const Home = ({ auth }) => {
   if (!auth.uid) {
     return (
       <div className="home grey lighten-4">
-        <div className="row blue darken-2">
+        <div className="row blue darken-3">
           <div className="wrapper">
             <div className="landing ">
               <h2 className="white-text">
@@ -89,7 +89,7 @@ const Home = ({ auth }) => {
           <h3>Login or sign up to get started</h3>
           <br />
           <Link to="/log-in">
-            <button className="btn">Get started</button>
+            <button className=" z-depth-0 btn">Get started</button>
           </Link>
         </div>
         <Footer />

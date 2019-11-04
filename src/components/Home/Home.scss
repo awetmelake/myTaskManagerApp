@@ -11,15 +11,16 @@
   .row {
     padding-top: 50px;
     margin-bottom: 100px;
-    // border-bottom: 2px solid grey;
 
     .landing {
-      min-height: 800px;
+      min-height: calc(100vh - 105px);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-around;
       margin: 0 auto;
+      overflow: hidden;
+      border-bottom: 1px solid lightgrey;
 
       p {
         font-size: 1.3em;
@@ -31,7 +32,7 @@
     }
 
     .landing-img {
-      max-height: 500px;
+      max-height: 550px;
       width: 80%;
       overflow: hidden;
       position: relative;

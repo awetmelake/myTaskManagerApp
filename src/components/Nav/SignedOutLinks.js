@@ -8,12 +8,12 @@ const SignedOutLink = () => {
       <li>
         <Link to="/log-in">
         Log in
-        <i class="material-icons right">exit_to_app </i>
+        <i className="material-icons right">exit_to_app </i>
        </Link>
       </li>
       <li>
         <Link to="/sign-up">
-        <i class="material-icons right">person_add  </i>
+        <i className="material-icons right">person_add  </i>
 
         Sign up
       </Link>

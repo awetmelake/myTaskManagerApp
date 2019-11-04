@@ -26,7 +26,7 @@ class SignUp extends Component {
   render() {
     const { authErr } = this.props;
     return (
-      <div class="blue darken-3">
+      <div className="blue darken-3">
           <div className="row" style={{minHeight: "92vh"}}>
             <div className="col s12 m8 offset-m2 l4 offset-l4" style={{ marginTop: "4em"}}>
               <div className="card">

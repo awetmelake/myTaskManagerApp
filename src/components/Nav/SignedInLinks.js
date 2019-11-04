@@ -10,7 +10,7 @@ const SignedInLinks = ({ signOut }) => {
 
       <li>
         <NavLink to="/" onClick={signOut}>
-          <i class="material-icons left">power_settings_new</i>Sign out
+          <i className="material-icons left">power_settings_new</i>Sign out
         </NavLink>
       </li>
     </ul>
