@@ -26,17 +26,12 @@ class SignUp extends Component {
   render() {
     const { authErr } = this.props;
     return (
-      <div>
-        <div className="row" style={{ minHeight: "100vh" }}>
-          <br />
-          <br />
-          <div className="col s12 m4 offset-m4 ">
-            <div className="card">
-              <div className="card-content  light-blue darken-4 white-text">
+      <div class="blue darken-3">
+          <div className="row" style={{minHeight: "92vh"}}>
+            <div className="col s12 m8 offset-m2 l4 offset-l4" style={{ marginTop: "4em"}}>
+              <div className="card">
+              <div className="card-content center">
                 <h3>Sign Up</h3>
-              </div>
-
-              <div className="card-content">
                 <form onSubmit={this.handleSubmit}>
                   <div className="input-field">
                     <label htmlFor="email">email</label>
@@ -77,7 +72,7 @@ class SignUp extends Component {
 
                   <div className="input-field">
                     <button
-                      className="btn-large light-blue darken-4"
+                      className="btn-large light-blue darken-4 z-depth-0"
                       type="submit"
                       style={{ width: "100%" }}
                     >
