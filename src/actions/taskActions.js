@@ -51,11 +51,27 @@ export const editTask = newTask => (dispatch, getState) => {
     });
 };
 
+// export const moveTask = (taskId, panelId) => (dispatch, getState) => {
+//   const userId = getState().firebase.auth.uid;
+//   db.doc(`users/${userId}/tasks/${newTask.id}`)
+//     .set({
+//       ...newTask
+//     })
+//     .then(() => {
+//       dispatch({
+//         type: EDITED_TASK
+//       });
+//     });
+// };
+
 export const setTime = time => (dispatch, getState) => {
   const userId = getState().firebase.auth.uid;
   const taskId = getState().timer.target;
   const tasks = getState().tasks.tasks;
-  let taskTime = tasks.filter(task => task.id !== taskId)[0].time;
+  let taskTime = tasks.filter(task => task.id === taskId)[0].time;
+  if(taskTime === null){
+    taskTime = 0;
+  }
   taskTime += time;
 
   db.doc(`users/${userId}/tasks/${taskId}`)
@@ -64,7 +80,8 @@ export const setTime = time => (dispatch, getState) => {
     })
     .then(() => {
       dispatch({
-        type: SET_TASK_TIME, payload: taskTime
+        type: SET_TASK_TIME,
+        payload: taskTime
       });
     });
 };
@@ -78,5 +95,5 @@ export const toggleTaskSize = () => (dispatch, getState) => {
 };
 
 export const setTaskFilter = filter => (dispatch, getState) => {
-  dispatch({ type: "SET_TASK_FILTER" , payload: filter});
+  dispatch({ type: "SET_TASK_FILTER", payload: filter });
 };
