@@ -17,12 +17,18 @@ import Footer from "../Footer/Footer";
 import { createBoard, deleteBoard } from "../../actions/boardActions";
 
 class Boards extends Component {
-  state = { showDelBoard: false, newBoardTitle: "" };
+  state = { showDelBoard: null, newBoardTitle: "" };
 
-  toggleDelBoard = () => {
-    this.setState({
-      showDelBoard: !this.state.showDelBoard
-    });
+  toggleDelPrompt = boardId => {
+    if (this.state.showDelBoard !== boardId) {
+      this.setState({
+        showDelBoard: boardId
+      });
+    } else {
+      this.setState({
+        showDelBoard: null
+      });
+    }
   };
 
   handleChange = e => {
@@ -71,13 +77,16 @@ class Boards extends Component {
                 <div className="card-action">
                   <Link to={`/board_${board.id}`}>Go to board</Link>
 
-                  <a className="pointer" onClick={this.toggleDelBoard}>
+                  <a
+                    className="pointer"
+                    onClick={e => this.toggleDelPrompt(board.id)}
+                  >
                     Delete this board
                   </a>
 
                   <Dialog
-                    open={this.state.showDelBoard}
-                    onBackdropClick={this.toggleDelBoard}
+                    open={this.state.showDelBoard === board.id}
+                    onBackdropClick={e =>  this.toggleDelPrompt(board.id)}
                   >
                     <div className="del-board modal">
                       <div className="modal-content">
@@ -89,7 +98,7 @@ class Boards extends Component {
                       </div>
                       <div className="modal-footer">
                         <button
-                          onClick={this.toggleDelBoard}
+                          onClick={ e =>  this.toggleDelPrompt(board.id)}
                           className="modal-close btn-flat black-text"
                         >
                           Nevermind!
@@ -131,8 +140,12 @@ class Boards extends Component {
                       }}
                     >
                       Your Boards
-                      <button className=" z-depth-0 btn right z-depth-0" onClick={toggle}>
-                        New Board
+                      <button
+                        title="Add new board"
+                        className=" z-depth-0 btn right z-depth-0 green"
+                        onClick={toggle}
+                      >
+                        <i className="material-icons ">add</i>
                       </button>
                     </h2>
                     {on && (
@@ -155,7 +168,7 @@ class Boards extends Component {
                           </div>
                           <div className="card-action">
                             <button
-                              className="btn z-depth-0"
+                              className="btn-small z-depth-0 green"
                               onClick={e => {
                                 createBoard(this.state.newBoardTitle);
                                 this.setState({
@@ -165,7 +178,10 @@ class Boards extends Component {
                             >
                               Add
                             </button>
-                            <button className="red z-depth-0 btn" onClick={toggle}>
+                            <button
+                              className="btn-small red z-depth-0 btn"
+                              onClick={toggle}
+                            >
                               Cancel
                             </button>
                           </div>
