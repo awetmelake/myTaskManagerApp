@@ -10,7 +10,8 @@ import {
   BOARD_ERR,
   CHANGED_BOARD_TITLE,
   UI_LOADING_INIT,
-  UI_LOADING_COMPLETE
+  UI_LOADING_COMPLETE,
+  // SET_NOTIFICATION
 } from "./types";
 
 export const createBoard = boardTitle => (dispatch, getState) => {
@@ -106,7 +107,7 @@ export const changeBoardTitle = (newTitle, boardId) => (dispatch, getState) => {
     board => board.id === boardId
   )[0].title;
   if (newTitle.length) {
-    db.doc(`users/${userId}/panels/${boardId}`)
+    db.doc(`users/${userId}/boards/${boardId}`)
       .update({
         title: newTitle
       })
@@ -119,8 +120,6 @@ export const changeBoardTitle = (newTitle, boardId) => (dispatch, getState) => {
   } else {
     dispatch({ type: BOARD_ERR, payload: "Invalid title" });
   }
-
-  dispatch({});
 };
 
 export const toggleLegend = () => dispatch => {

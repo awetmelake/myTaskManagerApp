@@ -7,7 +7,8 @@ import {
   CREATED_TASK,
   DELETED_TASK,
   TOGGLED_TASK_FOCUS,
-  SET_TASK_TIME
+  SET_TASK_TIME,
+  MOVED_TASK
 } from "./types";
 
 //params task object, the target panel and the target board id/title
@@ -51,25 +52,25 @@ export const editTask = newTask => (dispatch, getState) => {
     });
 };
 
-// export const moveTask = (taskId, panelId) => (dispatch, getState) => {
-//   const userId = getState().firebase.auth.uid;
-//   db.doc(`users/${userId}/tasks/${newTask.id}`)
-//     .set({
-//       ...newTask
-//     })
-//     .then(() => {
-//       dispatch({
-//         type: EDITED_TASK
-//       });
-//     });
-// };
+export const moveTask = (taskId, panelId) => (dispatch, getState) => {
+  const userId = getState().firebase.auth.uid;
+  db.doc(`users/${userId}/tasks/${taskId}`)
+    .update({
+      panel: panelId
+    })
+    .then(() => {
+      dispatch({
+        type: MOVED_TASK
+      });
+    });
+};
 
 export const setTime = time => (dispatch, getState) => {
   const userId = getState().firebase.auth.uid;
   const taskId = getState().timer.target;
   const tasks = getState().tasks.tasks;
   let taskTime = tasks.filter(task => task.id === taskId)[0].time;
-  if(taskTime === null){
+  if (taskTime === null) {
     taskTime = 0;
   }
   taskTime += time;

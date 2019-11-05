@@ -16,6 +16,7 @@ export const DELETED_TASK = "DELETED_TASK";
 export const EDITED_TASK = "EDITED_TASK";
 export const SET_TASK_TIME = "SET_TASK_TIME";
 export const TOGGLED_TASK_FOCUS = "TOGGLED_TASK_FOCUS";
+export const MOVED_TASK = "MOVED_TASK";
 
 // auth
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
@@ -37,3 +38,9 @@ export const STOP_TIMER = "STOP_TIMER";
 export const SET_TIMER_TARGET = "SET_TIMER_TARGET";
 export const TOGGLED_SELECT_MODE = "TOGGLED_SELECT_MODE";
 export const SET_TIMER_TYPE = "SET_TIMER_TYPE";
+
+// RDND types
+export const Types = {
+  TASK: 'task',
+  PANEL: 'PANEL',
+};

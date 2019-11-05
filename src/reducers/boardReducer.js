@@ -18,8 +18,6 @@ export default (state = initialState, action) => {
       return { ...state, err: null };
     case DELETED_BOARD:
       return state;
-    case CHANGED_BOARD_TITLE:
-      return { state };
     case BOARD_ERR:
       return { ...state, err: action.payload };
     case "TOGGLE_BOARD_EDIT_MODE":
