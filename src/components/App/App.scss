@@ -1,8 +1,11 @@
 @import "../../styles.scss";
 .App {
   min-height: 100vh;
-  nav {
+  .brand-logo{
+    font-size: 1.2em !important;
+    font-weight: 600px !important;
   }
+  font-family: "roboto condensed";
 }
 
 // override MUI
@@ -43,9 +46,11 @@
   display: flex;
   align-items: center;
 
-  .btn {
+  .stop-btn {
     height: 20px;
+    width: 20px;
     margin-right: 10px;
+    cursor: pointer;
   }
   p {
     text-align: center;
