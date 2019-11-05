@@ -99,12 +99,12 @@ class Boards extends Component {
                       <div className="modal-footer">
                         <button
                           onClick={ e =>  this.toggleDelPrompt(board.id)}
-                          className="modal-close btn-flat black-text"
+                          className="modal-close btn-flat grey-text text-darken-3"
                         >
                           Nevermind!
                         </button>
                         <button
-                          className="modal-close btn-flat black-text"
+                          className="modal-close btn-flat grey-text text-darken-3"
                           onClick={e => deleteBoard(board.id)}
                         >
                           I'm Sure
@@ -142,7 +142,7 @@ class Boards extends Component {
                       Your Boards
                       <button
                         title="Add new board"
-                        className=" z-depth-0 btn right z-depth-0 green"
+                        className="z-depth-0 btn-small right green"
                         onClick={toggle}
                       >
                         <i className="material-icons ">add</i>

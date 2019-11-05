@@ -1,3 +1,4 @@
+// removed depth on buttons
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
@@ -38,7 +39,7 @@ class TimerSet extends Component {
       <Toggle>
         {({ on, toggle }) => (
           <>
-            <a title="Timer" className="material-icons" onClick={toggle}>
+            <a title="Timer" className="material-icons grey-text text-darken-3" onClick={toggle}>
               access_time
             </a>
 
@@ -85,11 +86,12 @@ class TimerSet extends Component {
                         }}
                         className="pointer"
                       >
-                        {timer.target
-                          ? tasks.filter(
-                              task => task.id === timer.target
-                            )[0].title
-                          : "No selected task"}
+                        <i>
+                          {timer.target
+                            ? tasks.filter(task => task.id === timer.target)[0]
+                                .title
+                            : "No selected task"}
+                        </i>
                       </p>
                     </div>
                   </div>
@@ -99,7 +101,7 @@ class TimerSet extends Component {
                     style={{ display: "flex", justifyContent: "space-around " }}
                   >
                     <button
-                      className="btn green"
+                      className="btn green  z-depth-0"
                       onClick={e => {
                         startTimer();
                         toggle();
@@ -109,7 +111,7 @@ class TimerSet extends Component {
                       Start
                     </button>
                     <button
-                      className="btn red"
+                      className="btn red  z-depth-0"
                       onClick={e => {
                         stopTimer();
                       }}

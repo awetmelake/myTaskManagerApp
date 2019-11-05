@@ -1,6 +1,8 @@
+// drop target
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import { DropTarget } from 'react-dnd'
 
 // components
 import Task from "../Task/Task";
@@ -19,11 +21,30 @@ import {
   moveLeft,
   moveRight
 } from "../../actions/panelActions";
-
-import { createTask } from "../../actions/taskActions";
+import { createTask, moveTask } from "../../actions/taskActions";
+import {Types} from "../../actions/types"
 
 // styles
 import "./Panel.scss";
+
+const panelTarget = {
+  drop(props, monitor, component) {
+    const item = monitor.getItem()
+    props.moveTask(item.id, props.panel.id)
+    console.log("moved")
+    return { moved: true }
+  },
+}
+
+function collect(connect, monitor) {
+  return {
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+    isOverCurrent: monitor.isOver({ shallow: true }),
+    canDrop: monitor.canDrop(),
+    itemType: monitor.getItemType(),
+  }
+}
 
 class Panel extends Component {
   state = {
@@ -31,9 +52,9 @@ class Panel extends Component {
     editTitleMode: false,
     title: this.props.panel.title,
     id: this.props.panel.id,
-
     showAddTask: false,
-    showDelPanel: false
+    showDelPanel: false,
+    bgColor: "white"
   };
 
   toggleDelPanel = e => {
@@ -84,15 +105,19 @@ class Panel extends Component {
       editMode,
       moveLeft,
       filter,
-      moveRight
+      moveRight,
+      isOver,
+      canDrop,
+      connectDropTarget
     } = this.props;
+
     const { editTitleMode, title } = this.state;
-    return (
+    return connectDropTarget(
       <div
-        className="panel white "
+        className={`panel ${this.state.bgColor}`}
         style={editMode ? { flexGrow: 0 } : { flexGrow: 1 }}
       >
-        <div className="panel-header  grey lighten-2">
+        <div className="panel-header  grey lighten-4">
           <div className="panel-title">
             {!editTitleMode ? (
               panel.title
@@ -136,7 +161,7 @@ class Panel extends Component {
               {({ on, toggle }) => (
                 <div>
                   <i
-                    className="material-icons add-task-btn black-text"
+                    className="material-icons add-task-btn grey-text text-darken-3"
                     id="toggleAddTask"
                     title="See more options"
                     onClick={toggle}
@@ -225,7 +250,9 @@ export default compose(
       changePanelTitle,
       createTask,
       moveRight,
-      moveLeft
+      moveLeft,
+      moveTask,
     }
-  )
+  ),
+  DropTarget(Types.TASK, panelTarget, collect)
 )(Panel);

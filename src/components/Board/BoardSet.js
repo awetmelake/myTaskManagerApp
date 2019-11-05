@@ -22,14 +22,14 @@ const BoardSet = ({
   <Toggle>
     {({ on, toggle }) => (
       <>
-        <a className="material-icons menu-icon pointer" onClick={toggle}>
+        <a className="material-icons menu-icon grey-text text-darken-3 pointer" onClick={toggle}>
           menu
         </a>
 
         <Drawer open={on} onClose={toggle} anchor="right">
-          <div className="menu-header grey lighten-1">
+          <div className="menu-header grey lighten-3">
             <h6 className="center"><strong>Menu</strong></h6>
-            <div className="divider black"></div>
+            <div className="divider"></div>
           </div>
 
           <ul className="board-settings-drawer">

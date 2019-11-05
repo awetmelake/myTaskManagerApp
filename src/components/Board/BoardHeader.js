@@ -1,54 +1,98 @@
 import React from "react";
-
 import Timer from "../Timer/Timer";
 import TimerSet from "../Timer/TimerSet";
 import BoardSet from "./BoardSet";
 
-const BoardHeader = ({ board, toggleBoardEditMode, boards, editMode, timer, toggleLegend }) => {
-  return (
-    <nav className="grey darken-1 board-header z-depth-0 ">
-      <header className=" left brand-logo">
-        {!editMode ? "" : "layout:"} {board.title}
-      </header>
+class BoardHeader extends React.Component {
+  state = {
+    boardTitle: this.props.board.title
+  };
 
-      {editMode && (
-        <button
-          onClick={toggleBoardEditMode}
-          className="btn white-text green toggle-board-edit z-depth-0"
-        >
-          Done
-        </button>
-      )}
-      <ul className="right">
-        {!editMode ? (
-          <li>
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
 
-            <TimerSet />
-            <a
-              title="Edit board"
-              className="material-icons"
+  handleTitleChange = (e) => {
+    e.preventDefault();
+    if(this.state.boardTitle !== this.props.board.title){
+      this.props.changeBoardTitle(this.state.boardTitle ,this.props.board.id)
+    }
+  }
+
+  render() {
+    const {
+      board,
+      toggleBoardEditMode,
+      boards,
+      editMode,
+      timer,
+      toggleLegend,
+      changeBoardTitle
+    } = this.props;
+
+    return (
+      <nav className="grey lighten-4 board-header z-depth-0 ">
+        <header className="grey-text text-darken-3 left board-title">
+          {editMode ? (
+            <form onSubmit={e =>this.handleTitleChange(e)}>
+              <input
+                type="text"
+                className="edit-board-title right"
+                value={this.state.boardTitle}
+                onChange={this.handleChange}
+                name="boardTitle"
+              />
+            </form>
+          ) : (
+            board.title
+          )}
+        </header>
+
+        {editMode && (
+          <>
+            <button
               onClick={toggleBoardEditMode}
+              className="btn-small white-text green toggle-board-edit z-depth-0"
+            >
+              done
+            </button>
+          </>
+        )}
+        <ul className="right grey-text text-darken-3">
+          {!editMode ? (
+            <li>
+              <TimerSet />
+              <a
+                title="Edit board"
+                className="material-icons grey-text text-darken-3"
+                onClick={toggleBoardEditMode}
               >
                 edit
               </a>
 
-            <BoardSet toggleBoardEditMode={toggleBoardEditMode} toggleLegend={toggleLegend}/>
-          </li>
-        ) : (
-          <li>
-            <a
-              title="Exit edit mode"
-              className="material-icons "
-              onClick={toggleBoardEditMode}
-            >
-              close
-            </a>
-          </li>
-        )}
-        {timer.isRunning && <Timer />}
-      </ul>
-    </nav>
-  );
-};
+              <BoardSet
+                toggleBoardEditMode={toggleBoardEditMode}
+                toggleLegend={toggleLegend}
+              />
+            </li>
+          ) : (
+            <li>
+              <a
+                title="Exit edit mode"
+                className="material-icons grey-text text-darken-3"
+                onClick={toggleBoardEditMode}
+              >
+                close
+              </a>
+            </li>
+          )}
+          {timer.isRunning && <Timer />}
+        </ul>
+      </nav>
+    );
+  }
+}
 
 export default BoardHeader;

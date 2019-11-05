@@ -1,3 +1,4 @@
+// slight changes to stop timer btn
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
@@ -73,7 +74,7 @@ class Timer extends Component {
 
     return (
       <div className="timer grey lighten-2">
-        <button className="z-depth-0 btn red" onClick={e => stopTimer(this.state.elapsedTime)}></button>
+        <div title="Stop timer" className="z-depth-0 stop-btn red" onClick={e => stopTimer(this.state.elapsedTime)}></div>
         <div style={{ float: "right" }}>
           {type === "pomodoro" ? (
             <p>{this.timeFormat(this.state.pomodoroCount)}</p>

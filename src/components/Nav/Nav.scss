@@ -1,7 +1,22 @@
 @import "../../styles.scss";
 
 .main-nav {
+  font-family: "roboto mono";
   nav {
-    min-height: 64px !important;
+    max-height: 34px !important;
+    header{
+      line-height: 34px;
+      height: 34px;
+    }
+    ul{
+      li{
+        line-height: 34px;
+        height: 34px;
+        a,i{
+          line-height: 34px;
+          height: 34px;
+        }
+      }
+    }
   }
 }

@@ -1,6 +1,7 @@
+// colored buttons
+
 import React, { Component } from "react";
 
-// import uuid from 'uuidv4';
 // components
 import ColorSelect from "../ColorSelect";
 
@@ -49,17 +50,17 @@ class AddTask extends Component {
       <Dialog open={visibility} onBackdropClick={toggleVisibility}>
         <div className={` add-task ${this.state.color} `}>
           <form autoComplete="off">
-            <h4 className="center">Add new task</h4>
+            <h4 className="center">Create new task</h4>
 
             <div className="input-field">
-              <label htmlFor="title" className="black-text">
+              <label htmlFor="title" className="grey-text text-darken-3">
                 title
               </label>
               <input name="title" type="text" onChange={this.handleChange} />
             </div>
 
             <div className="input-field">
-              <label htmlFor="description" className="black-text">
+              <label htmlFor="description" className="grey-text text-darken-3">
                 description
               </label>
               <input
@@ -73,10 +74,10 @@ class AddTask extends Component {
             <br />
 
             <div className="container center">
-              <button className=" z-depth-0 btn grey darken-1" onClick={this.handleSubmit}>
+              <button className=" z-depth-0 btn darken-1 green" onClick={this.handleSubmit}>
                 Save
               </button>
-              <button className=" z-depth-0 btn grey darken-1" onClick={toggleVisibility}>
+              <button className=" z-depth-0 btn darken-1 red" onClick={toggleVisibility}>
                 Cancel
               </button>
             </div>

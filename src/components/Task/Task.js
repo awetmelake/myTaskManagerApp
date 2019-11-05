@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import { DragSource } from "react-dnd";
 
 // components
 import TaskInfo from "./TaskInfo";
@@ -9,8 +10,45 @@ import TaskInfo from "./TaskInfo";
 import { setTimerTarget } from "../../actions/timerActions";
 import { toggleSelectMode } from "../../actions/uiActions";
 import { toggleFocus } from "../../actions/taskActions";
+
 // styles
 import "./Task.scss";
+
+// constants
+import {Types} from "../../actions/types"
+
+const taskSource = {
+  // canDrag(props) {
+  //   return props.isReady
+  // },
+  //
+  // isDragging(props, monitor) {
+  //   return monitor.getItem().id === props.id
+  // },
+
+  beginDrag(props, monitor, component) {
+    const item = { id: props.task.id }
+    return item
+  },
+
+  endDrag(props, monitor, component) {
+    if (!monitor.didDrop()) {
+      return
+    }
+    const item = monitor.getItem()
+    const dropResult = monitor.getDropResult()
+    // this.props.moveTask(item.id) // find a way to get target panel
+    // alert("you dropped this item into panel")
+    console.log(monitor.getItem())
+  },
+}
+
+function collect(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging(),
+  }
+}
 
 class Task extends Component {
   state = {
@@ -60,9 +98,12 @@ class Task extends Component {
       setTimerTarget,
       toggleSelectMode,
       toggleFocus,
-      largeNames
+      largeNames,
+      isDragging,
+      connectDragSource
     } = this.props;
-    return (
+
+    return connectDragSource(
       <div
         className={`task ${task.color} task-${largeNames ? "large-tasks" : ""}`}
         style={this.getStyle()}
@@ -116,5 +157,6 @@ export default compose(
   connect(
     mapStateToProps,
     { setTimerTarget, toggleSelectMode, toggleFocus }
-  )
+  ),
+  DragSource(Types.TASK, taskSource, collect)
 )(Task);

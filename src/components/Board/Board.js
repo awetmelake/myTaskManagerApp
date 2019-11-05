@@ -14,7 +14,8 @@ import {
   createBoard,
   deleteBoard,
   toggleLegend,
-  toggleBoardEditMode
+  toggleBoardEditMode,
+  changeBoardTitle
 } from "../../actions/boardActions";
 import { changePanelTitle, createPanel } from "../../actions/panelActions";
 import { toggleSelectMode } from "../../actions/uiActions";
@@ -31,7 +32,7 @@ import "./Board.scss";
 
 class Board extends Component {
   state = {
-    panelTitle: ""
+    panelTitle: "",
   };
 
   handleChange = e => {
@@ -43,7 +44,6 @@ class Board extends Component {
   handleCreatePanel = (e, boardId) => {
     e.preventDefault();
     this.props.createPanel(this.state.panelTitle, boardId);
-    // reset state
     this.setState({
       panelTitle: ""
     });
@@ -62,7 +62,8 @@ class Board extends Component {
       toggleLegend,
       showLegend,
       editMode,
-      toggleBoardEditMode
+      toggleBoardEditMode,
+      changeBoardTitle
     } = this.props;
 
     if (!auth.uid) {
@@ -85,106 +86,106 @@ class Board extends Component {
             editMode={editMode}
             timer={timer}
             toggleLegend={toggleLegend}
+            handleChange={this.handleChange}
+            changeBoardTitle={changeBoardTitle}
           />
 
-          <div className="board ">
-            <div
-              className={`board-panels board-panels-${editMode ? "edit" : ""}`}
-            >
-              {selectMode && (
-                <div className="board-select-mode-popup ">
-                  <div className="card grey lighten-2 center">
-                    <div className="card-content">
-                      <p className="card-title">Select task to start timer</p>
-                    </div>
-                    <div className="card-action">
-                      <button
-                        className="btn-small red"
-                        onClick={toggleSelectMode}
-                      >
-                        cancel
-                      </button>
+          <div className="board grey lighten-4">
+            {/* React drag and drop context */}
+            <DndProvider backend={HTML5Backend}>
+              <div className={`board-panels board-panels-${editMode ? "edit" : ""}`}>
+                {selectMode && (
+                  <div className="board-select-mode-popup ">
+                    <div className="card grey lighten-2 center">
+                      <div className="card-content">
+                        <p className="card-title">Select task to start timer</p>
+                      </div>
+                      <div className="card-action">
+                        <button
+                          className="btn-small red"
+                          onClick={toggleSelectMode}
+                        >
+                          cancel
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
-
-              {/* React drag and drop context */}
-              <DndProvider backend={HTML5Backend}>
-                {panels
-                .sort((a, b) => a.index - b.index)
-                .map(
-                  panel =>
-                    panel.board === board.id && (
-                      <Panel
-                        panel={panel}
-                        key={panel.id}
-                        board={board}
-                        editMode={editMode}
-                      />
-                    )
                 )}
-              </DndProvider>
 
-              {editMode && (
-                <div className="valign-wrapper">
-                  <Toggle>
-                    {({ on, toggle }) => (
-                      <div>
-                        {on && (
-                          <div className="card add-panel-form panel grey lighten-4">
-                            <div className="form">
-                              <div className="input-field">
-                                {!panelErr ? (
-                                  <label htmlFor="panelTitle">
-                                    Panel title
-                                  </label>
-                                ) : (
-                                  <label htmlFor="panelTitle">{panelErr}</label>
-                                )}
+                  {panels
+                  .sort((a, b) => a.index - b.index)
+                  .map(
+                    panel =>
+                      panel.board === board.id && (
+                        <Panel
+                          panel={panel}
+                          key={panel.id}
+                          board={board}
+                          editMode={editMode}
+                        />
+                      )
+                  )}
 
-                                <input
-                                  autoFocus
-                                  type="text"
-                                  id="panelTitle"
-                                  name="panelTitle"
-                                  value={this.state.panelTitle}
-                                  onChange={this.handleChange}
-                                />
-                              </div>
+                {editMode && (
+                  <div className="valign-wrapper">
+                    <Toggle>
+                      {({ on, toggle }) => (
+                        <div>
+                          {on && (
+                            <div className="card add-panel-form panel grey lighten-4">
+                              <div className="form">
+                                <div className="input-field">
+                                  {!panelErr ? (
+                                    <label htmlFor="panelTitle">
+                                      Panel title
+                                    </label>
+                                  ) : (
+                                    <label htmlFor="panelTitle">{panelErr}</label>
+                                  )}
 
-                              <div className="add-panel-form-btns ">
-                                <button
-                                  className="btn-small z-depth-0 green"
-                                  onClick={e =>
-                                    this.handleCreatePanel(e, board.id)
-                                  }
-                                >
-                                  Add
-                                </button>
+                                  <input
+                                    autoFocus
+                                    type="text"
+                                    id="panelTitle"
+                                    name="panelTitle"
+                                    value={this.state.panelTitle}
+                                    onChange={this.handleChange}
+                                  />
+                                </div>
 
-                                <button className="z-depth-0 btn-small red" onClick={toggle}>
-                                  Cancel
-                                </button>
+                                <div className="add-panel-form-btns ">
+                                  <button
+                                    className="btn-small z-depth-0 green"
+                                    onClick={e =>
+                                      this.handleCreatePanel(e, board.id)
+                                    }
+                                  >
+                                    Add
+                                  </button>
+
+                                  <button className="z-depth-0 btn-small red" onClick={toggle}>
+                                    Cancel
+                                  </button>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        )}
+                          )}
 
-                        {!on && (
-                          <button
-                            onClick={toggle}
-                            className="white-text add-panel-btn pointer green btn darken-1 z-depth-0"
-                          >
-                            <i className="material-icons">add</i>
-                          </button>
-                        )}
-                      </div>
-                    )}
-                  </Toggle>
-                </div>
-              )}
-            </div>
+                          {!on && (
+                            <button
+                              onClick={toggle}
+                              className="white-text add-panel-btn pointer green btn darken-1 z-depth-0"
+                            >
+                              <i className="material-icons">add</i>
+                            </button>
+                          )}
+                        </div>
+                      )}
+                    </Toggle>
+                  </div>
+                )}
+              </div>
+            </DndProvider>
           </div>
           {showLegend && <Legend />}
         </div>
@@ -215,7 +216,8 @@ export default compose(
       createPanel,
       toggleSelectMode,
       toggleLegend,
-      toggleBoardEditMode
+      toggleBoardEditMode,
+      changeBoardTitle
     }
   ),
   firestoreConnect(props => [
