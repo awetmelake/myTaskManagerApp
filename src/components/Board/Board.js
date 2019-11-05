@@ -1,8 +1,13 @@
+// removed depth from buttons, icons for text
+// React drag and drop context to panels
+
 import React, { Component } from "react";
 import { firestoreConnect } from "react-redux-firebase";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { Redirect } from "react-router-dom";
+import HTML5Backend from 'react-dnd-html5-backend'
+import { DndProvider } from 'react-dnd'
 
 // actions
 import {
@@ -104,7 +109,9 @@ class Board extends Component {
                 </div>
               )}
 
-              {panels
+              {/* React drag and drop context */}
+              <DndProvider backend={HTML5Backend}>
+                {panels
                 .sort((a, b) => a.index - b.index)
                 .map(
                   panel =>
@@ -117,6 +124,7 @@ class Board extends Component {
                       />
                     )
                 )}
+              </DndProvider>
 
               {editMode && (
                 <div className="valign-wrapper">
@@ -145,9 +153,9 @@ class Board extends Component {
                                 />
                               </div>
 
-                              <div className="add-panel-form-btns">
+                              <div className="add-panel-form-btns ">
                                 <button
-                                  className="btn-small"
+                                  className="btn-small z-depth-0 green"
                                   onClick={e =>
                                     this.handleCreatePanel(e, board.id)
                                   }
@@ -155,7 +163,7 @@ class Board extends Component {
                                   Add
                                 </button>
 
-                                <button className=" z-depth-0 btn-small" onClick={toggle}>
+                                <button className="z-depth-0 btn-small red" onClick={toggle}>
                                   Cancel
                                 </button>
                               </div>
@@ -166,9 +174,9 @@ class Board extends Component {
                         {!on && (
                           <button
                             onClick={toggle}
-                            className="white-text add-panel-btn pointer green btn darken-1"
+                            className="white-text add-panel-btn pointer green btn darken-1 z-depth-0"
                           >
-                            Add Panel
+                            <i className="material-icons">add</i>
                           </button>
                         )}
                       </div>
