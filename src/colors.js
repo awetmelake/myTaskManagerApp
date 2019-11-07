@@ -1,7 +1,7 @@
 export const COLORS = {
-  yellow: "yellow lighten-3",
-  red: "red lighten-3 ",
-  blue: "blue lighten-3",
-  green: "green lighten-3",
-  orange: "orange lighten-3"
+  yellow: "yellow lighten-4",
+  red: "red lighten-4 ",
+  blue: "blue lighten-4",
+  green: "green lighten-4",
+  orange: "orange lighten-4"
 };
