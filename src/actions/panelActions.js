@@ -19,11 +19,12 @@ export const createPanel = (newPanelTitle, boardId) => (
   const targetBoard = getState().boards.boards.filter(
     board => board.id === boardId
   )[0];
-
+  const index = getState().panels.panels.filter(panel => panel.board === boardId).length;
+  console.log(index)
   const newPanel = {
     board: boardId,
     title: newPanelTitle,
-    index: getState().panels.panels.length
+    index: index
   };
 
   if (newPanel.title.length > 0) {
