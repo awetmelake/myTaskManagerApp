@@ -3,6 +3,7 @@ export const CREATED_BOARD = "CREATED_BOARD";
 export const DELETED_BOARD = "DELETED_BOARD";
 export const BOARD_ERR = "BOARD_ERR";
 export const CHANGED_BOARD_TITLE = "CHANGED_BOARD_TITLE";
+export const TOGGLED_LEGEND = "TOGGLED_LEGEND";
 
 // panels
 export const CREATED_PANEL = "CREATED_PANEL";
@@ -17,6 +18,7 @@ export const EDITED_TASK = "EDITED_TASK";
 export const SET_TASK_TIME = "SET_TASK_TIME";
 export const TOGGLED_TASK_FOCUS = "TOGGLED_TASK_FOCUS";
 export const MOVED_TASK = "MOVED_TASK";
+export const TOGGLED_TASK_SIZE = "TOGGLED_TASK_SIZE";
 
 // auth
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";

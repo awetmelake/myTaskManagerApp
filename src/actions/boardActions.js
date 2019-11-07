@@ -11,7 +11,7 @@ import {
   CHANGED_BOARD_TITLE,
   UI_LOADING_INIT,
   UI_LOADING_COMPLETE,
-  // SET_NOTIFICATION
+  TOGGLED_LEGEND
 } from "./types";
 
 export const createBoard = boardTitle => (dispatch, getState) => {
@@ -123,7 +123,9 @@ export const changeBoardTitle = (newTitle, boardId) => (dispatch, getState) => {
 };
 
 export const toggleLegend = () => dispatch => {
-  dispatch({ type: "TOGGLED_LEGEND" });
+  let showLegend = JSON.parse(localStorage.getItem("showLegend")) || false;
+  localStorage.setItem("showLegend", !showLegend);
+  dispatch({ type: TOGGLED_LEGEND });
 };
 
 export const toggleBoardEditMode = () => dispatch => {

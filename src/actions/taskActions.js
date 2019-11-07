@@ -8,7 +8,8 @@ import {
   DELETED_TASK,
   TOGGLED_TASK_FOCUS,
   SET_TASK_TIME,
-  MOVED_TASK
+  MOVED_TASK,
+  TOGGLED_TASK_SIZE
 } from "./types";
 
 //params task object, the target panel and the target board id/title
@@ -92,7 +93,9 @@ export const toggleFocus = taskId => (dispatch, getState) => {
 };
 
 export const toggleTaskSize = () => (dispatch, getState) => {
-  dispatch({ type: "TOGGLED_TASK_SIZE" });
+  let largeTasks = JSON.parse(localStorage.getItem("largeTasks")) || false;
+  localStorage.setItem("largeTasks", !largeTasks);
+  dispatch({ type: TOGGLED_TASK_SIZE });
 };
 
 export const setTaskFilter = filter => (dispatch, getState) => {

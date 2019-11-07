@@ -2,12 +2,13 @@ import {
   CREATED_BOARD,
   DELETED_BOARD,
   CHANGED_BOARD_TITLE,
-  BOARD_ERR
+  BOARD_ERR,
+  TOGGLED_LEGEND
 } from "../actions/types";
 
 const initialState = {
   boards: [],
-  showLegend: true,
+  showLegend: JSON.parse(localStorage.getItem('showLegend')) || true,
   err: null,
   editMode: false
 };
@@ -73,7 +74,7 @@ export default (state = initialState, action) => {
       else {
         return state;
       }
-    case "TOGGLED_LEGEND":
+    case TOGGLED_LEGEND:
       return {
         ...state,
         showLegend: !state.showLegend

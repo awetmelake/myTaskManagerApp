@@ -12,6 +12,8 @@ import Toggle from "../Toggle/Toggle";
 // actions
 import { toggleTaskSize, setTaskFilter } from "../../actions/taskActions";
 
+let largeTasks = JSON.parse(localStorage.getItem("largeTasks"));
+
 const BoardSet = ({
   toggleLegend,
   showLegend,
@@ -22,13 +24,23 @@ const BoardSet = ({
   <Toggle>
     {({ on, toggle }) => (
       <>
-        <a className="material-icons menu-icon grey-text text-darken-4 pointer" onClick={toggle}>
+        <a
+          className="material-icons menu-icon grey-text text-darken-4 pointer"
+          onClick={toggle}
+        >
           menu
         </a>
 
-        <Drawer open={on} onClose={toggle} anchor="right" style={{color: "grey"}}>
+        <Drawer
+          open={on}
+          onClose={toggle}
+          anchor="right"
+          style={{ color: "grey" }}
+        >
           <div className="menu-header grey lighten-2">
-            <h6 className="center"><strong>Menu</strong></h6>
+            <h6 className="center">
+              <strong>Menu</strong>
+            </h6>
             <div className="divider"></div>
           </div>
 
@@ -61,7 +73,7 @@ const BoardSet = ({
                 className="right"
                 checked={largeNames}
                 color="primary"
-                 onChange={toggleTaskSize}
+                onChange={toggleTaskSize}
               ></Switch>
             </li>
 

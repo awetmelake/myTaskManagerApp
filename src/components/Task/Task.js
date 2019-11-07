@@ -65,10 +65,8 @@ class Task extends Component {
     let targetClass = e.target.className;
     let targetId = e.target.id;
     if (
-      targetClass ===
-        `task ${this.props.task.color} task-${
-          this.props.largeNames ? "large-tasks" : ""
-        }` &&
+      targetId ===
+        "task-item" &&
       !this.props.selectMode &&
       !this.props.editMode
     ) {
@@ -95,12 +93,12 @@ class Task extends Component {
       isDragging,
       connectDragSource
     } = this.props;
-
     let opacity = isDragging ? 0 : 1;
 
     return connectDragSource(
       <div
-        className={`task ${task.color} task-${largeNames ? "large-tasks" : ""}`}
+        className={`task ${task.color} task-${largeNames ? "large-tasks" : ""} grey-text text-darken-4`}
+        id="task-item"
         style={{ ...this.getStyle(), opacity: `${opacity}` }}
         onClick={e => {
           if (selectMode) {
