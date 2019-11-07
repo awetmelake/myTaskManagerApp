@@ -22,12 +22,12 @@ const BoardSet = ({
   <Toggle>
     {({ on, toggle }) => (
       <>
-        <a className="material-icons menu-icon grey-text text-darken-3 pointer" onClick={toggle}>
+        <a className="material-icons menu-icon grey-text text-darken-4 pointer" onClick={toggle}>
           menu
         </a>
 
-        <Drawer open={on} onClose={toggle} anchor="right">
-          <div className="menu-header grey lighten-3">
+        <Drawer open={on} onClose={toggle} anchor="right" style={{color: "grey"}}>
+          <div className="menu-header grey lighten-2">
             <h6 className="center"><strong>Menu</strong></h6>
             <div className="divider"></div>
           </div>
@@ -44,7 +44,7 @@ const BoardSet = ({
               <p>Board layout</p>
             </li>
 
-            <li className="pointer " onClick={toggleLegend}>
+            <li className="pointer" onClick={toggleLegend}>
               <i className="material-icons left">color_lens</i>
               <p>Show legend</p>
               <Switch
@@ -54,13 +54,14 @@ const BoardSet = ({
               ></Switch>
             </li>
 
-            <li className="pointer " onClick={toggleTaskSize}>
+            <li className="pointer" onClick={toggleTaskSize}>
               <i className="material-icons left">text_format</i>
               <p>Large task names</p>
               <Switch
                 className="right"
                 checked={largeNames}
                 color="primary"
+                 onChange={toggleTaskSize}
               ></Switch>
             </li>
 

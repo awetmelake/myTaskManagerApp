@@ -34,7 +34,7 @@ class BoardHeader extends React.Component {
 
     return (
       <nav className="grey lighten-4 board-header z-depth-0 ">
-        <header className="grey-text text-darken-3 left board-title">
+        <header className="grey-text text-darken-4 left board-title">
           {editMode ? (
             <form onSubmit={e =>this.handleTitleChange(e)}>
               <input
@@ -60,13 +60,13 @@ class BoardHeader extends React.Component {
             </button>
           </>
         )}
-        <ul className="right grey-text text-darken-3">
+        <ul className="right grey-text text-darken-4">
           {!editMode ? (
             <li>
               <TimerSet />
               <a
                 title="Edit board"
-                className="material-icons grey-text text-darken-3"
+                className="material-icons grey-text text-darken-4"
                 onClick={toggleBoardEditMode}
               >
                 edit
@@ -81,7 +81,7 @@ class BoardHeader extends React.Component {
             <li>
               <a
                 title="Exit edit mode"
-                className="material-icons grey-text text-darken-3"
+                className="material-icons grey-text text-darken-4"
                 onClick={toggleBoardEditMode}
               >
                 close

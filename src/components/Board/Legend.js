@@ -8,10 +8,15 @@ import Popover from "@material-ui/core/Popover";
 // actions
 import { setTaskFilter } from "../../actions/taskActions";
 
+import {COLORS} from '../../colors.js';
+
 class Legend extends Component {
   render() {
     const { filter, setTaskFilter } = this.props;
-    const colors = ["yellow", "red", "green", "blue", "orange"];
+    const colors = [];
+    for (var color in COLORS) {
+      colors.push(color)
+    }
     return (
       <ul className="board-color-legend">
         {colors.map(c => (
@@ -20,7 +25,7 @@ class Legend extends Component {
               <>
                 <li
                   onClick={toggle}
-                  className={`${c} pointer`}
+                  className={`${COLORS[c]} pointer`}
                   id={`legend-${c}`}
                 >
                   {c.toUpperCase()}
