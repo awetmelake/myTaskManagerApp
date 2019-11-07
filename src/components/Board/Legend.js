@@ -9,6 +9,7 @@ import Popover from "@material-ui/core/Popover";
 import { setTaskFilter } from "../../actions/taskActions";
 
 import {COLORS} from '../../colors.js';
+import { BORDER_COLORS } from "../../colors.js";
 
 class Legend extends Component {
   render() {
@@ -27,6 +28,7 @@ class Legend extends Component {
                   onClick={toggle}
                   className={`${COLORS[c]} pointer`}
                   id={`legend-${c}`}
+                  style={{border: `1px solid ${BORDER_COLORS[c]}`}}
                 >
                   {c.toUpperCase()}
                 </li>

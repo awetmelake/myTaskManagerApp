@@ -16,6 +16,7 @@ import "./Task.scss";
 
 // constants
 import { Types } from "../../actions/types";
+import { BORDER_COLORS } from "../../colors.js";
 
 const taskSource = {
   beginDrag(props, monitor, component) {
@@ -44,7 +45,7 @@ class Task extends Component {
   state = {
     showDesc: false,
     taskInfo: false,
-    borderColor: `${this.props.task.color} darken-3`
+    borderColor: BORDER_COLORS[this.props.task.color.split(" ")[0]]
   };
 
   getStyle = () => ({
@@ -52,7 +53,6 @@ class Task extends Component {
       this.props.task.focused && this.props.timerRunning
         ? `0px 0px 5px black`
         : "none",
-    border: `1px solid #181818`
   });
 
   toggleDesc = () => {
@@ -99,7 +99,7 @@ class Task extends Component {
       <div
         className={`task ${task.color} task-${largeNames ? "large-tasks" : ""} grey-text text-darken-4`}
         id="task-item"
-        style={{ ...this.getStyle(), opacity: `${opacity}` }}
+        style={{ ...this.getStyle(), opacity: opacity, border: `1px solid ${this.state.borderColor}` }}
         onClick={e => {
           if (selectMode) {
             setTimerTarget(task.id);
