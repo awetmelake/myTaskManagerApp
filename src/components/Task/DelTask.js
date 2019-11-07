@@ -6,7 +6,7 @@ const DelTask = ({ task, delTask }) => (
     {({ on, toggle }) => (
       <div className="container">
         <i
-          className="material-icons pointer small task-info-del-btn"
+          className="material-icons pointer small task-info-del-btn grey-text text-darken-4"
           onClick={toggle}
           title="Delete Task"
         >

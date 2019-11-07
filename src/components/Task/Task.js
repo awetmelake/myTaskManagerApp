@@ -15,53 +15,44 @@ import { toggleFocus } from "../../actions/taskActions";
 import "./Task.scss";
 
 // constants
-import {Types} from "../../actions/types"
+import { Types } from "../../actions/types";
 
 const taskSource = {
-  // canDrag(props) {
-  //   return props.isReady
-  // },
-  //
-  // isDragging(props, monitor) {
-  //   return monitor.getItem().id === props.id
-  // },
-
   beginDrag(props, monitor, component) {
-    const item = { id: props.task.id }
-    return item
+    const item = { id: props.task.id };
+    return item;
   },
 
   endDrag(props, monitor, component) {
     if (!monitor.didDrop()) {
-      return
+      return;
     }
-    const item = monitor.getItem()
-    const dropResult = monitor.getDropResult()
-    // this.props.moveTask(item.id) // find a way to get target panel
-    // alert("you dropped this item into panel")
-    console.log(monitor.getItem())
-  },
-}
+    const item = monitor.getItem();
+    const dropResult = monitor.getDropResult();
+    console.log(monitor.getItem());
+  }
+};
 
 function collect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging(),
-  }
+    isDragging: monitor.isDragging()
+  };
 }
 
 class Task extends Component {
   state = {
     showDesc: false,
-    taskInfo: false
+    taskInfo: false,
+    borderColor: `${this.props.task.color} darken-3`
   };
 
-  //dotted border on (focus == true)
   getStyle = () => ({
     boxShadow:
       this.props.task.focused && this.props.timerRunning
-        ? "2px 2px 5px black"
-        : "0 0 0 white"
+        ? `0px 0px 5px black`
+        : "none",
+    border: `1px solid #181818`
   });
 
   toggleDesc = () => {
@@ -71,8 +62,10 @@ class Task extends Component {
   };
 
   toggleTaskInfo = e => {
+    let targetClass = e.target.className;
+    let targetId = e.target.id;
     if (
-      e.target.className ===
+      targetClass ===
         `task ${this.props.task.color} task-${
           this.props.largeNames ? "large-tasks" : ""
         }` &&
@@ -83,7 +76,7 @@ class Task extends Component {
         taskInfo: true
       });
     } else if (
-      e.target.className === "MuiDialog-container MuiDialog-scrollPaper"
+      targetClass === "MuiDialog-container MuiDialog-scrollPaper" || targetId === "task-timer-btn"
     ) {
       this.setState({
         taskInfo: false
@@ -103,10 +96,12 @@ class Task extends Component {
       connectDragSource
     } = this.props;
 
+    let opacity = isDragging ? 0 : 1;
+
     return connectDragSource(
       <div
         className={`task ${task.color} task-${largeNames ? "large-tasks" : ""}`}
-        style={this.getStyle()}
+        style={{ ...this.getStyle(), opacity: `${opacity}` }}
         onClick={e => {
           if (selectMode) {
             setTimerTarget(task.id);

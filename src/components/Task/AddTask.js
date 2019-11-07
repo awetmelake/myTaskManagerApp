@@ -1,25 +1,22 @@
-// colored buttons
-
 import React, { Component } from "react";
-
 // components
 import ColorSelect from "../ColorSelect";
-
 // mui
 import Dialog from "@material-ui/core/Dialog";
-
 // styles
 import "./Task.scss";
+import { COLORS } from "../../colors.js";
 
 class AddTask extends Component {
   state = {
     title: "",
     description: "",
     completeBy: "",
-    color: "yellow",
+    color: COLORS.yellow,
     panel: this.props.panel.id,
     time: 0,
-    visible: true
+    visible: true,
+    // index: 0
   };
 
   handleChange = e => {
@@ -39,11 +36,12 @@ class AddTask extends Component {
       title: "",
       description: "",
       completeBy: "",
-      color: "yellow",
+      color: COLORS.yellow,
       panel: this.props.panel.id,
       time: null
     });
   };
+
   render() {
     const { toggleVisibility, visibility } = this.props;
     return (
@@ -51,16 +49,14 @@ class AddTask extends Component {
         <div className={` add-task ${this.state.color} `}>
           <form autoComplete="off">
             <h4 className="center">Create new task</h4>
-
             <div className="input-field">
-              <label htmlFor="title" className="grey-text text-darken-3">
+              <label htmlFor="title" className="grey-text text-darken-4">
                 title
               </label>
               <input name="title" type="text" onChange={this.handleChange} />
             </div>
-
             <div className="input-field">
-              <label htmlFor="description" className="grey-text text-darken-3">
+              <label htmlFor="description" className="grey-text text-darken-4">
                 description
               </label>
               <input
@@ -69,15 +65,20 @@ class AddTask extends Component {
                 onChange={this.handleChange}
               />
             </div>
-
             <ColorSelect handleChange={this.handleChange} />
             <br />
 
             <div className="container center">
-              <button className=" z-depth-0 btn darken-1 green" onClick={this.handleSubmit}>
+              <button
+                className=" z-depth-0 btn darken-1 green"
+                onClick={this.handleSubmit}
+              >
                 Save
               </button>
-              <button className=" z-depth-0 btn darken-1 red" onClick={toggleVisibility}>
+              <button
+                className=" z-depth-0 btn darken-1 red"
+                onClick={toggleVisibility}
+              >
                 Cancel
               </button>
             </div>

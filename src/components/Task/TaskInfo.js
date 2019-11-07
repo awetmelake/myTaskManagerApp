@@ -6,6 +6,11 @@ import Dialog from "@material-ui/core/Dialog";
 
 // actions
 import { editTask, delTask } from "../../actions/taskActions";
+import {
+  startTimer,
+  setTimerTarget,
+  toggleTimerSet
+} from "../../actions/timerActions";
 
 // components
 import ColorSelect from "../ColorSelect";
@@ -54,7 +59,15 @@ class TaskInfo extends Component {
   };
 
   render() {
-    const { task, visible, toggleVisibility, delTask } = this.props;
+    const {
+      task,
+      visible,
+      toggleVisibility,
+      delTask,
+      startTimer,
+      setTimerTarget,
+      toggleTimerSet
+    } = this.props;
 
     return (
       <Dialog open={visible} onBackdropClick={toggleVisibility}>
@@ -81,11 +94,9 @@ class TaskInfo extends Component {
             </div>
 
             <div className="task-info-title">
-              {task.description || this.state.editMode ?
-                "Description:" : null
-              }
+              {task.description || this.state.editMode ? "Description:" : null}
               {!this.state.editMode ? (
-                <h5 style={{ fontSize: "1.3em" }} > {task.description}</h5>
+                <h5 style={{ fontSize: "1.3em" }}> {task.description}</h5>
               ) : (
                 <div className="form-field">
                   <label htmlFor="panel-title"></label>
@@ -103,10 +114,10 @@ class TaskInfo extends Component {
 
             <div className="task-info-title">
               {!this.state.editMode && task.time > 0 && (
-                <div>
+                <>
                   Time spent:
                   {" " + this.timeFormat(task.time)}
-                </div>
+                </>
               )}
             </div>
           </div>
@@ -133,11 +144,24 @@ class TaskInfo extends Component {
             </div>
           )}
           <i
-            className="material-icons pointer small task-info-edit-btn"
+            className="material-icons pointer task-info-edit-btn small grey-text text-darken-4"
             onClick={this.toggleEdit}
             title="Edit Task"
           >
             edit
+          </i>
+
+          <i
+            className="material-icons pointer task-info-timer-btn small grey-text text-darken-4"
+            id="task-timer-btn"
+            onClick={e => {
+              toggleVisibility(e);
+              setTimerTarget(task.id);
+              toggleTimerSet();
+            }}
+            title="Start timer"
+          >
+            access_time
           </i>
 
           <DelTask task={task} delTask={delTask} />
@@ -149,5 +173,5 @@ class TaskInfo extends Component {
 
 export default connect(
   null,
-  { editTask, delTask }
+  { editTask, delTask, startTimer, setTimerTarget, toggleTimerSet }
 )(TaskInfo);
