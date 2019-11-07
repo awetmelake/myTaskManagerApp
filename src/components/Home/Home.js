@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import { Redirect, Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { isLoaded } from "react-redux-firebase";
 import Footer from "../Footer/Footer";
 
 import landingImg from "../../images/agenda-concept-development-7376.jpg";
