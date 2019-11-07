@@ -1,49 +1,25 @@
 import React from "react";
+import { COLORS } from "../colors.js";
 
 const ColorSelect = ({ handleChange }) => {
+  let colors = [];
+  for (let color in COLORS) {
+    console.log()
+    colors.push(
+      <li key={COLORS[color]}>
+        <button
+          className={`btn-small ${COLORS[color]}`}
+          name="color"
+          value={COLORS[color]}
+          onClick={handleChange}
+        />
+      </li>
+    );
+  }
+
   return (
     <ul className="color-select">
-      <li>
-        <button
-          className="btn-small yellow"
-          name="color"
-          value="yellow"
-          onClick={handleChange}
-        />
-      </li>
-
-      <li>
-        <button
-          className="btn-small red lighten-1"
-          name="color"
-          value="red lighten-1"
-          onClick={handleChange}
-        />
-      </li>
-      <li>
-        <button
-          className="btn-small  light-green darken-1"
-          name="color"
-          value=" light-green darken-1"
-          onClick={handleChange}
-        />
-      </li>
-      <li>
-        <button
-          className="btn-small blue lighten-1"
-          name="color"
-          value="blue lighten-1"
-          onClick={handleChange}
-        />
-      </li>
-      <li>
-        <button
-          className="btn-small orange lighten-2"
-          name="color"
-          value="orange lighten-2 "
-          onClick={handleChange}
-        />
-      </li>
+        {colors.map(c => c)}
     </ul>
   );
 };
