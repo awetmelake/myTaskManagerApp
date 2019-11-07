@@ -1,8 +1,16 @@
 // drop target
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { compose } from "redux";
-import { DropTarget } from 'react-dnd'
+import React, {
+  Component
+} from "react";
+import {
+  connect
+} from "react-redux";
+import {
+  compose
+} from "redux";
+import {
+  DropTarget
+} from "react-dnd";
 
 // components
 import Task from "../Task/Task";
@@ -21,29 +29,38 @@ import {
   moveLeft,
   moveRight
 } from "../../actions/panelActions";
-import { createTask, moveTask } from "../../actions/taskActions";
-import {Types} from "../../actions/types"
+import {
+  createTask,
+  moveTask
+} from "../../actions/taskActions";
+import {
+  Types
+} from "../../actions/types";
 
 // styles
 import "./Panel.scss";
 
 const panelTarget = {
   drop(props, monitor, component) {
-    const item = monitor.getItem()
-    props.moveTask(item.id, props.panel.id)
-    console.log("moved")
-    return { moved: true }
-  },
-}
+    const item = monitor.getItem();
+    props.moveTask(item.id, props.panel.id);
+    console.log("moved");
+    return {
+      moved: true
+    };
+  }
+};
 
 function collect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),
-    isOverCurrent: monitor.isOver({ shallow: true }),
+    isOverCurrent: monitor.isOver({
+      shallow: true
+    }),
     canDrop: monitor.canDrop(),
-    itemType: monitor.getItemType(),
-  }
+    itemType: monitor.getItemType()
+  };
 }
 
 class Panel extends Component {
@@ -54,7 +71,8 @@ class Panel extends Component {
     id: this.props.panel.id,
     showAddTask: false,
     showDelPanel: false,
-    bgColor: "white"
+    bgColor: "white",
+    showPanel: true
   };
 
   toggleDelPanel = e => {
@@ -95,6 +113,17 @@ class Panel extends Component {
     this.props.changePanelTitle(this.state.title, this.props.panel.id);
   };
 
+  togglePanel = e => {
+    if (
+      e.target.className === "panel-header" ||
+      e.target.className === "panel-title"
+    ) {
+      this.setState({
+        showPanel: !this.state.showPanel
+      });
+    }
+  };
+
   render() {
     const {
       panel,
@@ -110,14 +139,23 @@ class Panel extends Component {
       canDrop,
       connectDropTarget
     } = this.props;
-
-    const { editTitleMode, title } = this.state;
+    const {
+      editTitleMode,
+      title
+    } = this.state;
     return connectDropTarget(
       <div
-        className={`panel ${this.state.bgColor}`}
-        style={editMode ? { flexGrow: 0 } : { flexGrow: 1 }}
+        className={`panel ${isOver ? "lightgreen" : "white"}`}
+        style={{
+          flexGrow: !editMode && this.state.showPanel ? "1" : "0",
+          width: this.state.showPanel ? "200px" : "50px"
+        }}
       >
-        <div className="panel-header  grey lighten-4">
+        <div
+          className="panel-header grey lighten-3"
+          onClick={e => this.togglePanel(e)}
+          title={this.state.showPanel ? "Click to minimize" : "Click to expand"}
+        >
           <div className="panel-title">
             {!editTitleMode ? (
               panel.title
@@ -136,10 +174,16 @@ class Panel extends Component {
                 />
                 <br />
                 <div className="container center">
-                  <button className=" z-depth-0 btn-small" onClick={this.handleSubmit}>
+                  <button
+                    className=" z-depth-0 btn-small"
+                    onClick={this.handleSubmit}
+                  >
                     Save
                   </button>
-                  <button className="red z-depth-0 btn-small" onClick={this.toggleEdit}>
+                  <button
+                    className="red z-depth-0 btn-small"
+                    onClick={this.toggleEdit}
+                  >
                     Cancel
                   </button>
                 </div>
@@ -147,72 +191,78 @@ class Panel extends Component {
             )}
           </div>
 
-          {!editMode ? (
-            <i
-              className="material-icons add-task-btn"
-              id="toggleAddTask"
-              onClick={this.toggleAddTask}
-              title="Create new task"
-            >
-              add
-            </i>
-          ) : (
-            <Toggle>
-              {({ on, toggle }) => (
-                <div>
-                  <i
-                    className="material-icons add-task-btn grey-text text-darken-3"
-                    id="toggleAddTask"
-                    title="See more options"
-                    onClick={toggle}
-                  >
-                    more
-                  </i>
-                  {on && (
-                    <div className="card white panel-settings">
-                      <ClickAwayListener onClickAway={toggle}>
-                        <ul className="">
-                          <li
-                            onClick={e => {
-                              this.toggleEdit();
-                              toggle();
-                            }}
-                          >
-                            Edit
-                          </li>
-                          {panel.index > 0 && (
-                            <li onClick={e => moveLeft(panel.id, panel.index)}>
-                              Move Left
+          {this.state.showPanel &&
+            (!editMode ? (
+              <i
+                className="material-icons add-task-btn"
+                id="toggleAddTask"
+                onClick={this.toggleAddTask}
+                title="Create new task"
+              >
+                add
+              </i>
+            ) : (
+              <Toggle>
+                {({ on, toggle }) => (
+                  <div>
+                    <i
+                      className="material-icons add-task-btn grey-text text-darken-4"
+                      id="toggleAddTask"
+                      title="See more options"
+                      onClick={toggle}
+                    >
+                      more
+                    </i>
+                    {on && (
+                      <div className="card white panel-settings">
+                        <ClickAwayListener onClickAway={toggle}>
+                          <ul className="">
+                            <li
+                              onClick={e => {
+                                this.toggleEdit();
+                                toggle();
+                              }}
+                            >
+                              Edit
                             </li>
-                          )}
-                          {panel.index < board.panels - 1 && (
-                            <li onClick={e => moveRight(panel.id, panel.index)}>
-                              Move Right
-                            </li>
-                          )}
-                          <li onClick={this.toggleDelPanel}>Delete</li>
-                        </ul>
-                      </ClickAwayListener>
-                    </div>
-                  )}
-                </div>
-              )}
-            </Toggle>
-          )}
+                            {panel.index > 0 && (
+                              <li
+                                onClick={e => moveLeft(panel.id, panel.index)}
+                              >
+                                Move Left
+                              </li>
+                            )}
+                            {panel.index < board.panels - 1 && (
+                              <li
+                                onClick={e => moveRight(panel.id, panel.index)}
+                              >
+                                Move Right
+                              </li>
+                            )}
+                            <li onClick={this.toggleDelPanel}>Delete</li>
+                          </ul>
+                        </ClickAwayListener>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </Toggle>
+            ))}
         </div>
 
         <div className="panel-tasks">
-          {tasks.map(task => {
-            if (panel.id === task.panel) {
-              if (filter !== null) {
-                if (task.color.includes(filter)) {
+          {this.state.showPanel &&
+            tasks.map(task => {
+              if (panel.id === task.panel) {
+                if (filter !== null) {
+                  if (task.color.includes(filter)) {
+                    return <Task task={task} key={task.id} />;
+                  }
+                } else {
                   return <Task task={task} key={task.id} />;
                 }
-              } else {
-                return <Task task={task} key={task.id} />;
               }
-            }
-          })}
+            })}
         </div>
 
         <DelPanel
@@ -243,15 +293,14 @@ const mapStateToProps = state => ({
 
 export default compose(
   connect(
-    mapStateToProps,
-    {
+    mapStateToProps, {
       createPanel,
       deletePanel,
       changePanelTitle,
       createTask,
       moveRight,
       moveLeft,
-      moveTask,
+      moveTask
     }
   ),
   DropTarget(Types.TASK, panelTarget, collect)
