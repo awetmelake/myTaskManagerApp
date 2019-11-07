@@ -38,6 +38,7 @@ export const STOP_TIMER = "STOP_TIMER";
 export const SET_TIMER_TARGET = "SET_TIMER_TARGET";
 export const TOGGLED_SELECT_MODE = "TOGGLED_SELECT_MODE";
 export const SET_TIMER_TYPE = "SET_TIMER_TYPE";
+export const TOGGLED_TIMER_SET = "TOGGLED_TIMER_SET";
 
 // RDND types
 export const Types = {
