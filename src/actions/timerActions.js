@@ -6,7 +6,8 @@ import {
   STOP_TIMER,
   SET_TIMER_TARGET,
   TOGGLED_SELECT_MODE,
-  SET_TIMER_TYPE
+  SET_TIMER_TYPE,
+  TOGGLED_TIMER_SET
 } from "./types";
 
 import { setTime, toggleFocus } from "./taskActions";
@@ -23,8 +24,14 @@ export const startTimer = () => (dispatch, getState) => {
 };
 
 export const setTimerTarget = taskId => (dispatch, getState) => {
-  dispatch({ type: SET_TIMER_TARGET, payload: taskId });
-  dispatch({ type: START_TIMER });
+  const selectMode = getState().ui.selectMode;
+  dispatch({
+    type: SET_TIMER_TARGET,
+    payload: taskId
+  });
+  if (selectMode) {
+    dispatch({ type: START_TIMER });
+  }
 };
 
 export const setTimerType = type => (dispatch, getState) => {
@@ -36,9 +43,12 @@ export const toggleSelectMode = () => (dispatch, getState) => {
 };
 
 export const stopTimer = time => (dispatch, getState) => {
-  console.log(time)
-  const taskId = getState().timer.target
+  const taskId = getState().timer.target;
   dispatch(setTime(time));
   dispatch({ type: STOP_TIMER });
   dispatch(toggleFocus(taskId));
+};
+
+export const toggleTimerSet = time => dispatch => {
+  dispatch({ type: TOGGLED_TIMER_SET });
 };
