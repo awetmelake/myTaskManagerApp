@@ -174,9 +174,10 @@ class Board extends Component {
                           {!on && (
                             <button
                               onClick={toggle}
-                              className="white-text add-panel-btn pointer green btn darken-1 z-depth-0"
+                              title="add another panel"
+                              className="white-text add-panel-btn pointer green btn-small darken-1 z-depth-0"
                             >
-                              <i className="material-icons">add</i>
+                              Add Panel
                             </button>
                           )}
                         </div>

@@ -78,7 +78,7 @@ class Boards extends Component {
                   <Link to={`/board_${board.id}`}>Go to board</Link>
 
                   <a
-                    className="pointer"
+                    className="pointer red-text text-lighten-2 right" title="Permanently delete this board"
                     onClick={e => this.toggleDelPrompt(board.id)}
                   >
                     Delete this board
@@ -136,17 +136,14 @@ class Boards extends Component {
                       style={{
                         display: "flex",
                         alignItems: "center",
-                        justifyContent: "space-between"
+                        justifyContent: "space-between",
+                        fontFamily: "Roboto"
                       }}
                     >
                       Your Boards
-                      <button
-                        title="Add new board"
-                        className="z-depth-0 btn-small right green"
-                        onClick={toggle}
-                      >
-                        <i className="material-icons ">add</i>
-                      </button>
+                        <i className="pointer material-icons text-green green-text" title="Add new board"
+                          style={{fontSize: '40px'}}
+                        onClick={toggle}>add</i>
                     </h2>
                     {on && (
                       <ClickAwayListener onClickAway={toggle}>

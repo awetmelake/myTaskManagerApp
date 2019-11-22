@@ -75,6 +75,7 @@ class BoardHeader extends React.Component {
               <BoardSet
                 toggleBoardEditMode={toggleBoardEditMode}
                 toggleLegend={toggleLegend}
+                id={board.id}
               />
             </li>
           ) : (
