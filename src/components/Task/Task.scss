@@ -70,6 +70,7 @@
       right: 10px;
       width: 150px;
       padding: 1em;
+      z-index: 101;
 
       .card-footer {
         display: flex;
@@ -85,6 +86,8 @@
       margin: auto;
     }
   }
+
+
 }
 
 .add-task {
