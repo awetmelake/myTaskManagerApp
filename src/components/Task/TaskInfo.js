@@ -73,10 +73,23 @@ class TaskInfo extends Component {
       <Dialog open={visible} onBackdropClick={toggleVisibility}>
         <div className={`card task-info ${this.state.color}`}>
           <div className="card-content">
+            <i
+              className="material-icons grey-text text-darken-3 right pointer"
+              id="task-info-close"
+              style={{
+                fontSize: "30px",
+                position: "absolute",
+                right: "5px",
+                top: "5px"
+              }}
+              onClick={toggleVisibility}
+            >
+              close
+            </i>
             <div className="task-info-title">
               Title:
               {!this.state.editMode ? (
-                <h5> {task.title}</h5>
+                <h5 onClick={this.toggleEdit}> {task.title}</h5>
               ) : (
                 <div className="form-field" onSubmit={this.handleSubmit}>
                   <label htmlFor="panel-title"></label>
@@ -96,7 +109,10 @@ class TaskInfo extends Component {
             <div className="task-info-title">
               {task.description || this.state.editMode ? "Description:" : null}
               {!this.state.editMode ? (
-                <h5 style={{ fontSize: "1.3em" }}> {task.description}</h5>
+                <h5 style={{ fontSize: "1.3em" }} onClick={this.toggleEdit}>
+                  {" "}
+                  {task.description}
+                </h5>
               ) : (
                 <div className="form-field">
                   <label htmlFor="panel-title"></label>

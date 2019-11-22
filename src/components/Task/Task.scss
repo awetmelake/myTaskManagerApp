@@ -38,6 +38,10 @@
     width: 600px;
     height: 400px;
 
+    h5 {
+      margin: 0;
+    }
+
     &-title {
       font-size: 15px !important;
       margin-bottom: 2em;
@@ -86,8 +90,6 @@
       margin: auto;
     }
   }
-
-
 }
 
 .add-task {

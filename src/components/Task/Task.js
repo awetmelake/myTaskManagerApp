@@ -74,7 +74,7 @@ class Task extends Component {
         taskInfo: true
       });
     } else if (
-      targetClass === "MuiDialog-container MuiDialog-scrollPaper" || targetId === "task-timer-btn"
+      targetClass === "MuiDialog-container MuiDialog-scrollPaper" || targetId === "task-timer-btn" || targetId === "task-info-close"
     ) {
       this.setState({
         taskInfo: false
